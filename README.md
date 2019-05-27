@@ -16,10 +16,20 @@ devtools::install_github("thomasgredig/checkRAWfolder")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows you how to check your RAW folder
 
 ``` r
 library(checkRAWfolder)
-## basic example code
-```
 
+# folder path
+p = 'Research-User/RAW'
+
+# does it have the proper structure?
+raw.checkNoSubfolders(p)
+
+# get the getUsername
+raw.getUsername(p)
+
+# make a data frame with all fields
+d = raw.getTable(p)
+```
