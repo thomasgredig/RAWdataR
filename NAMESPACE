@@ -2,6 +2,7 @@
 
 export(raw.checkNoSubfolders)
 export(raw.getNoFiles)
+export(raw.getNoSamples)
 export(raw.getTable)
 export(raw.getUsername)
 export(raw.splitFilename)
