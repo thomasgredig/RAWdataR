@@ -16,6 +16,7 @@ empty.table = data.frame(
   Instrument = NA,
   Sample = '',
   Description = '',
+  Extension = '',
   Filename = ''
 )
 
@@ -47,7 +48,8 @@ raw.splitFilename <- function(filename) {
         User = s[3],
         Instrument = s[4],
         Sample = s[5],
-        Description = desc,
+        Description = gsub('(.*)\\.[^.]+$','\\1',desc),
+        Extension = gsub('.*\\.([^.]+)$','\\1',desc),
         Filename = filename
       )
     }
@@ -60,9 +62,9 @@ raw.splitFilename <- function(filename) {
     User = s[3],
     Instrument = s[4],
     Sample = s[5],
-    Description = s[6],
+    Description = gsub('(.*)\\.[^.]+$','\\1',s[6]),
+    Extension = gsub('.*\\.([^.]+)$','\\1',s[6]),
     Filename = filename
   )
 }
-
 
