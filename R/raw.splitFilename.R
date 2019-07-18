@@ -34,12 +34,15 @@ raw.splitFilename <- function(filename) {
     e = empty.table
     e$Filename = filename
     if (length(s)==5) {
-      q = strsplit.max(s[5],'-',2)
+      Extension = gsub('.*\\.([^.]+)$','\\1',s[5])
+      sample =  gsub('(.*)\\.[^.]+$','\\1',s[5])
+      q = strsplit.max(sample,'-',2)
       if(length(q)==2) {
         s[5] = q[1]
-        desc = q[2]
+        desc = paste0(q[2],'.',Extension)
       } else {
-        desc = '??'
+        s[5] = sample
+        desc = paste0('.',Extension)
       }
       e = data.frame(
         Date = s[1],
@@ -67,4 +70,3 @@ raw.splitFilename <- function(filename) {
     Filename = filename
   )
 }
-
