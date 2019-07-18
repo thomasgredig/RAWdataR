@@ -10,7 +10,7 @@ strsplit.max <- function(x,split,maxNo) {
 
 empty.table = data.frame(
   Date = '',
-  Date.formatted = as.Date('20171006', format='%Y%m%d'),
+  Date.formatted = as.Date('19900101', format='%Y%m%d'),
   Project = '',
   User = '',
   Instrument = NA,
@@ -33,6 +33,13 @@ raw.splitFilename <- function(filename) {
     e = empty.table
     e$Filename = filename
     if (length(s)==5) {
+      q = strsplit.max(s[5],'-',2)
+      if(length(q)==2) {
+        s[5] = q[1]
+        desc = q[2]
+      } else {
+        desc = '??'
+      }
       e = data.frame(
         Date = s[1],
         Date.formatted = as.Date(s[1], format='%Y%m%d'),
@@ -40,7 +47,7 @@ raw.splitFilename <- function(filename) {
         User = s[3],
         Instrument = s[4],
         Sample = s[5],
-        Description = '  ??  ',
+        Description = desc,
         Filename = filename
       )
     }
@@ -57,3 +64,5 @@ raw.splitFilename <- function(filename) {
     Filename = filename
   )
 }
+
+
