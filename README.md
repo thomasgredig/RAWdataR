@@ -56,7 +56,7 @@ d = raw.getTable(p)
 
 Some additional tools in the `tools` sub-folder:
 
-Creating a database with all RAW files:
+Creating a database with all RAW files (configure first lines):
 `all-raw-files.R`       
 
 finds additional folders with RAW files:
