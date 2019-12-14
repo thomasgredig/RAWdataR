@@ -3,7 +3,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of checkRAWfolder is to validate the scientific RAW folder.
+The goal of checkRAWfolder is to validate the scientific RAW folder and perform some standard file checks. 
 
 From the National Science Foundation, the [Open Data at NSF](https://www.nsf.gov/data/) describes the underlying goals and fosters maintaing metadata. 
 
@@ -61,3 +61,18 @@ Creating a database with all RAW files (configure first lines):
 
 finds additional folders with RAW files:
 `find-RAW-elsewhere.R`
+
+
+## File Checking
+
+Instead of using direct filenames, you can use checksums from the files. For a project that has data added all the time, you could have the following code:
+
+```r
+library(checkRAWfolder)
+s = raw.getPartialMD5("README.md")
+
+file.list = dir()
+# this will return 'README.md'
+filename = raw.getFilename(file.list,s)
+```
+
