@@ -18,3 +18,18 @@ raw.getFilename <- function(file.list, MD5) {
   }
   filename
 }
+
+
+#' returns the MD5sum of a filenam
+#'
+#' @param filename filename
+#' @param num string length
+#' @return CRC MD5 sum for this particular file
+#' @examples
+#' raw.getMD5('README.md')
+#'
+#' @export
+raw.getPartialMD5 <- function(filename,num=6) {
+  if (!file.exists(filename)) return(NA)
+  substr(md5sum(filename),1,num)
+}
