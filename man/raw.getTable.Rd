@@ -4,10 +4,12 @@
 \alias{raw.getTable}
 \title{returns a dataframe with field information for each file}
 \usage{
-raw.getTable(pfad)
+raw.getTable(pfad, project = "")
 }
 \arguments{
 \item{pfad}{path to the RAW folder}
+
+\item{project}{project name limits files}
 }
 \value{
 dataframe
