@@ -8,6 +8,6 @@
 #' @export
 raw.getNamesProjects <- function(pfad) {
   file.list = raw.getValidFiles(pfad)
-  projects = lapply(strsplit(file.list,'_'),'[[',2)
+  projects = sapply(strsplit(file.list,'_'),'[[',2)
   levels(factor(projects))
 }
