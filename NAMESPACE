@@ -2,10 +2,12 @@
 
 export(raw.checkNoSubfolders)
 export(raw.getFilename)
+export(raw.getNamesProjects)
 export(raw.getNoFiles)
 export(raw.getNoImages)
 export(raw.getNoSamples)
 export(raw.getPartialMD5)
 export(raw.getTable)
 export(raw.getUsername)
+export(raw.getValidFiles)
 export(raw.splitFilename)
