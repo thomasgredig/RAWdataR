@@ -1,0 +1,31 @@
+#' returns the MD5sum of a filename
+#'
+#' @param filename filename
+#' @param num string length
+#' @return CRC MD5 sum for this particular file
+#' @examples
+#' raw.getMD5('README.md')
+#'
+#' @export
+raw.getPartialMD5 <- function(filename,num=6) {
+  fdel=c()
+  for(c in 1:length(filename)) {
+    if (!file.exists(filename[c])) { fdel=c(fdel,c)}
+  }
+  # remove files that cannot be found
+  if(length(fdel)>0) filename=filename[-fdel]
+  substr(md5sum(filename),1,num)
+}
+
+#' returns a string with all MD5 files
+#'
+#' @param filename filename
+#' @param num string length
+#' @return CRC MD5 sum for this particular file
+#' @examples
+#' raw.getPartialMD5str('README.md')
+#'
+#' @export
+raw.getPartialMD5str <- function(filename) {
+  paste0(as.vector(raw.getPartialMD5(file.path(pfad,f))),collapse=',')
+}

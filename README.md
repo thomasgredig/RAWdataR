@@ -18,19 +18,19 @@ devtools::install_github("thomasgredig/checkRAWfolder")
 
 ## Naming Convention
 
-RAW data filenames must be **unique** and the content cannot be altered. The filenames cannot be changed since graphing routines may rely on their unique data filenames. All data fiels must be in non-proprietary formats, if not, then a second file with the converted text or ASCII format content needs to be saved as well. All data files should have the following format:
+In order to achieve scientifically reproducible data, we shall follow the follow principles: (a) RAW data filenames must be **unique** and the content cannot be altered, (b) the filenames cannot be changed since graphing routines may rely on their unique data filenames, (c) all data files must be in non-proprietary formats, if not, then a second file with the converted text or ASCII format content needs to be saved as well. All data files should have the following format:
 
-  Date_Project_Initials_Tool_Sample_RunInfo.csv 
+>  Date_Project_Initials_Tool_Sample_RunInfo.csv 
 
-All files are in the same folder (no sub-folders). The RAW folder has a flat structrure.
+(d) all files are in the same folder (no sub-folders). The RAW folder has a flat structrure.
 
 The **date** is in `yyyymmdd` format and represents the date of the data collection start. The **project string** is assigned by the project manager and the initials are from the person collecting data.
 
 **Tools** are short strings and represent the machine taking the data, see [Tool List](https://github.com/thomasgredig/MSthesis-Guidelines).
 
 Each **sample** should have a unique name, generally starting witht he initials of the person, and following the date of sample creation. 
-
 If more than 1 data collection is made in one day, then **RunInfo** is added to discriminate or to add more description to the RAW data file. 
+
 
 ## Example
 
@@ -45,11 +45,28 @@ p = 'Research-User/RAW'
 # does it have the proper structure?
 raw.checkNoSubfolders(p)
 
-# get the getUsername
-raw.getUsername(p)
+# find all the project names
+raw.getNamesProjects(p)
 
 # make a data frame with all fields
 d = raw.getTable(p)
+```
+
+## Loading RAW Data
+
+For graphing and data analysis the correct files need to be loaded. A common approach would be searching data files by `project`, `date`, `user`, or by `instrument`. 
+
+```r
+# for instance, find all VSM files from 2018
+file.list = raw.findFiles(path.RAW, date='2018', instrument='vsm')
+```
+
+As more data is stored, the file.list may change overtime. Therefore, the following approach should be used to ensure reproducibility:
+
+```r
+md5String = raw.getPartialMD5str(file.list)
+file.list = raw.findFiles(path.RAW, date='2018', instrument='vsm',
+    md5 = md5String)
 ```
 
 ## Tools
