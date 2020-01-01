@@ -3,6 +3,7 @@
 export(raw.checkNoSubfolders)
 export(raw.findFiles)
 export(raw.getFilename)
+export(raw.getInvalidFiles)
 export(raw.getNamesProjects)
 export(raw.getNoFiles)
 export(raw.getNoImages)
