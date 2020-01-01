@@ -25,6 +25,8 @@ raw.findFiles(
 
 \item{sample}{sample name}
 
+\item{md5}{single string with comma separated abbreviated MD5 sums}
+
 \item{file.list}{path of RAW files}
 }
 \value{
@@ -34,6 +36,8 @@ filename with certain checksum
 returns a list of files provided the search criteria
 }
 \examples{
-raw.findFiles(pfad, date='2020')  # all files from 2020
+file.list = raw.findFiles(pfad, date='201901')  # all files from Jan 2019
+md5String = raw.getPartialMD5str(file.list)
+file.list = raw.findFiles(pfad, date='201901',md5 = md5String)
 
 }

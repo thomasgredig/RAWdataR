@@ -61,12 +61,12 @@ For graphing and data analysis the correct files need to be loaded. A common app
 file.list = raw.findFiles(path.RAW, date='2018', instrument='vsm')
 ```
 
-As more data is stored, the file.list may change overtime. Therefore, the following approach should be used to ensure reproducibility:
+As more data is stored, the `file.list` may change overtime. Therefore, the  approach to ensure reproducibility requires the generation of a MD5 string using `raw.getPartialMD5str`, once the exact file list is established, it can be hard-coded as a string (see below for 4 files). Even if more files are generated, the file list is restricted by the MD5 codes. 
 
 ```r
 md5String = raw.getPartialMD5str(file.list)
 file.list = raw.findFiles(path.RAW, date='2018', instrument='vsm',
-    md5 = md5String)
+    md5 = 'a25f3a,66c5d1,4a0333,1b94b5')
 ```
 
 ## Tools

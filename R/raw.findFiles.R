@@ -6,10 +6,12 @@
 #' @param user 2 initials for user
 #' @param instrument name of instrument, such as 'vsm'
 #' @param sample sample name
-#' @param md5
+#' @param md5 single string with comma separated abbreviated MD5 sums
 #' @return filename with certain checksum
 #' @examples
-#' raw.findFiles(pfad, date='2020')  # all files from 2020
+#' file.list = raw.findFiles(pfad, date='201901')  # all files from Jan 2019
+#' md5String = raw.getPartialMD5str(file.list)
+#' file.list = raw.findFiles(pfad, date='201901',md5 = md5String)
 #'
 #' @export
 raw.findFiles <- function(pfad, project='.*', date='.*',
