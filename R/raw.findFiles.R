@@ -21,7 +21,7 @@ raw.findFiles <- function(pfad, project='.*', date='.*',
   muster = paste0(date, '_',project,'_',user,'_',instrument,'_',sample)
   f = raw.validateFiles(dir(pfad, pattern=muster, ignore.case = TRUE))
   # check MD5 of those files and return only those files that agree
-  if(length(md5)>0) {
+  if(nchar(md5)>0) {
     md5v = strsplit(md5,',')[[1]] # verify that those are the files
     m2 = strsplit(raw.getPartialMD5str(f),',')[[1]]
     f=f[duplicated(c(md5v,m2))[(length(md5v)+1):(length(md5v)+length(m2))]]
