@@ -19,13 +19,12 @@ raw.getPartialMD5 <- function(filename,num=6) {
 
 #' returns a string with all MD5 files
 #'
-#' @param filename filename
-#' @param num string length
+#' @param filename filename with path
 #' @return CRC MD5 sum for this particular file
 #' @examples
 #' raw.getPartialMD5str('README.md')
 #'
 #' @export
 raw.getPartialMD5str <- function(filename) {
-  paste0(as.vector(raw.getPartialMD5(file.path(pfad,f))),collapse=',')
+  paste0(as.vector(raw.getPartialMD5(filename)),collapse=',')
 }

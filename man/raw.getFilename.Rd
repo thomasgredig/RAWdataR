@@ -8,6 +8,8 @@ raw.getFilename(file.list, MD5)
 }
 \arguments{
 \item{file.list}{path and filenames}
+
+\item{MD5}{checksum, can be any length}
 }
 \value{
 filename with certain checksum
@@ -16,6 +18,6 @@ filename with certain checksum
 returns the filename with certain MD5sum
 }
 \examples{
-raw.getFilename(dir(),'6')
+raw.getFilename(dir(),'6b')
 
 }

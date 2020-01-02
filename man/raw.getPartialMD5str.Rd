@@ -7,9 +7,7 @@
 raw.getPartialMD5str(filename)
 }
 \arguments{
-\item{filename}{filename}
-
-\item{num}{string length}
+\item{filename}{filename with path}
 }
 \value{
 CRC MD5 sum for this particular file

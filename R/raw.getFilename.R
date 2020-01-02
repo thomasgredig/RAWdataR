@@ -1,9 +1,10 @@
 #' returns the filename with certain MD5sum
 #'
 #' @param file.list path and filenames
+#' @param MD5 checksum, can be any length
 #' @return filename with certain checksum
 #' @examples
-#' raw.getFilename(dir(),'6')
+#' raw.getFilename(dir(),'6b')
 #'
 #' @export
 raw.getFilename <- function(file.list, MD5) {

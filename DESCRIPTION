@@ -1,12 +1,13 @@
 Package: checkRAWfolder
 Type: Package
-Title: Checks a Scientific RAW folder for formatting
-Version: 0.1.6
+Title: Supports scientifically reproducible RAW data processing
+Version: 0.1.7
 Authors@R: person("Thomas", "Gredig", email = "tgredig@csulb.edu",
                   role = c("aut", "cre"))
 Maintainer: Thomas Gredig <tgredig@csulb.edu>
-Description: Checks a Scientific RAW folder for formatting
-  and allows for MD5 checksums.
+Description: Allows for analsysis and processing of RAW data in a reproducible
+      fashion. Functions retrieve files based on MD5 checksums and check for
+      proper file formats and unique filenames.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

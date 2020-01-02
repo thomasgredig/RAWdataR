@@ -1,13 +1,13 @@
 #' returns a list of files provided the search criteria
 #'
-#' @param file.list path of RAW files
+#' @param pfad path of RAW files
 #' @param project name of project
 #' @param date date in format YYYYMMDD
 #' @param user 2 initials for user
 #' @param instrument name of instrument, such as 'vsm'
 #' @param sample sample name
 #' @param md5 single string with comma separated abbreviated MD5 sums
-#' @return filename with certain checksum
+#' @return list with filenames with certain checksum
 #' @examples
 #' file.list = raw.findFiles(pfad, date='201901')  # all files from Jan 2019
 #' md5String = raw.getPartialMD5str(file.list)

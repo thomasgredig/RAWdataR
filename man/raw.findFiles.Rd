@@ -15,6 +15,8 @@ raw.findFiles(
 )
 }
 \arguments{
+\item{pfad}{path of RAW files}
+
 \item{project}{name of project}
 
 \item{date}{date in format YYYYMMDD}
@@ -26,11 +28,9 @@ raw.findFiles(
 \item{sample}{sample name}
 
 \item{md5}{single string with comma separated abbreviated MD5 sums}
-
-\item{file.list}{path of RAW files}
 }
 \value{
-filename with certain checksum
+list with filenames with certain checksum
 }
 \description{
 returns a list of files provided the search criteria
