@@ -1,7 +1,7 @@
 Package: checkRAWfolder
 Type: Package
 Title: Supports scientifically reproducible RAW data processing
-Version: 0.1.7
+Version: 0.1.8
 Authors@R: person("Thomas", "Gredig", email = "tgredig@csulb.edu",
                   role = c("aut", "cre"))
 Maintainer: Thomas Gredig <tgredig@csulb.edu>
