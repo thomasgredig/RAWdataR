@@ -69,6 +69,14 @@ file.list = raw.findFiles(path.RAW, date='2018', instrument='vsm',
     md5 = 'a25f3a,66c5d1,4a0333,1b94b5')
 ```
 
+## Invalid Files
+
+You can also find files with invalid naming convention using the following function, where date is optional
+
+```r
+raw.getInvalidFiles(path.RAW, date='2020')
+```
+
 ## Tools
 
 Some additional tools in the `tools` sub-folder:

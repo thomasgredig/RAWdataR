@@ -15,12 +15,13 @@ raw.getValidFiles <- function(pfad) {
 #' returns all invalid RAW files in a folder
 #'
 #' @param pfad path to the RAW folder
+#' @param year 4-digit year to limit search
 #' @return vector with filenames
 #' @examples
 #' raw.getInvalidFiles('.')
 #'
 #' @export
-raw.getInvalidFiles <- function(pfad) {
-  file.list = dir(pfad,pattern='^[^_]')
+raw.getInvalidFiles <- function(pfad, year='.*') {
+  file.list = dir(pfad,pattern=paste0('^',year,'[^_]'))
   file.list[sapply(strsplit(file.list,'_'),length)!=6]
 }
