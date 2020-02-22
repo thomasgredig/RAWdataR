@@ -7,6 +7,7 @@
 #' @param instrument name of instrument, such as 'vsm'
 #' @param sample sample name
 #' @param md5 single string with comma separated abbreviated MD5 sums
+#' @param fullPath if TRUE, returns full path, otherwise filename only
 #' @return list with filenames with certain checksum
 #' @examples
 #' file.list = raw.findFiles(pfad, date='201901')  # all files from Jan 2019
@@ -16,7 +17,8 @@
 #' @export
 raw.findFiles <- function(pfad, project='.*', date='.*',
                           user='.*', instrument='.*',
-                          sample='.*',md5='') {
+                          sample='.*',md5='',
+                          fullPath = TRUE) {
   if ((date!='.*') & (nchar(date)<8)) { date=paste0(date,'.*') }
   muster = paste0(date, '_',project,'_',user,'_',instrument,'_',sample)
   f = raw.validateFiles(dir(pfad, pattern=muster, ignore.case = TRUE))
@@ -27,6 +29,7 @@ raw.findFiles <- function(pfad, project='.*', date='.*',
     m2 = strsplit(raw.getPartialMD5str(f1),',')[[1]]
     f=f[duplicated(c(md5v,m2))[(length(md5v)+1):(length(md5v)+length(m2))]]
   }
+  if (fullPath == TRUE) { f = file.path(pfad, f) }
   f
 }
 

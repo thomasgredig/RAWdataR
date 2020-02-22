@@ -11,7 +11,8 @@ raw.findFiles(
   user = ".*",
   instrument = ".*",
   sample = ".*",
-  md5 = ""
+  md5 = "",
+  fullPath = TRUE
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ raw.findFiles(
 \item{sample}{sample name}
 
 \item{md5}{single string with comma separated abbreviated MD5 sums}
+
+\item{fullPath}{if TRUE, returns full path, otherwise filename only}
 }
 \value{
 list with filenames with certain checksum
