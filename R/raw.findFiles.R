@@ -34,5 +34,6 @@ raw.findFiles <- function(pfad, project='.*', date='.*',
 }
 
 raw.validateFiles <- function(file.list) {
-  file.list[sapply(strsplit(file.list,'_'),length)==6]
+  f1 = file.list[sapply(strsplit(file.list,'_'),length)>=5]
+  f1[sapply(strsplit(f1,'_'),length)<=6]
 }
