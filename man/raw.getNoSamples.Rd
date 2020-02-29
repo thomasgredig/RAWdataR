@@ -2,7 +2,7 @@
 % Please edit documentation in R/raw.getNoSamples.R
 \name{raw.getNoSamples}
 \alias{raw.getNoSamples}
-\title{returns number of samples that were made}
+\title{returns approximate number of samples that were made}
 \usage{
 raw.getNoSamples(pfad)
 }
@@ -13,7 +13,7 @@ raw.getNoSamples(pfad)
 number of samples that were made with the NTE
 }
 \description{
-returns number of samples that were made
+returns approximate number of samples that were made
 }
 \examples{
 raw.getNoSamples('.')
