@@ -8,7 +8,8 @@
 #' @export
 raw.getValidFiles <- function(pfad) {
   file.list = dir(pfad,pattern='^[^_]')
-  file.list[sapply(strsplit(file.list,'_'),length)==6]
+  f1 = file.list[sapply(strsplit(file.list,'_'),length)>=5]
+  f1[sapply(strsplit(f1,'_'),length)<=6]
 }
 
 
@@ -23,5 +24,6 @@ raw.getValidFiles <- function(pfad) {
 #' @export
 raw.getInvalidFiles <- function(pfad, year='.*') {
   file.list = dir(pfad,pattern=paste0('^',year,'[^_]'))
-  file.list[sapply(strsplit(file.list,'_'),length)!=6]
+  f1 = file.list[sapply(strsplit(file.list,'_'),length)!=6]
+  f1[sapply(strsplit(f1,'_'),length)!=5]
 }
