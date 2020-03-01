@@ -47,10 +47,12 @@ raw.tryFixInvalidFile <- function(pfad, filename,
   gsub('\\s+','',filename) -> filename
 
   if (guessSample==TRUE) {
-    sample.name = gsub('.*([A-Z]{2}[[:digit:]]{2,}[[:lower:]]*).*','\\1',filename)
-    if (length(sample.name)>0 && length(sample.name)<10) {
-      filename = paste0(sample.name,'_',gsub(sample.name,'',filename))
-    }
+    # sample.name = gsub('(.*)([A-Z]{2}[[:digit:]]{2,}[[:lower:]]*)(.*)','\\1_\\2\\3',filename)
+    filename = gsub('(.*)([A-Z]{2}[[:digit:]]{2,}[[:lower:]]*)(.*)','\\1 XX \\2\\3',filename)
+
+#    if (length(sample.name)>0 && length(sample.name)<10) {
+#      filename = paste0(sample.name,'_',gsub(sample.name,'',filename))
+#    }
   }
 
   paste0(dt,'_',project,'_',user,'_',inst,'_',filename)
