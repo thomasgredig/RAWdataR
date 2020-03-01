@@ -4,7 +4,13 @@
 \alias{raw.tryFixInvalidFile}
 \title{suggests a new filename for an invalid filename}
 \usage{
-raw.tryFixInvalidFile(pfad, filename, project = "xx", user = "unknown")
+raw.tryFixInvalidFile(
+  pfad,
+  filename,
+  project = "xx",
+  user = "unknown",
+  guessSample = FALSE
+)
 }
 \arguments{
 \item{pfad}{path of RAW folder}

@@ -4,12 +4,14 @@
 #' @param filename filename in RAW folder
 #' @param project project name if known
 #' @param user 2 or 3 letter user initials
+#' @param guessSample TRUE/FALSE to add sample name
 #' @return string with suggested filename
 #' @examples
 #' raw.tryFixInvalidFile('.',dir('.')[1])
 #'
 #' @export
-raw.tryFixInvalidFile <- function(pfad, filename, project='xx', user='unknown') {
+raw.tryFixInvalidFile <- function(pfad, filename, project='xx', user='unknown',
+                                  guessSample = FALSE) {
   instr.list = c('AFM','XRD','NTE','XRD','XRD','PPMS',
                  'VSM')
   fext = c('nid','ras','txt','asc','raw','seq',
@@ -42,6 +44,12 @@ raw.tryFixInvalidFile <- function(pfad, filename, project='xx', user='unknown') 
   gsub('^-','',filename) -> filename
   gsub('\\s+','',filename) -> filename
 
+  if (guessSample==TRUE) {
+    sample.name = gsub('.*([[:alpha:]]{2}[[:digit:]]{2,}[[:lower:]]*).*','\\1',filename)
+    if (length(sample.name)>0 && length(sample.name)<10) {
+      filename = paste0(sample.name,'_',gsub(sample.name,'',filename))
+    }
+  }
+
   paste0(dt,'_',project,'_',user,'_',inst,'_',filename)
 }
-
