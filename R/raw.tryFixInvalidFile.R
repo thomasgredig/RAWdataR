@@ -10,7 +10,9 @@
 #' raw.tryFixInvalidFile('.',dir('.')[1])
 #'
 #' @export
-raw.tryFixInvalidFile <- function(pfad, filename, project='xx', user='unknown',
+raw.tryFixInvalidFile <- function(pfad, filename,
+                                  project='xx',
+                                  user='unknown',
                                   guessSample = FALSE) {
   instr.list = c('AFM','XRD','NTE','XRD','XRD','PPMS',
                  'VSM')
@@ -45,7 +47,7 @@ raw.tryFixInvalidFile <- function(pfad, filename, project='xx', user='unknown',
   gsub('\\s+','',filename) -> filename
 
   if (guessSample==TRUE) {
-    sample.name = gsub('.*([[:alpha:]]{2}[[:digit:]]{2,}[[:lower:]]*).*','\\1',filename)
+    sample.name = gsub('.*([A-Z]{2}[[:digit:]]{2,}[[:lower:]]*).*','\\1',filename)
     if (length(sample.name)>0 && length(sample.name)<10) {
       filename = paste0(sample.name,'_',gsub(sample.name,'',filename))
     }

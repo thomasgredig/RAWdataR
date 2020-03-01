@@ -20,6 +20,8 @@ raw.tryFixInvalidFile(
 \item{project}{project name if known}
 
 \item{user}{2 or 3 letter user initials}
+
+\item{guessSample}{TRUE/FALSE to add sample name}
 }
 \value{
 string with suggested filename
