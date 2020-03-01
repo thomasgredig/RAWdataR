@@ -10,8 +10,10 @@
 #'
 #' @export
 raw.tryFixInvalidFile <- function(pfad, filename, project='xx', user='unknown') {
-  instr.list = c('AFM','XRD','NTE','XRD','XRD')
-  fext = c('nid','ras','txt','asc','raw')
+  instr.list = c('AFM','XRD','NTE','XRD','XRD','PPMS',
+                 'VSM')
+  fext = c('nid','ras','txt','asc','raw','seq',
+           'dat')
 
   dt = format(as.Date(file.info(file.path(pfad,filename))$mtime),
               format = '%Y%m%d')
