@@ -12,7 +12,8 @@ raw.findFiles(
   instrument = ".*",
   sample = ".*",
   md5 = "",
-  fullPath = TRUE
+  fullPath = TRUE,
+  underscoreComments = FALSE
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ raw.findFiles(
 \item{md5}{single string with comma separated abbreviated MD5 sums}
 
 \item{fullPath}{if TRUE, returns full path, otherwise filename only}
+
+\item{underscoreComments}{if TRUE, comments can have underscores}
 }
 \value{
 list with filenames with certain checksum
