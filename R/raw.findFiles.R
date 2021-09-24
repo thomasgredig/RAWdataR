@@ -20,7 +20,7 @@ raw.findFiles <- function(pfad, project='.*', date='.*',
                           user='.*', instrument='.*',
                           sample='.*',md5='',
                           fullPath = TRUE,
-                          underscoreComments = FALSE) {
+                          underscoreComments = TRUE) {
   if ((date!='.*') & (nchar(date)<8)) { date=paste0(date,'.*') }
   muster = paste0(date, '_',project,'_',user,'_',instrument,'_',sample)
   f = raw.validateFiles(dir(pfad, pattern=muster, ignore.case = TRUE), underscoreComments)

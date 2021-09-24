@@ -13,7 +13,7 @@ raw.findFiles(
   sample = ".*",
   md5 = "",
   fullPath = TRUE,
-  underscoreComments = FALSE
+  underscoreComments = TRUE
 )
 }
 \arguments{
