@@ -4,10 +4,12 @@
 \alias{raw.getNoSamples}
 \title{returns approximate number of samples that were made}
 \usage{
-raw.getNoSamples(pfad)
+raw.getNoSamples(pfad, underscoreComments = TRUE)
 }
 \arguments{
 \item{pfad}{path to the RAW folder}
+
+\item{underscoreComments}{include files with comments that have _}
 }
 \value{
 number of samples that were made with the NTE
