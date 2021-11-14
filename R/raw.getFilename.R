@@ -11,7 +11,7 @@ raw.getFilename <- function(file.list, MD5) {
   filename = NA
   for(f in file.list) {
     if (!dir.exists(f)) {
-      if (substr(md5sum(f),1,nchar(MD5))==MD5) {
+      if (substr(tools::md5sum(f),1,nchar(MD5))==MD5) {
         filename = f
         break;
       }

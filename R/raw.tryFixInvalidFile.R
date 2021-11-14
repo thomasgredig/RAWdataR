@@ -31,7 +31,7 @@ raw.tryFixInvalidFile <- function(pfad, filename,
   }
 
 
-  n = grep(tolower(file_ext(filename)), fext)
+  n = grep(tolower(tools::file_ext(filename)), fext)
   inst = 'XXX'
   if (length(n)>0) {
     inst = instr.list[n]

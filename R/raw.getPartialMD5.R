@@ -14,7 +14,7 @@ raw.getPartialMD5 <- function(filename,num=6) {
   }
   # remove files that cannot be found
   if(length(fdel)>0) filename=filename[-fdel]
-  substr(md5sum(filename),1,num)
+  substr(tools::md5sum(filename),1,num)
 }
 
 #' returns a string with all MD5 files
