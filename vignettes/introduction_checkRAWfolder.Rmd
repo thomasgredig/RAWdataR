@@ -1,0 +1,61 @@
+---
+title: "introduction_checkRAWfolder"
+output: rmarkdown::html_vignette
+date: "12/16/2019"
+author: "Thomas Gredig"
+vignette: >
+  %\VignetteIndexEntry{introduction_checkRAWfolder}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+```{r, include=FALSE}
+library(checkRAWfolder)
+library(knitr)
+p = '../RAW'
+no.issues = 0
+d = raw.getTable(p)
+```
+
+## Check RAW Folder Data
+
+
+There should be no subfolders:
+
+```{r}
+if(raw.checkNoSubfolders(p)==FALSE) {
+  warning("There should be no subfolders in the RAW folder.")
+  no.issues = no.issues + 1
+}
+```
+
+
+## Projects
+
+All projects should be saved in the RAW folder. There are a total of **`r nrow(d)` products** in the RAW folder. The projects are **`r paste(levels(d$Project))`**.
+
+Here is a sample list:
+
+```{r}
+# d$Item = 1
+# by(d$Item, d$Sample, sum) -> q
+# m1 = data.frame(samples = levels(d$Sample), no.Files = as.numeric(q))
+# kable(m1)
+```
+
+
+## Issues
+
+Summary of issues:
+
+```{r}
+paste("There were",no.issues,"issues.")
+```
