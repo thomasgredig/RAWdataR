@@ -1,10 +1,10 @@
 ---
-title: "introduction_checkRAWfolder"
+title: "Introduction RAWdataR"
 output: rmarkdown::html_vignette
 date: "12/16/2019"
 author: "Thomas Gredig"
 vignette: >
-  %\VignetteIndexEntry{introduction_checkRAWfolder}
+  %\VignetteIndexEntry{introduction_RAWdataR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 
 ```{r, include=FALSE}
-library(checkRAWfolder)
+library(RAWdataR)
 library(knitr)
 p = '../RAW'
 no.issues = 0

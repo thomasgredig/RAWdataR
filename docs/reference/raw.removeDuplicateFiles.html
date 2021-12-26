@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Checks that the RAW folder contains no sub-folders — raw.checkNoSubfolders • RAWdataR</title>
+<title>remove duplicate RAW files — raw.removeDuplicateFiles • RAWdataR</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Checks that the RAW folder contains no sub-folders — raw.checkNoSubfolders" />
-<meta property="og:description" content="Checks that the RAW folder contains no sub-folders" />
+<meta property="og:title" content="remove duplicate RAW files — raw.removeDuplicateFiles" />
+<meta property="og:description" content="remove duplicate RAW files" />
 
 
 
@@ -118,35 +118,32 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Checks that the RAW folder contains no sub-folders</h1>
+    <h1>remove duplicate RAW files</h1>
     
-    <div class="hidden name"><code>raw.checkNoSubfolders.Rd</code></div>
+    <div class="hidden name"><code>raw.removeDuplicateFiles.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Checks that the RAW folder contains no sub-folders</p>
+    <p>remove duplicate RAW files</p>
     </div>
 
-    <pre class="usage"><span class='fu'>raw.checkNoSubfolders</span><span class='op'>(</span><span class='va'>pfad</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>raw.removeDuplicateFiles</span><span class='op'>(</span><span class='va'>pfad</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>pfad</th>
-      <td><p>path to the RAW folder</p></td>
+      <td><p>path to search for duplicate files</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>boolean (true or false)</p>
+    
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='fu'>raw.checkNoSubfolders</span><span class='op'>(</span><span class='st'>'.'</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
-<span class='r-in'></span>
-</pre>
+
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -1,19 +1,19 @@
-# checkRAWfolder
+# RAWdataR
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of checkRAWfolder is to validate the scientific RAW folder and perform some standard file checks. 
+The goal of RAWdataR is to validate the scientific RAW folder and perform some standard file checks in R language.
 
 From the National Science Foundation, the [Open Data at NSF](https://www.nsf.gov/data/) describes the underlying goals and fosters maintaing metadata. 
 
 ## Installation
 
-You can install the released version of checkRAWfolder by:
+You can install the released version of RAWdataR by:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("thomasgredig/checkRAWfolder")
+devtools::install_github("thomasgredig/RAWdataR")
 ```
 
 ## Naming Convention
@@ -37,7 +37,7 @@ If more than 1 data collection is made in one day, then **RunInfo** is added to 
 This is a basic example which shows you how to check your RAW folder
 
 ``` r
-library(checkRAWfolder)
+library(RAWdataR)
 
 # folder path
 p = 'Research-User/RAW'
@@ -77,23 +77,13 @@ You can also find files with invalid naming convention using the following funct
 raw.getInvalidFiles(path.RAW, date='2020')
 ```
 
-## Tools
-
-Some additional tools in the `tools` sub-folder:
-
-Creating a database with all RAW files (configure first lines):
-`all-raw-files.R`       
-
-finds additional folders with RAW files:
-`find-RAW-elsewhere.R`
-
 
 ## File Checking
 
 Instead of using direct filenames, you can use checksums from the files. For a project that has data added all the time, you could have the following code:
 
 ```r
-library(checkRAWfolder)
+library(RAWdataR)
 s = raw.getPartialMD5("README.md")
 
 file.list = dir()
