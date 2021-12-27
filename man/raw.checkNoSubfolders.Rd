@@ -2,7 +2,7 @@
 % Please edit documentation in R/raw.checkNoSubfolders.R
 \name{raw.checkNoSubfolders}
 \alias{raw.checkNoSubfolders}
-\title{Checks that the RAW folder contains no sub-folders}
+\title{Subfolders in RAW path}
 \usage{
 raw.checkNoSubfolders(pfad)
 }
@@ -10,12 +10,13 @@ raw.checkNoSubfolders(pfad)
 \item{pfad}{path to the RAW folder}
 }
 \value{
-boolean (true or false)
+\code{TRUE} if there are no subfolders
 }
 \description{
-Checks that the RAW folder contains no sub-folders
+The RAW path should not contain subfolders; the reason for
+this is that subfolders tend to have additional information in
+the folder name, which then makes the file less unique.
 }
 \examples{
-raw.checkNoSubfolders('.')
-
+raw.checkNoSubfolders(raw.getSamplePath())
 }

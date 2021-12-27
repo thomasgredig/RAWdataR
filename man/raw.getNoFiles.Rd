@@ -2,9 +2,7 @@
 % Please edit documentation in R/raw.getNoFiles.R
 \name{raw.getNoFiles}
 \alias{raw.getNoFiles}
-\title{returns number of files, but does not
-include filenames that start with _, such
-as _README.txt, which is not a data file}
+\title{Number of Files}
 \usage{
 raw.getNoFiles(pfad)
 }
@@ -20,6 +18,6 @@ include filenames that start with _, such
 as _README.txt, which is not a data file
 }
 \examples{
-raw.getNoFiles('.')
+raw.getNoFiles(raw.getSamplePath())
 
 }

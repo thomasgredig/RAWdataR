@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Number of Files — raw.getNoFiles • RAWdataR</title>
+<title>returns a string with all MD5 files — raw.getMD5str • RAWdataR</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,8 @@
 
 
 
-<meta property="og:title" content="Number of Files — raw.getNoFiles" />
-<meta property="og:description" content="returns number of files, but does not
-include filenames that start with _, such
-as _README.txt, which is not a data file" />
+<meta property="og:title" content="returns a string with all MD5 files — raw.getMD5str" />
+<meta property="og:description" content="returns a string with all MD5 files" />
 
 
 
@@ -120,35 +118,33 @@ as _README.txt, which is not a data file" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Number of Files</h1>
+    <h1>returns a string with all MD5 files</h1>
     
-    <div class="hidden name"><code>raw.getNoFiles.Rd</code></div>
+    <div class="hidden name"><code>raw.getMD5str.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>returns number of files, but does not
-include filenames that start with _, such
-as _README.txt, which is not a data file</p>
+    <p>returns a string with all MD5 files</p>
     </div>
 
-    <pre class="usage"><span class='fu'>raw.getNoFiles</span><span class='op'>(</span><span class='va'>pfad</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>raw.getMD5str</span><span class='op'>(</span><span class='va'>filename</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pfad</th>
-      <td><p>path to the RAW folder</p></td>
+      <th>filename</th>
+      <td><p>filename with path</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>number of files</p>
+    <p>CRC MD5 sum for this particular file</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='fu'>raw.getNoFiles</span><span class='op'>(</span><span class='fu'><a href='raw.getSamplePath.html'>raw.getSamplePath</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 4</span>
+    <pre class="examples"><span class='r-in'><span class='fu'>raw.getMD5str</span><span class='op'>(</span><span class='fu'><a href='raw.getSampleFiles.html'>raw.getSampleFiles</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "7545cd,7545cd,24fefa,7545cd"</span>
 <span class='r-in'></span>
 </pre>
   </div>

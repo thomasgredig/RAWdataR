@@ -4,7 +4,7 @@
 #' @param underscoreComments include files with comments that have _
 #' @return number of samples that were made with the NTE
 #' @examples
-#' raw.getNoSamples('.')
+#' raw.getNoSamples(raw.getSamplePath())
 #'
 #' @export
 raw.getNoSamples <- function(pfad, underscoreComments=TRUE) {

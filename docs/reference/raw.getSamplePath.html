@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Number of Files — raw.getNoFiles • RAWdataR</title>
+<title>Sample path to RAW folder — raw.getSamplePath • RAWdataR</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,9 @@
 
 
 
-<meta property="og:title" content="Number of Files — raw.getNoFiles" />
-<meta property="og:description" content="returns number of files, but does not
-include filenames that start with _, such
-as _README.txt, which is not a data file" />
+<meta property="og:title" content="Sample path to RAW folder — raw.getSamplePath" />
+<meta property="og:description" content="Returns a path with several sample files to check validity of
+filenames." />
 
 
 
@@ -120,36 +119,26 @@ as _README.txt, which is not a data file" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Number of Files</h1>
+    <h1>Sample path to RAW folder</h1>
     
-    <div class="hidden name"><code>raw.getNoFiles.Rd</code></div>
+    <div class="hidden name"><code>raw.getSamplePath.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>returns number of files, but does not
-include filenames that start with _, such
-as _README.txt, which is not a data file</p>
+    <p>Returns a path with several sample files to check validity of
+filenames.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>raw.getNoFiles</span><span class='op'>(</span><span class='va'>pfad</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>raw.getSamplePath</span><span class='op'>(</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>pfad</th>
-      <td><p>path to the RAW folder</p></td>
-    </tr>
-    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>number of files</p>
+    <p>path with sample RAW files</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='fu'>raw.getNoFiles</span><span class='op'>(</span><span class='fu'><a href='raw.getSamplePath.html'>raw.getSamplePath</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 4</span>
-<span class='r-in'></span>
+    <pre class="examples"><span class='r-in'><span class='fu'>raw.getSamplePath</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpxwBBwh/temp_libpath28f77071045d/RAWdataR/extdata"</span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

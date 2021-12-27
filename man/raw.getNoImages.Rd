@@ -16,6 +16,6 @@ number of images
 returns the number of images
 }
 \examples{
-raw.getNoImages('.')
+raw.getNoImages(raw.getSamplePath())
 
 }

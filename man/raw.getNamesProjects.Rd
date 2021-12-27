@@ -2,7 +2,7 @@
 % Please edit documentation in R/raw.getNamesProjects.R
 \name{raw.getNamesProjects}
 \alias{raw.getNamesProjects}
-\title{returns all project names}
+\title{Find all project names}
 \usage{
 raw.getNamesProjects(pfad)
 }
@@ -13,9 +13,9 @@ raw.getNamesProjects(pfad)
 vector with project names
 }
 \description{
-returns all project names
+find all project names in a given directory
 }
 \examples{
-raw.getNamesProjects('.')
+raw.getNamesProjects(raw.getSamplePath())
 
 }

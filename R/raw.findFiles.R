@@ -11,10 +11,12 @@
 #' @param underscoreComments if TRUE, comments can have underscores
 #' @return list with filenames with certain checksum
 #' @examples
-#' file.list = raw.findFiles(pfad, date='201901')  # all files from Jan 2019
-#' md5String = raw.getPartialMD5str(file.list)
-#' file.list = raw.findFiles(pfad, date='201901',md5 = md5String)
-#'
+#' pfad = raw.getSamplePath()
+#' file.list = raw.findFiles(pfad, date='201606')  # all files from Jan 2019
+#' print(file.list)
+#' md5String = raw.getMD5str(file.list)
+#' file.list = raw.findFiles(pfad, md5 = md5String)
+#' print(file.list)
 #' @export
 raw.findFiles <- function(pfad, project='.*', date='.*',
                           user='.*', instrument='.*',

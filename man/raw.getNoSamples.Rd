@@ -18,6 +18,6 @@ number of samples that were made with the NTE
 returns approximate number of samples that were made
 }
 \examples{
-raw.getNoSamples('.')
+raw.getNoSamples(raw.getSamplePath())
 
 }

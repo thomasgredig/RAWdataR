@@ -1,3 +1,5 @@
+#' Number of Files
+#'
 #' returns number of files, but does not
 #' include filenames that start with _, such
 #' as _README.txt, which is not a data file
@@ -5,7 +7,7 @@
 #' @param pfad path to the RAW folder
 #' @return number of files
 #' @examples
-#' raw.getNoFiles('.')
+#' raw.getNoFiles(raw.getSamplePath())
 #'
 #' @export
 raw.getNoFiles <- function(pfad) {

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Number of Files — raw.getNoFiles • RAWdataR</title>
+<title>returns the filename with certain MD5sum — raw.getFilenameByMD5 • RAWdataR</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,8 @@
 
 
 
-<meta property="og:title" content="Number of Files — raw.getNoFiles" />
-<meta property="og:description" content="returns number of files, but does not
-include filenames that start with _, such
-as _README.txt, which is not a data file" />
+<meta property="og:title" content="returns the filename with certain MD5sum — raw.getFilenameByMD5" />
+<meta property="og:description" content="returns the filename with certain MD5sum" />
 
 
 
@@ -120,36 +118,38 @@ as _README.txt, which is not a data file" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Number of Files</h1>
+    <h1>returns the filename with certain MD5sum</h1>
     
-    <div class="hidden name"><code>raw.getNoFiles.Rd</code></div>
+    <div class="hidden name"><code>raw.getFilenameByMD5.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>returns number of files, but does not
-include filenames that start with _, such
-as _README.txt, which is not a data file</p>
+    <p>returns the filename with certain MD5sum</p>
     </div>
 
-    <pre class="usage"><span class='fu'>raw.getNoFiles</span><span class='op'>(</span><span class='va'>pfad</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>raw.getFilenameByMD5</span><span class='op'>(</span><span class='va'>file.list</span>, <span class='va'>MD5</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pfad</th>
-      <td><p>path to the RAW folder</p></td>
+      <th>file.list</th>
+      <td><p>path and filenames</p></td>
+    </tr>
+    <tr>
+      <th>MD5</th>
+      <td><p>checksum, can be any length</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>number of files</p>
+    <p>filename with certain MD5 checksum, returns <code>NA</code> if not found</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='fu'>raw.getNoFiles</span><span class='op'>(</span><span class='fu'><a href='raw.getSamplePath.html'>raw.getSamplePath</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 4</span>
-<span class='r-in'></span>
+    <pre class="examples"><span class='r-in'><span class='va'>file.list</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='raw.getSamplePath.html'>raw.getSamplePath</a></span><span class='op'>(</span><span class='op'>)</span>,<span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>dir</a></span><span class='op'>(</span><span class='fu'><a href='raw.getSamplePath.html'>raw.getSamplePath</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>raw.getFilenameByMD5</span><span class='op'>(</span><span class='va'>file.list</span>,<span class='st'>'6b'</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] NA</span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

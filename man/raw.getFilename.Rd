@@ -2,22 +2,10 @@
 % Please edit documentation in R/raw.getFilename.R
 \name{raw.getFilename}
 \alias{raw.getFilename}
-\title{returns the filename with certain MD5sum}
+\title{OBSOLETE: return filename from MD5}
 \usage{
 raw.getFilename(file.list, MD5)
 }
-\arguments{
-\item{file.list}{path and filenames}
-
-\item{MD5}{checksum, can be any length}
-}
-\value{
-filename with certain checksum
-}
 \description{
-returns the filename with certain MD5sum
-}
-\examples{
-raw.getFilename(dir(),'6b')
-
+OBSOLETE: return filename from MD5
 }
