@@ -13,5 +13,5 @@ list of filenames including path
 Returns a list of filenames to a sample RAW folder
 }
 \examples{
-raw.getSampleFiles()
+basename(raw.getSampleFiles())
 }

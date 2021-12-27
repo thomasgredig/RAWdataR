@@ -4,7 +4,7 @@ output: rmarkdown::html_vignette
 date: "12/16/2019"
 author: "Thomas Gredig"
 vignette: >
-  %\VignetteIndexEntry{introduction_RAWdataR}
+  %\VignetteIndexEntry{Introduction RAWdataR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

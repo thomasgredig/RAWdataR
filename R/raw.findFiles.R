@@ -7,16 +7,16 @@
 #' @param instrument name of instrument, such as 'vsm'
 #' @param sample sample name
 #' @param md5 single string with comma separated abbreviated MD5 sums
-#' @param fullPath if TRUE, returns full path, otherwise filename only
-#' @param underscoreComments if TRUE, comments can have underscores
+#' @param fullPath if \code{TRUE}, returns full path, otherwise filename only
+#' @param underscoreComments if \code{TRUE}, comments can have underscores
 #' @return list with filenames with certain checksum
 #' @examples
 #' pfad = raw.getSamplePath()
-#' file.list = raw.findFiles(pfad, date='201606')  # all files from Jan 2019
-#' print(file.list)
+#' file.list = raw.findFiles(pfad, date='201606')  # all files from June 2019
+#' print(basename(file.list))
 #' md5String = raw.getMD5str(file.list)
 #' file.list = raw.findFiles(pfad, md5 = md5String)
-#' print(file.list)
+#' print(basename(file.list))
 #' @export
 raw.findFiles <- function(pfad, project='.*', date='.*',
                           user='.*', instrument='.*',
@@ -30,18 +30,9 @@ raw.findFiles <- function(pfad, project='.*', date='.*',
   if(nchar(md5)>0) {
     md5v = strsplit(md5,',')[[1]] # verify that those are the files
     f1 = file.path(pfad,f)
-    m2 = strsplit(raw.getPartialMD5str(f1),',')[[1]]
-    f=f[duplicated(c(md5v,m2))[(length(md5v)+1):(length(md5v)+length(m2))]]
+    m2 = strsplit(raw.getMD5str(f1),',')[[1]]
+    f=f[which(m2 %in% md5v)]
   }
   if (fullPath == TRUE) { f = file.path(pfad, f) }
   f
-}
-
-raw.validateFiles <- function(file.list, underscoreComments) {
-  f1 = file.list[sapply(strsplit(file.list,'_'),length)>=5]
-  if (underscoreComments==TRUE) {
-    f1
-  } else {
-    f1[sapply(strsplit(f1,'_'),length)<=6]
-  }
 }

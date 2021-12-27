@@ -1,0 +1,39 @@
+---
+title: "MD5 Validation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{MD5 Validation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(RAWdataR)
+```
+
+For reproducible code analysis, it is important that the same data files are loaded. However, it is generally not useful to include specific data files, since there are several that are analyzed and sometimes more files will be analyzed with the same method later on. Therefore, `raw.findFiles` is used to find specific files based on criteria.
+
+It can happen, however, that more data is added later on, which changes the analysis code as the `raw.findFiles` returns a different set of data files. In order to avoid listing specific file names and re-use of the code, we can generate MD5 checksums. Here is an example.
+
+
+```{r}
+path.RAW = raw.getSamplePath()
+myData = raw.findFiles(path.RAW, user='TG')
+md5 = raw.getMD5str(myData)
+print(paste("The MD5 checksum for all currently used files are:",md5))
+```
+
+If more files are added at a later point that could potentially show up with the same `raw.findFiles` search, we can restrict to the exact same files as before:
+
+```{r}
+path.RAW = raw.getSamplePath()
+myData2 = raw.findFiles(path.RAW, user='TG', md5='7545cd')
+myData==myData2
+```

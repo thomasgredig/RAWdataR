@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>splits filename into fields — raw.splitFilename • RAWdataR</title>
+<title>check whether a RAW data file has a valid filename — raw.isValid • RAWdataR</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="splits filename into fields — raw.splitFilename" />
-<meta property="og:description" content="splits filename into fields" />
+<meta property="og:title" content="check whether a RAW data file has a valid filename — raw.isValid" />
+<meta property="og:description" content="check whether a RAW data file has a valid filename" />
 
 
 
@@ -124,33 +124,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>splits filename into fields</h1>
+    <h1>check whether a RAW data file has a valid filename</h1>
     
-    <div class="hidden name"><code>raw.splitFilename.Rd</code></div>
+    <div class="hidden name"><code>raw.isValid.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>splits filename into fields</p>
+    <p>check whether a RAW data file has a valid filename</p>
     </div>
 
-    <pre class="usage"><span class='fu'>raw.splitFilename</span><span class='op'>(</span><span class='va'>filename</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>raw.isValid</span><span class='op'>(</span><span class='va'>filename</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>filename</th>
-      <td><p>filename in RAW folder format</p></td>
+      <td><p>name of file</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data frame</p>
+    <p>returns <code>TRUE</code> if name has a valid format</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='fu'>raw.splitFilename</span><span class='op'>(</span><span class='st'>'20010101-project-user-inst-sample.DAT'</span><span class='op'>)</span></span>
-<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in sapply(filelist, FUN = function(x) {    strsplit.max(basename(x), "_", 6)}):</span> object 'filelist' not found</span>
+    <pre class="examples"><span class='r-in'><span class='fu'>raw.isValid</span><span class='op'>(</span><span class='fu'><a href='raw.getSampleFiles.html'>raw.getSampleFiles</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1]  TRUE  TRUE  TRUE FALSE</span>
 <span class='r-in'></span>
 </pre>
   </div>

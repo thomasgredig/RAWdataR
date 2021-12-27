@@ -16,6 +16,13 @@ You can install the released version of RAWdataR by:
 devtools::install_github("thomasgredig/RAWdataR")
 ```
 
+## Documentation
+
+The (reference documentation)[https://thomasgredig.github.io/RAWdataR/] has examples and a list of all functions published in this package.
+
+
+
+
 ## Naming Convention
 
 In order to achieve scientifically reproducible data, we shall follow the follow principles: (a) RAW data filenames must be **unique** and the content cannot be altered, (b) the filenames cannot be changed since graphing routines may rely on their unique data filenames, (c) all data files must be in non-proprietary formats, if not, then a second file with the converted text or ASCII format content needs to be saved as well. All data files should have the following format:

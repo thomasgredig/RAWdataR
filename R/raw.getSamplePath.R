@@ -5,7 +5,9 @@
 #'
 #' @return path with sample RAW files
 #' @examples
-#' raw.getSamplePath()
+#' \dontrun{
+#'   raw.getSamplePath()
+#' }
 #' @export
 raw.getSamplePath <- function() {
   system.file("extdata",package="RAWdataR")
@@ -17,7 +19,7 @@ raw.getSamplePath <- function() {
 #'
 #' @return list of filenames including path
 #' @examples
-#' raw.getSampleFiles()
+#' basename(raw.getSampleFiles())
 #' @export
 raw.getSampleFiles<- function() {
   file.path(raw.getSamplePath(),dir(raw.getSamplePath()))

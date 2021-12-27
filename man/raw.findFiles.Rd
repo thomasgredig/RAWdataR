@@ -31,9 +31,9 @@ raw.findFiles(
 
 \item{md5}{single string with comma separated abbreviated MD5 sums}
 
-\item{fullPath}{if TRUE, returns full path, otherwise filename only}
+\item{fullPath}{if \code{TRUE}, returns full path, otherwise filename only}
 
-\item{underscoreComments}{if TRUE, comments can have underscores}
+\item{underscoreComments}{if \code{TRUE}, comments can have underscores}
 }
 \value{
 list with filenames with certain checksum
@@ -43,9 +43,9 @@ returns a list of files provided the search criteria
 }
 \examples{
 pfad = raw.getSamplePath()
-file.list = raw.findFiles(pfad, date='201606')  # all files from Jan 2019
-print(file.list)
+file.list = raw.findFiles(pfad, date='201606')  # all files from June 2019
+print(basename(file.list))
 md5String = raw.getMD5str(file.list)
 file.list = raw.findFiles(pfad, md5 = md5String)
-print(file.list)
+print(basename(file.list))
 }

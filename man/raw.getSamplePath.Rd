@@ -14,5 +14,7 @@ Returns a path with several sample files to check validity of
 filenames.
 }
 \examples{
-raw.getSamplePath()
+\dontrun{
+  raw.getSamplePath()
+}
 }

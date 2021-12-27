@@ -1,0 +1,36 @@
+---
+title: "RAW data file validation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{RAW data file validation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(RAWdataR)
+```
+
+# Data File Validation
+
+In order to find data at a later stage and foster enhanced search capabilities, we show here how to detect problems with file labeling and how to generate some statistics. 
+
+
+## Validity
+
+```{r}
+path.RAW = raw.getSamplePath()
+file.list = dir(path.RAW)
+for(f in file.list) {
+  if (!raw.isValid(f)) {
+    print(paste("Found file with invalid name: ",f))
+  }
+}
+```

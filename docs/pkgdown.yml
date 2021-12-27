@@ -2,6 +2,8 @@ pandoc: 2.16.2
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
+  MD5-Validation: MD5-Validation.html
+  RAW-data-file-validation: RAW-data-file-validation.html
   introduction_checkRAWfolder: introduction_checkRAWfolder.html
-last_built: 2021-12-27T01:57Z
+last_built: 2021-12-27T19:17Z
 
