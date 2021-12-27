@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • RAWdataR</title>
+<title>Find duplicate RAW files — raw.findDuplicates • RAWdataR</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,9 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Find duplicate RAW files — raw.findDuplicates" />
+<meta property="og:description" content="Date: 2018-11-21
+Searches a directory for all files (not necessarily coded properly), then returns a vector with files that have a duplicate." />
 
 
 
@@ -58,7 +60,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -121,150 +123,42 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Find duplicate RAW files</h1>
+    
+    <div class="hidden name"><code>raw.findDuplicates.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Date: 2018-11-21
+Searches a directory for all files (not necessarily coded properly), then returns a vector with files that have a duplicate.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>raw.findDuplicates</span><span class='op'>(</span><span class='va'>pfad</span>, fromLast <span class='op'>=</span> <span class='cn'>TRUE</span>, isValid <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="raw.checkNoSubfolders.html">raw.checkNoSubfolders()</a></code> </p>
-        </td>
-        <td><p>Subfolders in RAW path</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.findDuplicates.html">raw.findDuplicates()</a></code> </p>
-        </td>
-        <td><p>Find duplicate RAW files</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.findFiles.html">raw.findFiles()</a></code> </p>
-        </td>
-        <td><p>returns a list of files provided the search criteria</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.getFilename.html">raw.getFilename()</a></code> </p>
-        </td>
-        <td><p>OBSOLETE: return filename from MD5</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.getFilenameByMD5.html">raw.getFilenameByMD5()</a></code> </p>
-        </td>
-        <td><p>returns the filename with certain MD5sum</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.getInvalidFiles.html">raw.getInvalidFiles()</a></code> </p>
-        </td>
-        <td><p>returns all invalid RAW files in a folder</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.getMD5.html">raw.getMD5()</a></code> </p>
-        </td>
-        <td><p>returns the MD5sum of a filename</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.getMD5str.html">raw.getMD5str()</a></code> </p>
-        </td>
-        <td><p>returns a string with all MD5 files</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.getNamesProjects.html">raw.getNamesProjects()</a></code> </p>
-        </td>
-        <td><p>Find all project names</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.getNoFiles.html">raw.getNoFiles()</a></code> </p>
-        </td>
-        <td><p>Number of Files</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.getNoImages.html">raw.getNoImages()</a></code> </p>
-        </td>
-        <td><p>returns the number of images</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.getNoSamples.html">raw.getNoSamples()</a></code> </p>
-        </td>
-        <td><p>returns approximate number of samples that were made</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.getSampleFiles.html">raw.getSampleFiles()</a></code> </p>
-        </td>
-        <td><p>Sample Files from RAW folder</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.getSamplePath.html">raw.getSamplePath()</a></code> </p>
-        </td>
-        <td><p>Sample path to RAW folder</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.getTable.html">raw.getTable()</a></code> </p>
-        </td>
-        <td><p>returns a dataframe with field information for each file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.getValidFiles.html">raw.getValidFiles()</a></code> </p>
-        </td>
-        <td><p>returns all valid RAW files in a folder</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.isValid.html">raw.isValid()</a></code> </p>
-        </td>
-        <td><p>check whether a RAW data file has a valid filename</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.splitFilename.html">raw.splitFilename()</a></code> </p>
-        </td>
-        <td><p>splits filename into fields</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="raw.tryFixInvalidFile.html">raw.tryFixInvalidFile()</a></code> </p>
-        </td>
-        <td><p>suggests a new filename for an invalid filename</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>pfad</th>
+      <td><p>path to search for duplicate files</p></td>
+    </tr>
+    <tr>
+      <th>fromLast</th>
+      <td><p>if <code>TRUE</code>, last element is kept, if <code>FALSE</code>, first element is kept, default is <code>TRUE</code></p></td>
+    </tr>
+    <tr>
+      <th>isValid</th>
+      <td><p>if <code>TRUE</code> only search valid named files</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>list of files that are duplicates</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

@@ -36,3 +36,5 @@ raw.findFiles <- function(pfad, project='.*', date='.*',
   if (fullPath == TRUE) { f = file.path(pfad, f) }
   f
 }
+
+

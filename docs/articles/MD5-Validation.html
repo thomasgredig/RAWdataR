@@ -93,7 +93,7 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RAWdataR</span><span class="op">)</span></code></pre></div>
-<p>For reproducible code analysis, it is important that the same data files are loaded. However, it is generally not useful to include specific data files, since there are several that are analyzed and sometimes more files will be analyzed with the same method later on. Therefore, <code>raw.findFiles</code> is used to find specific files based on criteria.</p>
+<p>For <strong>reproducible code analysis</strong>, it is important that the same data files are loaded. However, it is generally not useful to include specific data files, since there are several that are analyzed and sometimes more files will be analyzed with the same method later on. Therefore, <code>raw.findFiles</code> is used to find specific files based on criteria.</p>
 <p>It can happen, however, that more data is added later on, which changes the analysis code as the <code>raw.findFiles</code> returns a different set of data files. In order to avoid listing specific file names and re-use of the code, we can generate MD5 checksums. Here is an example.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">path.RAW</span> <span class="op">=</span> <span class="fu"><a href="../reference/raw.getSamplePath.html">raw.getSamplePath</a></span><span class="op">(</span><span class="op">)</span>
@@ -101,7 +101,9 @@
 <span class="va">md5</span> <span class="op">=</span> <span class="fu"><a href="../reference/raw.getMD5str.html">raw.getMD5str</a></span><span class="op">(</span><span class="va">myData</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"The MD5 checksum for all currently used files are:"</span>,<span class="va">md5</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] "The MD5 checksum for all currently used files are: 7545cd"</span></code></pre></div>
-<p>If more files are added at a later point that could potentially show up with the same <code>raw.findFiles</code> search, we can restrict to the exact same files as before:</p>
+<p>There are at least 2 scenarios where this is useful:</p>
+<p><strong>(1)</strong> If more files are added at a later point that could potentially show up with the same <code>raw.findFiles</code> search, we can restrict to the exact same files as before.</p>
+<p><strong>(2)</strong> If the RAW filename is changed for some reason, maybe corrected (2021 instead of 2011) or a sample name is corrected, then the analysis will be based on the same data regardless of the filename.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">path.RAW</span> <span class="op">=</span> <span class="fu"><a href="../reference/raw.getSamplePath.html">raw.getSamplePath</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">myData2</span> <span class="op">=</span> <span class="fu"><a href="../reference/raw.findFiles.html">raw.findFiles</a></span><span class="op">(</span><span class="va">path.RAW</span>, user<span class="op">=</span><span class="st">'TG'</span>, md5<span class="op">=</span><span class="st">'7545cd'</span><span class="op">)</span>

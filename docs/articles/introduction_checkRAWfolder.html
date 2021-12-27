@@ -93,36 +93,45 @@
 
     
     
-<div id="check-raw-folder-data" class="section level2">
+<div id="find-duplicate-raw-data-files" class="section level2">
 <h2 class="hasAnchor">
-<a href="#check-raw-folder-data" class="anchor"></a>Check RAW Folder Data</h2>
-<p>There should be no subfolders:</p>
+<a href="#find-duplicate-raw-data-files" class="anchor"></a>Find duplicate RAW data files</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="../reference/raw.checkNoSubfolders.html">raw.checkNoSubfolders</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">==</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span><span class="st">"There should be no subfolders in the RAW folder."</span><span class="op">)</span>
-  <span class="va">no.issues</span> <span class="op">=</span> <span class="va">no.issues</span> <span class="op">+</span> <span class="fl">1</span>
-<span class="op">}</span>
-<span class="co">#&gt; Warning in raw.checkNoSubfolders(p): RAW folder not found.</span>
-<span class="co">#&gt; Warning: There should be no subfolders in the RAW folder.</span></code></pre></div>
-</div>
-<div id="projects" class="section level2">
-<h2 class="hasAnchor">
-<a href="#projects" class="anchor"></a>Projects</h2>
-<p>All projects should be saved in the RAW folder. There are a total of <strong>0 products</strong> in the RAW folder. The projects are ****.</p>
-<p>Here is a sample list:</p>
+<code class="sourceCode R"><span class="va">path.RAW</span> <span class="op">=</span> <span class="fu"><a href="../reference/raw.getSamplePath.html">raw.getSamplePath</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="../reference/raw.findDuplicates.html">raw.findDuplicates</a></span><span class="op">(</span><span class="va">path.RAW</span>,isValid<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">d1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>f<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span>,md5<span class="op">=</span><span class="fu"><a href="../reference/raw.getMD5.html">raw.getMD5</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span>,row.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="fu">kable</span><span class="op">(</span><span class="va">d1</span>, col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Duplicated Files'</span>,<span class="st">'MD5'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="91%">
+<col width="8%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Duplicated Files</th>
+<th align="left">MD5</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">20160607_Optical_AN_Spectrophotometer_NM20151109CuPc100gl150-A2(UDS).txt</td>
+<td align="left">7545cd</td>
+</tr>
+<tr class="even">
+<td align="left">not-a-RAW-file.txt</td>
+<td align="left">7545cd</td>
+</tr>
+</tbody>
+</table>
+<p>This is the list of duplicated files. We can find out what the original file:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># d$Item = 1</span>
-<span class="co"># by(d$Item, d$Sample, sum) -&gt; q</span>
-<span class="co"># m1 = data.frame(samples = levels(d$Sample), no.Files = as.numeric(q))</span>
-<span class="co"># kable(m1)</span></code></pre></div>
-</div>
-<div id="issues" class="section level2">
-<h2 class="hasAnchor">
-<a href="#issues" class="anchor"></a>Issues</h2>
-<p>Summary of issues:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"There were"</span>,<span class="va">no.issues</span>,<span class="st">"issues."</span><span class="op">)</span>
-<span class="co">#&gt; [1] "There were 1 issues."</span></code></pre></div>
+<code class="sourceCode R"><span class="va">searchMD5</span> <span class="op">=</span> <span class="va">d1</span><span class="op">$</span><span class="va">md5</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">d1</span><span class="op">$</span><span class="va">md5</span><span class="op">)</span><span class="op">]</span>
+<span class="kw">for</span><span class="op">(</span><span class="va">m</span> <span class="kw">in</span> <span class="va">searchMD5</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Duplicates for files with MD5 = "</span>,<span class="va">m</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="../reference/raw.findFiles.html">raw.findFiles</a></span><span class="op">(</span><span class="va">path.RAW</span>, md5<span class="op">=</span><span class="va">m</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="co">#&gt; [1] "Duplicates for files with MD5 =  7545cd"</span>
+<span class="co">#&gt; [1] "20141215_FePc_TG_vsm_Tb33Al66_20141215-Tb33Al66-ac1Oe-20Hz.txt"          </span>
+<span class="co">#&gt; [2] "20160607_Optical_AN_Spectrophotometer_NM20151109CuPc100gl150-A2(UDS).txt"</span></code></pre></div>
 </div>
   </div>
 

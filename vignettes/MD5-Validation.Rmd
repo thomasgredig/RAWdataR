@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 library(RAWdataR)
 ```
 
-For reproducible code analysis, it is important that the same data files are loaded. However, it is generally not useful to include specific data files, since there are several that are analyzed and sometimes more files will be analyzed with the same method later on. Therefore, `raw.findFiles` is used to find specific files based on criteria.
+For **reproducible code analysis**, it is important that the same data files are loaded. However, it is generally not useful to include specific data files, since there are several that are analyzed and sometimes more files will be analyzed with the same method later on. Therefore, `raw.findFiles` is used to find specific files based on criteria.
 
 It can happen, however, that more data is added later on, which changes the analysis code as the `raw.findFiles` returns a different set of data files. In order to avoid listing specific file names and re-use of the code, we can generate MD5 checksums. Here is an example.
 
@@ -30,7 +30,11 @@ md5 = raw.getMD5str(myData)
 print(paste("The MD5 checksum for all currently used files are:",md5))
 ```
 
-If more files are added at a later point that could potentially show up with the same `raw.findFiles` search, we can restrict to the exact same files as before:
+There are at least 2 scenarios where this is useful:
+
+**(1)** If more files are added at a later point that could potentially show up with the same `raw.findFiles` search, we can restrict to the exact same files as before.
+
+**(2)** If the RAW filename is changed for some reason, maybe corrected (2021 instead of 2011) or a sample name is corrected, then the analysis will be based on the same data regardless of the filename.
 
 ```{r}
 path.RAW = raw.getSamplePath()
