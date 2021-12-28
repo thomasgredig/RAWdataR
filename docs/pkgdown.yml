@@ -5,5 +5,8 @@ articles:
   MD5-Validation: MD5-Validation.html
   RAW-data-file-validation: RAW-data-file-validation.html
   introduction_checkRAWfolder: introduction_checkRAWfolder.html
-last_built: 2021-12-28T17:45Z
+last_built: 2021-12-28T22:20Z
+urls:
+  reference: https://thomasgredig.github.io/RAWdataR//reference
+  article: https://thomasgredig.github.io/RAWdataR//articles
 

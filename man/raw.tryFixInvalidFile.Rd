@@ -30,6 +30,7 @@ string with suggested filename
 suggests a new filename for an invalid filename
 }
 \examples{
-raw.tryFixInvalidFile('.',dir('.')[1])
+raw.tryFixInvalidFile(pfad = raw.getSamplePath(),
+       filename = raw.getInvalidFiles(raw.getSamplePath())[1])
 
 }

@@ -12,7 +12,7 @@ Description: Allows for analsysis and processing of RAW data in a reproducible
       proper file formats and unique filenames.
 License: file LICENSE
 Encoding: UTF-8
-LazyData: true
+URL: https://thomasgredig.github.io/RAWdataR/
 RoxygenNote: 7.1.2
 Imports:
     tools

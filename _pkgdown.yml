@@ -1,0 +1,13 @@
+url: https://thomasgredig.github.io/RAWdataR/
+
+template:
+  bootstrap: 5
+  bslib:
+    bg: "#202123"
+    fg: "#B8BCC2"
+    primary: "#306cc9"
+    base_font: {google: "Roboto"}
+
+authors:
+  Thomas Gredig:
+    href: https://home.csulb.edu//~tgredig/

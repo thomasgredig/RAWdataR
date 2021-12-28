@@ -18,18 +18,22 @@ devtools::install_github("thomasgredig/RAWdataR")
 
 ## Documentation
 
-The (reference documentation)[https://thomasgredig.github.io/RAWdataR/] has examples and a list of all functions published in this package.
+The **[reference documentation](https://thomasgredig.github.io/RAWdataR/)** has examples and a list of all functions published in this package.
 
 
 
 
 ## Naming Convention
 
-In order to achieve scientifically reproducible data, we shall follow the follow principles: (a) RAW data filenames must be **unique** and the content cannot be altered, (b) the filenames cannot be changed since graphing routines may rely on their unique data filenames, (c) all data files must be in non-proprietary formats, if not, then a second file with the converted text or ASCII format content needs to be saved as well. All data files should have the following format:
+In order to achieve scientifically reproducible data, we shall follow the follow principles: 
+
+- RAW data filenames must be **unique** and the content cannot be altered, 
+- the filenames cannot be changed since graphing routines may rely on their unique data filenames, 
+- all data files must be in non-proprietary formats, if not, then a second file with the converted text or ASCII format content needs to be saved as well. All data files should have the following format:
 
 >  Date_Project_Initials_Tool_Sample_RunInfo.csv 
 
-(d) all files are in the same folder (no sub-folders). The RAW folder has a flat structrure.
+- all files are in the same folder (no sub-folders). The RAW folder has a flat structrure.
 
 The **date** is in `yyyymmdd` format and represents the date of the data collection start. The **project string** is assigned by the project manager and the initials are from the person collecting data.
 

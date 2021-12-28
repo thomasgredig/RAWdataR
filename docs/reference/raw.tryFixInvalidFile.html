@@ -171,8 +171,9 @@
     <p>string with suggested filename</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='fu'>raw.tryFixInvalidFile</span><span class='op'>(</span><span class='st'>'.'</span>,<span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>dir</a></span><span class='op'>(</span><span class='st'>'.'</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "20211228_xx_unknown_XXX_index.html"</span>
+    <pre class="examples"><span class='r-in'><span class='fu'>raw.tryFixInvalidFile</span><span class='op'>(</span>pfad <span class='op'>=</span> <span class='fu'><a href='raw.getSamplePath.html'>raw.getSamplePath</a></span><span class='op'>(</span><span class='op'>)</span>,</span>
+<span class='r-in'>       filename <span class='op'>=</span> <span class='fu'><a href='raw.getInvalidFiles.html'>raw.getInvalidFiles</a></span><span class='op'>(</span><span class='fu'><a href='raw.getSamplePath.html'>raw.getSamplePath</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "20211228_xx_unknown_NTE_not-a-RAW-file.txt"</span>
 <span class='r-in'></span>
 </pre>
   </div>
@@ -186,7 +187,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Thomas Gredig.</p>
+  <p>Developed by <a href='https://home.csulb.edu//~tgredig/'>Thomas Gredig</a>.</p>
 </div>
 
 <div class="pkgdown">

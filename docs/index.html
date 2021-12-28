@@ -100,16 +100,23 @@
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h2>
-<p>The (reference documentation)[<a href="https://thomasgredig.github.io/RAWdataR/" class="uri">https://thomasgredig.github.io/RAWdataR/</a>] has examples and a list of all functions published in this package.</p>
+<p>The <strong><a href="https://thomasgredig.github.io/RAWdataR/">reference documentation</a></strong> has examples and a list of all functions published in this package.</p>
 </div>
 <div id="naming-convention" class="section level2">
 <h2 class="hasAnchor">
 <a href="#naming-convention" class="anchor"></a>Naming Convention</h2>
-<p>In order to achieve scientifically reproducible data, we shall follow the follow principles: (a) RAW data filenames must be <strong>unique</strong> and the content cannot be altered, (b) the filenames cannot be changed since graphing routines may rely on their unique data filenames, (c) all data files must be in non-proprietary formats, if not, then a second file with the converted text or ASCII format content needs to be saved as well. All data files should have the following format:</p>
+<p>In order to achieve scientifically reproducible data, we shall follow the follow principles:</p>
+<ul>
+<li>RAW data filenames must be <strong>unique</strong> and the content cannot be altered,</li>
+<li>the filenames cannot be changed since graphing routines may rely on their unique data filenames,</li>
+<li>all data files must be in non-proprietary formats, if not, then a second file with the converted text or ASCII format content needs to be saved as well. All data files should have the following format:</li>
+</ul>
 <blockquote>
 <p>Date_Project_Initials_Tool_Sample_RunInfo.csv</p>
 </blockquote>
-<p>(d) all files are in the same folder (no sub-folders). The RAW folder has a flat structrure.</p>
+<ul>
+<li>all files are in the same folder (no sub-folders). The RAW folder has a flat structrure.</li>
+</ul>
 <p>The <strong>date</strong> is in <code>yyyymmdd</code> format and represents the date of the data collection start. The <strong>project string</strong> is assigned by the project manager and the initials are from the person collecting data.</p>
 <p><strong>Tools</strong> are short strings and represent the machine taking the data, see <a href="https://github.com/thomasgredig/MSthesis-Guidelines">Tool List</a>.</p>
 <p>Each <strong>sample</strong> should have a unique name, generally starting witht he initials of the person, and following the date of sample creation. If more than 1 data collection is made in one day, then <strong>RunInfo</strong> is added to discriminate or to add more description to the RAW data file.</p>
@@ -119,7 +126,7 @@
 <a href="#example" class="anchor"></a>Example</h2>
 <p>This is a basic example which shows you how to check your RAW folder</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RAWdataR</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://thomasgredig.github.io/RAWdataR/">RAWdataR</a></span><span class="op">)</span>
 
 <span class="co"># folder path</span>
 <span class="va">p</span> <span class="op">=</span> <span class="st">'Research-User/RAW'</span>
@@ -128,10 +135,10 @@
 <span class="fu"><a href="reference/raw.checkNoSubfolders.html">raw.checkNoSubfolders</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
 
 <span class="co"># find all the project names</span>
-<span class="fu"><a href="reference/raw.getNamesProjects.html">raw.getNamesProjects</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
+<span class="fu">raw.getNamesProjects</span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
 
 <span class="co"># make a data frame with all fields</span>
-<span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="reference/raw.getTable.html">raw.getTable</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></code></pre></div>
+<span class="va">d</span> <span class="op">=</span> <span class="fu">raw.getTable</span><span class="op">(</span><span class="va">p</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="loading-raw-data" class="section level2">
 <h2 class="hasAnchor">
@@ -158,7 +165,7 @@
 <a href="#file-checking" class="anchor"></a>File Checking</h2>
 <p>Instead of using direct filenames, you can use checksums from the files. For a project that has data added all the time, you could have the following code:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RAWdataR</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://thomasgredig.github.io/RAWdataR/">RAWdataR</a></span><span class="op">)</span>
 <span class="va">s</span> <span class="op">=</span> <span class="fu"><a href="reference/raw.getPartialMD5.html">raw.getPartialMD5</a></span><span class="op">(</span><span class="st">"README.md"</span><span class="op">)</span>
 
 <span class="va">file.list</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">dir</a></span><span class="op">(</span><span class="op">)</span>
@@ -179,7 +186,8 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Thomas Gredig <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5824-7626" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="https://home.csulb.edu//~tgredig/">Thomas Gredig</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5824-7626" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
@@ -188,7 +196,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Thomas Gredig.</p>
+  <p>Developed by <a href="https://home.csulb.edu//~tgredig/">Thomas Gredig</a>.</p>
 </div>
 
 <div class="pkgdown">

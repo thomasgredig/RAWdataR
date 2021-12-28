@@ -7,7 +7,8 @@
 #' @param guessSample TRUE/FALSE to add sample name
 #' @return string with suggested filename
 #' @examples
-#' raw.tryFixInvalidFile('.',dir('.')[1])
+#' raw.tryFixInvalidFile(pfad = raw.getSamplePath(),
+#'        filename = raw.getInvalidFiles(raw.getSamplePath())[1])
 #'
 #' @export
 raw.tryFixInvalidFile <- function(pfad, filename,
