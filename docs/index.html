@@ -142,7 +142,7 @@
 <span class="va">file.list</span> <span class="op">=</span> <span class="fu"><a href="reference/raw.findFiles.html">raw.findFiles</a></span><span class="op">(</span><span class="va">path.RAW</span>, date<span class="op">=</span><span class="st">'2018'</span>, instrument<span class="op">=</span><span class="st">'vsm'</span><span class="op">)</span></code></pre></div>
 <p>As more data is stored, the <code>file.list</code> may change overtime. Therefore, the approach to ensure reproducibility requires the generation of a MD5 string using <code>raw.getPartialMD5str</code>, once the exact file list is established, it can be hard-coded as a string (see below for 4 files). Even if more files are generated, the file list is restricted by the MD5 codes.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">md5String</span> <span class="op">=</span> <span class="fu">raw.getPartialMD5str</span><span class="op">(</span><span class="va">file.list</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">md5String</span> <span class="op">=</span> <span class="fu"><a href="reference/raw.getPartialMD5str.html">raw.getPartialMD5str</a></span><span class="op">(</span><span class="va">file.list</span><span class="op">)</span>
 <span class="va">file.list</span> <span class="op">=</span> <span class="fu"><a href="reference/raw.findFiles.html">raw.findFiles</a></span><span class="op">(</span><span class="va">path.RAW</span>, date<span class="op">=</span><span class="st">'2018'</span>, instrument<span class="op">=</span><span class="st">'vsm'</span>,
     md5 <span class="op">=</span> <span class="st">'a25f3a,66c5d1,4a0333,1b94b5'</span><span class="op">)</span></code></pre></div>
 </div>
@@ -159,7 +159,7 @@
 <p>Instead of using direct filenames, you can use checksums from the files. For a project that has data added all the time, you could have the following code:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RAWdataR</span><span class="op">)</span>
-<span class="va">s</span> <span class="op">=</span> <span class="fu">raw.getPartialMD5</span><span class="op">(</span><span class="st">"README.md"</span><span class="op">)</span>
+<span class="va">s</span> <span class="op">=</span> <span class="fu"><a href="reference/raw.getPartialMD5.html">raw.getPartialMD5</a></span><span class="op">(</span><span class="st">"README.md"</span><span class="op">)</span>
 
 <span class="va">file.list</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">dir</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co"># this will return 'README.md'</span>
@@ -172,8 +172,8 @@
     <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
-<li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></small></li>
+<li>file <a href="LICENSE-text.html">LICENSE</a>
+</li>
 </ul>
 </div>
 <div class="developers">

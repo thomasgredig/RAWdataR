@@ -1,6 +1,8 @@
 # RAWdataR 0.5
 
-* fix `raw.findFiles` by MD5 code
+* Add `raw.fixInvalidFile` to fix filenames
+* Write path inspector
+* Fix `raw.findFiles` by MD5 code
 * Validation of files `raw.isValid()`
 * (Documentation with References)[https://thomasgredig.github.io/RAWdataR/]
 * tools library used for MD5 checks

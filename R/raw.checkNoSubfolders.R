@@ -10,6 +10,6 @@
 #' raw.checkNoSubfolders(raw.getSamplePath())
 #' @export
 raw.checkNoSubfolders <- function(pfad) {
-  if(!dir.exists(pfad)) { warning('RAW folder not found.') }
+  if(!dir.exists(pfad)) { warning(paste('Data folder',pfad,'not found.'))  }
   (length(list.dirs(pfad)) == 1)
 }

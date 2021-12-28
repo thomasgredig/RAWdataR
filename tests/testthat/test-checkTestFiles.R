@@ -20,3 +20,7 @@ test_that("Verify MD5 strings for files.", {
   md5str = raw.getMD5str(raw.getSampleFiles())
   expect_equal(md5str, "7545cd,7545cd,24fefa,7545cd")
 })
+
+test_that("Add instrument name", {
+  raw.fixInvalidFile(f, instrument='vsm')
+})

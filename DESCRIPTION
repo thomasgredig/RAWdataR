@@ -10,7 +10,7 @@ Maintainer: Thomas Gredig <tgredig@csulb.edu>
 Description: Allows for analsysis and processing of RAW data in a reproducible
       fashion. Functions retrieve files based on MD5 checksums and check for
       proper file formats and unique filenames.
-License: GPL-3
+License: file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2

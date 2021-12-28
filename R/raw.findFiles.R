@@ -8,7 +8,6 @@
 #' @param sample sample name
 #' @param md5 single string with comma separated abbreviated MD5 sums
 #' @param fullPath if \code{TRUE}, returns full path, otherwise filename only
-#' @param underscoreComments if \code{TRUE}, comments can have underscores
 #' @return list with filenames with certain checksum
 #' @examples
 #' pfad = raw.getSamplePath()
@@ -21,11 +20,10 @@
 raw.findFiles <- function(pfad, project='.*', date='.*',
                           user='.*', instrument='.*',
                           sample='.*',md5='',
-                          fullPath = TRUE,
-                          underscoreComments = TRUE) {
+                          fullPath = TRUE) {
   if ((date!='.*') & (nchar(date)<8)) { date=paste0(date,'.*') }
   muster = paste0(date, '_',project,'_',user,'_',instrument,'_',sample)
-  f = raw.validateFiles(dir(pfad, pattern=muster, ignore.case = TRUE), underscoreComments)
+  f = raw.validateFiles(dir(pfad, pattern=muster, ignore.case = TRUE))
   # check MD5 of those files and return only those files that agree
   if(nchar(md5)>0) {
     md5v = strsplit(md5,',')[[1]] # verify that those are the files

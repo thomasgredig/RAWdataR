@@ -142,10 +142,6 @@
       <th>pfad</th>
       <td><p>path to the RAW folder</p></td>
     </tr>
-    <tr>
-      <th>year</th>
-      <td><p>4-digit year to limit search</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -153,20 +149,8 @@
     <p>vector with filenames</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='fu'>raw.getInvalidFiles</span><span class='op'>(</span><span class='st'>'.'</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] "index.html"                    "raw.checkNoSubfolders.html"   </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3] "raw.findDuplicates.html"       "raw.findFiles.html"           </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5] "raw.getFilename.html"          "raw.getFilenameByMD5.html"    </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7] "raw.getInvalidFiles.html"      "raw.getMD5.html"              </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9] "raw.getMD5str.html"            "raw.getNamesProjects.html"    </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [11] "raw.getNoFiles.html"           "raw.getNoImages.html"         </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [13] "raw.getNoSamples.html"         "raw.getPartialMD5.html"       </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [15] "raw.getPartialMD5str.html"     "raw.getSampleFiles.html"      </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [17] "raw.getSamplePath.html"        "raw.getTable.html"            </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [19] "raw.getUsername.html"          "raw.getValidFiles.html"       </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [21] "raw.isValid.html"              "raw.removeDuplicateFiles.html"</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [23] "raw.splitFilename.html"        "raw.tryFixInvalidFile.html"   </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [25] "Rplot001.png"                 </span>
+    <pre class="examples"><span class='r-in'><span class='fu'>raw.getInvalidFiles</span><span class='op'>(</span><span class='fu'><a href='raw.getSamplePath.html'>raw.getSamplePath</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "not-a-RAW-file.txt"</span>
 <span class='r-in'></span>
 </pre>
   </div>

@@ -22,7 +22,32 @@ library(RAWdataR)
 library(knitr)
 ```
 
+## Inspect Directory
+
+We can find out about `projects` and `users` for a particular directory by inspecting it.
+
+```{r}
+path.RAW = raw.getSamplePath()
+raw.inspectFolder(path.RAW)
+```
+
+One of the instruments is off, let us inspect which file that is:
+
+```{r}
+basename(raw.findFiles(path.RAW, instrument='MM160622SI1'))
+```
+
+The data filename is missing an instrument. It appears to be a `vsm` data file. The instrument can be added as follows:
+
+```{r}
+f = raw.findFiles(path.RAW, instrument='MM160622SI1')
+raw.fixInvalidFile(f, instrument='vsm')
+```
+
+
+
 ## Find duplicate RAW data files
+
 
 ```{r}
 path.RAW = raw.getSamplePath()
@@ -30,6 +55,8 @@ f = raw.findDuplicates(path.RAW,isValid=FALSE)
 d1 = data.frame(f=basename(f),md5=raw.getMD5(f),row.names = c())
 kable(d1, col.names = c('Duplicated Files','MD5'))
 ```
+
+
 
 This is the list of duplicated files. We can find out what the original file:
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>returns the MD5sum of a filename — raw.getMD5 • RAWdataR</title>
+<title>Inspect RAW data folder — raw.inspectFolder • RAWdataR</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="returns the MD5sum of a filename — raw.getMD5" />
-<meta property="og:description" content="returns the MD5sum of a filename" />
+<meta property="og:title" content="Inspect RAW data folder — raw.inspectFolder" />
+<meta property="og:description" content="Inspect RAW data folder" />
 
 
 
@@ -124,45 +124,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>returns the MD5sum of a filename</h1>
+    <h1>Inspect RAW data folder</h1>
     
-    <div class="hidden name"><code>raw.getMD5.Rd</code></div>
+    <div class="hidden name"><code>raw.inspectFolder.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>returns the MD5sum of a filename</p>
+    <p>Inspect RAW data folder</p>
     </div>
 
-    <pre class="usage"><span class='fu'>raw.getMD5</span><span class='op'>(</span><span class='va'>filename</span>, num <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>raw.inspectFolder</span><span class='op'>(</span><span class='va'>pfad</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>filename</th>
-      <td><p>filename</p></td>
-    </tr>
-    <tr>
-      <th>num</th>
-      <td><p>string length</p></td>
+      <th>pfad</th>
+      <td><p>path to folder with RAW data</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>CRC MD5 sum for this particular file</p>
+    <p>list</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='fu'>raw.getMD5</span><span class='op'>(</span><span class='fu'><a href='raw.getSampleFiles.html'>raw.getSampleFiles</a></span><span class='op'>(</span><span class='op'>)</span>,num<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>           /private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpG8Xb3N/temp_libpath5082e11787d/RAWdataR/extdata/20141215_FePc_TG_vsm_Tb33Al66_20141215-Tb33Al66-ac1Oe-20Hz.txt </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                                                                                                                                          "7545cdf506" </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> /private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpG8Xb3N/temp_libpath5082e11787d/RAWdataR/extdata/20160607_Optical_AN_Spectrophotometer_NM20151109CuPc100gl150-A2(UDS).txt </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                                                                                                                                          "7545cdf506" </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                /private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpG8Xb3N/temp_libpath5082e11787d/RAWdataR/extdata/20160718_Dual_MM_MM160622SI1_20160718_2.5K_MVSH_00001.txt </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                                                                                                                                          "24fefae835" </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                       /private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpG8Xb3N/temp_libpath5082e11787d/RAWdataR/extdata/not-a-RAW-file.txt </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                                                                                                                                          "7545cdf506" </span>
-<span class='r-in'></span>
+    <pre class="examples"><span class='r-in'><span class='fu'>raw.inspectFolder</span><span class='op'>(</span><span class='fu'><a href='raw.getSamplePath.html'>raw.getSamplePath</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $hasSubfolders</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $projects</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Dual,FePc,Optical"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $users</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "AN,MM,TG"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $samples</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "20160718,NM20151109CuPc100gl150-A2(UDS).txt,Tb33Al66"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $instruments</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "MM160622SI1,Spectrophotometer,vsm"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $invalidFiles</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
