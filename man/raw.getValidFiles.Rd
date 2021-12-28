@@ -16,6 +16,6 @@ vector with filenames
 returns all valid RAW files in a folder
 }
 \examples{
-raw.getValidFiles('.')
+raw.getValidFiles(raw.getSamplePath())
 
 }

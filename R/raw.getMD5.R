@@ -16,8 +16,16 @@ raw.getMD5 <- function(filename,num=6) {
   if(length(fdel)>0) filename=filename[-fdel]
   substr(tools::md5sum(filename),1,num)
 }
+
+#' returns the MD5sum of a filename
+#'
+#' @param filename filename
+#' @param num string length
+#' @return CRC MD5 sum for this particular file
 #' @export
 raw.getPartialMD5 <- function(filename,num=6) { raw.getMD5(filename, num) }
+
+
 #' returns a string with all MD5 files
 #'
 #' @param filename filename with path
@@ -29,6 +37,12 @@ raw.getPartialMD5 <- function(filename,num=6) { raw.getMD5(filename, num) }
 raw.getMD5str <- function(filename) {
   paste0(as.vector(raw.getMD5(filename)),collapse=',')
 }
+
+
+#' returns a string with all MD5 files
+#'
+#' @param filename filename with path
+#' @return CRC MD5 sum for this particular file
 #' @export
 raw.getPartialMD5str <- function(filename) { raw.getMD5str(filename) }
 

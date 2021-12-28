@@ -2,7 +2,7 @@
 % Please edit documentation in R/raw.getNamesProjects.R
 \name{raw.getNamesProjects}
 \alias{raw.getNamesProjects}
-\title{Find all project names}
+\title{OBSOLETE: Find all project names}
 \usage{
 raw.getNamesProjects(pfad)
 }

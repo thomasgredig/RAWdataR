@@ -1,4 +1,4 @@
-#' Find all project names
+#' OBSOLETE: Find all project names
 #'
 #' find all project names in a given directory
 #'
@@ -9,7 +9,5 @@
 #'
 #' @export
 raw.getNamesProjects <- function(pfad) {
-  file.list = raw.getValidFiles(pfad)
-  projects = sapply(strsplit(file.list,'_'),'[[',2)
-  levels(factor(projects))
+
 }

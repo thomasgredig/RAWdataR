@@ -8,17 +8,15 @@
 #' @export
 raw.isValid <- function(filename) {
   filename = basename(filename)   # make sure no path information included
-  grepl("^(\\d{8})_(\\S*?)_(\\S*?)_(\\S*?)_(.*)\\.(.*)$",filename, perl=TRUE)
+  substr(filename,1,8) -> q
+  td = !is.na(as.Date(q, format='%Y%m%d'))
+  tf = grepl("^(\\d{8})_(\\S*?)_(\\S*?)_(\\S*?)_(.*)\\.(.*)$",filename, perl=TRUE)
+
+  td & tf
 }
 
 
 
-raw.validateFiles <- function(file.list, underscoreComments) {
+raw.validateFiles <- function(file.list) {
   f1 = file.list[raw.isValid(file.list)]
-  # f1 = file.list[sapply(strsplit(file.list,'_'),length)>=5]
-  # if (underscoreComments==TRUE) {
-  #   f1
-  # } else {
-  #   f1[sapply(strsplit(f1,'_'),length)<=6]
-  # }
 }

@@ -8,17 +8,17 @@ strsplit.max <- function(x,split,maxNo) {
   s
 }
 
-empty.table = data.frame(
-  Date = '',
-  Date.formatted = as.Date('19900101', format='%Y%m%d'),
-  Project = '',
-  User = '',
-  Instrument = NA,
-  Sample = '',
-  Description = '',
-  Extension = '',
-  Filename = ''
-)
+# empty.table = data.frame(
+#   Date = '',
+#   Date.formatted = as.Date('19900101', format='%Y%m%d'),
+#   Project = '',
+#   User = '',
+#   Instrument = NA,
+#   Sample = '',
+#   Description = '',
+#   Extension = '',
+#   Filename = ''
+# )
 
 #' splits filename into fields
 #'
@@ -28,7 +28,7 @@ empty.table = data.frame(
 #' raw.splitFilename('20010101-project-user-inst-sample.DAT')
 #'
 #' @export
-raw.splitFilename <- function(filename) {
+raw.splitFilename <- function(filelist) {
   d1 = as.data.frame(t(sapply(filelist, FUN=function(x) { strsplit.max(basename(x),'_',6) } )))
   rownames(d1) <- NULL
   names(d1) = c('Date','Project','User','Instrument','Sample','Description')

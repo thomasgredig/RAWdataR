@@ -8,8 +8,6 @@ raw.getInvalidFiles(pfad, year = ".*")
 }
 \arguments{
 \item{pfad}{path to the RAW folder}
-
-\item{year}{4-digit year to limit search}
 }
 \value{
 vector with filenames
@@ -18,6 +16,6 @@ vector with filenames
 returns all invalid RAW files in a folder
 }
 \examples{
-raw.getInvalidFiles('.')
+raw.getInvalidFiles(raw.getSamplePath())
 
 }

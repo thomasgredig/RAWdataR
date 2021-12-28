@@ -6,6 +6,11 @@
 \usage{
 raw.getFilename(file.list, MD5)
 }
+\arguments{
+\item{file.list}{path and filenames}
+
+\item{MD5}{checksum, can be any length}
+}
 \description{
 OBSOLETE: return filename from MD5
 }

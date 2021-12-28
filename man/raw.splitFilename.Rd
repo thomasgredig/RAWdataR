@@ -4,7 +4,7 @@
 \alias{raw.splitFilename}
 \title{splits filename into fields}
 \usage{
-raw.splitFilename(filename)
+raw.splitFilename(filelist)
 }
 \arguments{
 \item{filename}{filename in RAW folder format}
