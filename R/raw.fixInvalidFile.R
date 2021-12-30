@@ -17,7 +17,7 @@ raw.fixInvalidFile <- function(filename, addInstrument='', addUser='',
                                addProject='', addSample='',
                                renameFile=FALSE) {
   p = dirname(filename)
-  f.old
+  f.old=filename
   f = basename(filename)
   fs = strsplit(f, '_')
   if (nchar(addProject)>0)
@@ -29,6 +29,7 @@ raw.fixInvalidFile <- function(filename, addInstrument='', addUser='',
   if (nchar(addSample)>0)
     fs = lapply(fs, function(x) { append(x, addSample, after = 4) } )
   f = sapply(fs, function(x) { paste(x,collapse = '_') })
-  if (renameFile) file.rename(from=f.old, to=f)
-  file.path(p,f)
+  f.new = file.path(p,f)
+  if (renameFile) file.rename(from=f.old, to=f.new)
+  f.new
 }
