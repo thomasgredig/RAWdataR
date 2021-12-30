@@ -11,7 +11,8 @@
 #' f = raw.findFiles(raw.getSamplePath(), addInstrument='MM160622SI1')
 #' print(f)
 #' f.new = raw.fixInvalidFile(f, instrument='vsm')
-#' print(paste("Fixing:",f,"to new file:",f.new))
+#' print(paste("Old name:",f))
+#' print(paste("New name:",f.new))
 #' @export
 raw.fixInvalidFile <- function(filename, addInstrument='', addUser='',
                                addProject='', addSample='',

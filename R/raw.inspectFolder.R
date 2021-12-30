@@ -13,7 +13,7 @@ raw.inspectFolder <- function(pfad) {
   projects = paste(levels(as.factor(d$project)), collapse=',')
   users = paste(levels(as.factor(d$user)), collapse=',')
   samples = paste(levels(as.factor(d$sample)), collapse=',')
-  instruments  = paste(levels(as.factor(d$instrument)), collapse=',')
+  instruments  = paste(levels(as.factor(tolower(d$instrument))), collapse=',')
 
   list(
     hasSubfolders = hasSubfolders,
