@@ -1,3 +1,8 @@
+# RAWdataR 0.5.1
+
+* fix findFiles, so that only specific item is searched.
+
+
 # RAWdataR 0.5
 
 * Add `raw.fixInvalidFile` to fix filenames

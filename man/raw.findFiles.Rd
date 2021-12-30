@@ -6,11 +6,11 @@
 \usage{
 raw.findFiles(
   pfad,
-  project = ".*",
-  date = ".*",
-  user = ".*",
-  instrument = ".*",
-  sample = ".*",
+  project = "[^_]+",
+  date = "[^_]+",
+  user = "[^_]+",
+  instrument = "[^_]+",
+  sample = "[^_]+",
   md5 = "",
   fullPath = TRUE
 )

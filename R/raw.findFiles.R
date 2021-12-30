@@ -17,12 +17,12 @@
 #' file.list = raw.findFiles(pfad, md5 = md5String)
 #' print(basename(file.list))
 #' @export
-raw.findFiles <- function(pfad, project='.*', date='.*',
-                          user='.*', instrument='.*',
-                          sample='.*',md5='',
+raw.findFiles <- function(pfad, project='[^_]+', date='[^_]+',
+                          user='[^_]+', instrument='[^_]+',
+                          sample='[^_]+',md5='',
                           fullPath = TRUE) {
-  if ((date!='.*') & (nchar(date)<8)) { date=paste0(date,'.*') }
-  muster = paste0(date, '_',project,'_',user,'_',instrument,'_',sample)
+  if ((date!='[^_]+') & (nchar(date)<8)) { date=paste0(date,'[^_]+') }
+  muster = paste0('^',date, '_',project,'_',user,'_',instrument,'_',sample)
   f = raw.validateFiles(dir(pfad, pattern=muster, ignore.case = TRUE))
   # check MD5 of those files and return only those files that agree
   if(nchar(md5)>0) {

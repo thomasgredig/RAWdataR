@@ -1,7 +1,7 @@
 Package: RAWdataR
 Type: Package
 Title: Supports scientifically reproducible RAW data processing
-Version: 0.5
+Version: 0.5.1
 Year: 2019
 Authors@R: person("Thomas", "Gredig", email = "tgredig@csulb.edu",
                   role = c("aut", "cre"),
