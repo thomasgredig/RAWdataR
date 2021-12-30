@@ -2,23 +2,36 @@
 % Please edit documentation in R/raw.fixInvalidFile.R
 \name{raw.fixInvalidFile}
 \alias{raw.fixInvalidFile}
-\title{Fix invalid filename}
+\title{Fix invalid data filename}
 \usage{
-raw.fixInvalidFile(filename, instrument = "")
+raw.fixInvalidFile(
+  filename,
+  addInstrument = "",
+  addUser = "",
+  addProject = "",
+  addSample = ""
+)
 }
 \arguments{
 \item{filename}{name of file}
 
-\item{instrument}{new name of instrument}
+\item{addInstrument}{instrument to be added}
+
+\item{addUser}{user to be added}
+
+\item{addProject}{project to be added}
+
+\item{addSample}{sample to be added}
 }
 \value{
 returns fixed filenames
 }
 \description{
-Fix invalid filename
+Fix invalid data filename
 }
 \examples{
-f = raw.findFiles(raw.getSamplePath(), instrument='MM160622SI1')
+f = raw.findFiles(raw.getSamplePath(), addInstrument='MM160622SI1')
 print(f)
-raw.fixInvalidFile(f, instrument='vsm')
+f.new = raw.fixInvalidFile(f, instrument='vsm')
+print(paste("Fixing:",f,"to new file:",f.new))
 }

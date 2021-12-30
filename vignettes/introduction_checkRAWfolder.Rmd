@@ -40,8 +40,9 @@ basename(raw.findFiles(path.RAW, instrument='MM160622SI1'))
 The data filename is missing an instrument. It appears to be a `vsm` data file. The instrument can be added as follows:
 
 ```{r}
-f = raw.findFiles(path.RAW, instrument='MM160622SI1')
-raw.fixInvalidFile(f, instrument='vsm')
+f = basename(raw.findFiles(path.RAW, instrument='MM160622SI1'))
+f.new = basename(raw.fixInvalidFile(f, addInstrument='vsm'))
+print(paste("Change:",f,"to:",f.new))
 ```
 
 

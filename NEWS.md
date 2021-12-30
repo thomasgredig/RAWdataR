@@ -1,5 +1,6 @@
 # RAWdataR 0.5.1
 
+* `raw.fixInvalidFile` can add instrument, user, project, and sample
 * fix findFiles, so that only specific item is searched.
 
 
