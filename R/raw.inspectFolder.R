@@ -21,7 +21,8 @@ raw.inspectFolder <- function(pfad) {
     users = users,
     samples = samples,
     instruments = instruments,
-    invalidFiles = length(dir(pfad)) - length(file.list)
+    validFiles = length(file.list),
+    invalidFiles = numFiles - length(file.list)
   )
 }
 
