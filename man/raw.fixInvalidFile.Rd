@@ -9,7 +9,8 @@ raw.fixInvalidFile(
   addInstrument = "",
   addUser = "",
   addProject = "",
-  addSample = ""
+  addSample = "",
+  renameFile = FALSE
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ raw.fixInvalidFile(
 \item{addProject}{project to be added}
 
 \item{addSample}{sample to be added}
+
+\item{renameFile}{if \code{TRUE} file will be renamed}
 }
 \value{
 returns fixed filenames
