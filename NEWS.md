@@ -1,7 +1,9 @@
 # RAWdataR 0.5.1
 
+* Number of valid files returned by `raw.inspectFolder`
+* Instruments "xrd" and "XRD" are converted to lowercase
 * `raw.fixInvalidFile` can add instrument, user, project, and sample
-* fix findFiles, so that only specific item is searched.
+* Fix findFiles, so that only specific item is searched.
 
 
 # RAWdataR 0.5
