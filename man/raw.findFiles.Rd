@@ -12,7 +12,8 @@ raw.findFiles(
   instrument = "[^_]+",
   sample = "[^_]+",
   md5 = "",
-  fullPath = TRUE
+  fullPath = TRUE,
+  recursive = FALSE
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ raw.findFiles(
 \item{md5}{single string with comma separated abbreviated MD5 sums}
 
 \item{fullPath}{if \code{TRUE}, returns full path, otherwise filename only}
+
+\item{recursive}{if \code{TRUE}, also searchs subfolders}
 }
 \value{
 list with filenames with certain checksum

@@ -8,6 +8,7 @@
 #' @param sample sample name
 #' @param md5 single string with comma separated abbreviated MD5 sums
 #' @param fullPath if \code{TRUE}, returns full path, otherwise filename only
+#' @param recursive if \code{TRUE}, also searchs subfolders
 #' @return list with filenames with certain checksum
 #' @examples
 #' pfad = raw.getSamplePath()
@@ -20,10 +21,11 @@
 raw.findFiles <- function(pfad, project='[^_]+', date='[^_]+',
                           user='[^_]+', instrument='[^_]+',
                           sample='[^_]+',md5='',
-                          fullPath = TRUE) {
+                          fullPath = TRUE,
+                          recursive = FALSE) {
   if ((date!='[^_]+') & (nchar(date)<8)) { date=paste0(date,'[^_]+') }
   muster = paste0('^',date, '_',project,'_',user,'_',instrument,'_',sample)
-  f = raw.validateFiles(dir(pfad, pattern=muster, ignore.case = TRUE))
+  f = raw.validateFiles(dir(pfad, pattern=muster, ignore.case = TRUE, recursive = recursive))
   # check MD5 of those files and return only those files that agree
   if(nchar(md5)>0) {
     md5v = strsplit(md5,',')[[1]] # verify that those are the files

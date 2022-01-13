@@ -33,9 +33,9 @@ returns fixed filenames
 Fix invalid data filename
 }
 \examples{
-f = raw.findFiles(raw.getSamplePath(), addInstrument='MM160622SI1')
+f = raw.findFiles(raw.getSamplePath(), instrument='MM160622SI1')
 print(f)
-f.new = raw.fixInvalidFile(f, instrument='vsm')
+f.new = raw.fixInvalidFile(f, addInstrument='vsm')
 print(paste("Old name:",f))
 print(paste("New name:",f.new))
 }

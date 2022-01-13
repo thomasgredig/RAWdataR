@@ -3,6 +3,7 @@
 #' @param filename filename
 #' @param num string length
 #' @return CRC MD5 sum for this particular file
+#' @importFrom tools md5sum
 #' @examples
 #' raw.getMD5(raw.getSampleFiles(),num=10)
 #'
@@ -14,7 +15,7 @@ raw.getMD5 <- function(filename,num=6) {
   }
   # remove files that cannot be found
   if(length(fdel)>0) filename=filename[-fdel]
-  substr(tools::md5sum(filename),1,num)
+  substr(md5sum(filename),1,num)
 }
 
 #' returns the MD5sum of a filename

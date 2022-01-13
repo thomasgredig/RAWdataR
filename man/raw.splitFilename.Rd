@@ -7,7 +7,7 @@
 raw.splitFilename(filelist)
 }
 \arguments{
-\item{filename}{filename in RAW folder format}
+\item{filelist}{filename in RAW folder format}
 }
 \value{
 data frame

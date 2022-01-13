@@ -1,5 +1,6 @@
 # RAWdataR 0.5.1
 
+* allow recursive search (subfolders) in raw data folder
 * Number of valid files returned by `raw.inspectFolder`
 * Instruments "xrd" and "XRD" are converted to lowercase
 * `raw.fixInvalidFile` can add instrument, user, project, and sample

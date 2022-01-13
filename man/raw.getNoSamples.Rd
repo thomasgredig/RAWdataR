@@ -4,12 +4,12 @@
 \alias{raw.getNoSamples}
 \title{returns approximate number of samples that were made}
 \usage{
-raw.getNoSamples(pfad, underscoreComments = TRUE)
+raw.getNoSamples(pfad, recursive = FALSE)
 }
 \arguments{
 \item{pfad}{path to the RAW folder}
 
-\item{underscoreComments}{include files with comments that have _}
+\item{recursive}{if \code{TRUE} search also subfolders}
 }
 \value{
 number of samples that were made with the NTE

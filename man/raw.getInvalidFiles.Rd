@@ -2,18 +2,22 @@
 % Please edit documentation in R/raw.getValidFiles.R
 \name{raw.getInvalidFiles}
 \alias{raw.getInvalidFiles}
-\title{returns all invalid RAW files in a folder}
+\title{Returns all invalid RAW files}
 \usage{
-raw.getInvalidFiles(pfad, year = ".*")
+raw.getInvalidFiles(pfad, year = ".*", recursive = FALSE)
 }
 \arguments{
 \item{pfad}{path to the RAW folder}
+
+\item{year}{limit to a particular year (currently ignored)}
+
+\item{recursive}{if \code{TRUE}, will also search sub-directories}
 }
 \value{
 vector with filenames
 }
 \description{
-returns all invalid RAW files in a folder
+Searches a folder (and year) for files that could be invalid
 }
 \examples{
 raw.getInvalidFiles(raw.getSamplePath())

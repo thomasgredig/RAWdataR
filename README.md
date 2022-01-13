@@ -1,6 +1,7 @@
 # RAWdataR
 
 <!-- badges: start -->
+[![Codecov test coverage](https://codecov.io/gh/thomasgredig/RAWdataR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/thomasgredig/RAWdataR?branch=master)
 <!-- badges: end -->
 
 The goal of RAWdataR is to validate the scientific RAW folder and perform some standard file checks in R language.

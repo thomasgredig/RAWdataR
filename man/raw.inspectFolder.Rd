@@ -4,10 +4,12 @@
 \alias{raw.inspectFolder}
 \title{Inspect RAW data folder}
 \usage{
-raw.inspectFolder(pfad)
+raw.inspectFolder(pfad, recursive = FALSE)
 }
 \arguments{
 \item{pfad}{path to folder with RAW data}
+
+\item{recursive}{if \code{TRUE} also search subfolders}
 }
 \value{
 list

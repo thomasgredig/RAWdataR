@@ -2,18 +2,20 @@
 % Please edit documentation in R/raw.getValidFiles.R
 \name{raw.getValidFiles}
 \alias{raw.getValidFiles}
-\title{returns all valid RAW files in a folder}
+\title{Returns all valid RAW files}
 \usage{
-raw.getValidFiles(pfad)
+raw.getValidFiles(pfad, recursive = FALSE)
 }
 \arguments{
 \item{pfad}{path to the RAW folder}
+
+\item{recursive}{if \code{TRUE}, will also search sub-directories}
 }
 \value{
 vector with filenames
 }
 \description{
-returns all valid RAW files in a folder
+Searches a folder for valid files
 }
 \examples{
 raw.getValidFiles(raw.getSamplePath())

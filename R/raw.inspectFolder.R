@@ -1,14 +1,15 @@
 #' Inspect RAW data folder
 #'
 #' @param pfad path to folder with RAW data
+#' @param recursive if \code{TRUE} also search subfolders
 #' @return list
 #' @examples
 #' raw.inspectFolder(raw.getSamplePath())
 #' @export
-raw.inspectFolder <- function(pfad) {
+raw.inspectFolder <- function(pfad, recursive=FALSE) {
   hasSubfolders = !raw.checkNoSubfolders(pfad)
   numFiles = length(dir(pfad))
-  file.list = raw.findFiles(pfad)
+  file.list = raw.findFiles(pfad,recursive=recursive)
   d = raw.getNames(file.list)
   projects = paste(levels(as.factor(d$project)), collapse=',')
   users = paste(levels(as.factor(d$user)), collapse=',')
