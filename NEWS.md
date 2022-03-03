@@ -1,3 +1,7 @@
+# RAWdataR 0.5.2
+
+* add function `path.goUpOneDir` to easily go up one directory
+
 # RAWdataR 0.5.1
 
 * allow recursive search (subfolders) in raw data folder

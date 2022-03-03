@@ -10,14 +10,14 @@
     
     <a class="navbar-brand me-2" href="../index.html">RAWdataR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
@@ -87,12 +87,12 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="raw.findFiles.html">raw.findFiles</a></span><span class="op">(</span><span class="fu"><a href="raw.getSamplePath.html">raw.getSamplePath</a></span><span class="op">(</span><span class="op">)</span>, instrument<span class="op">=</span><span class="st">'MM160622SI1'</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/Rtmpfc79LS/temp_libpath12df7c326a02/RAWdataR/extdata/20160718_Dual_MM_MM160622SI1_20160718_2.5K_MVSH_00001.txt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpVRlcj0/temp_libpathd6e27d378d3/RAWdataR/extdata/20160718_Dual_MM_MM160622SI1_20160718_2.5K_MVSH_00001.txt"</span>
 <span class="r-in"><span class="va">f.new</span> <span class="op">=</span> <span class="fu">raw.fixInvalidFile</span><span class="op">(</span><span class="va">f</span>, addInstrument<span class="op">=</span><span class="st">'vsm'</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Old name:"</span>,<span class="va">f</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Old name: /private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/Rtmpfc79LS/temp_libpath12df7c326a02/RAWdataR/extdata/20160718_Dual_MM_MM160622SI1_20160718_2.5K_MVSH_00001.txt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Old name: /private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpVRlcj0/temp_libpathd6e27d378d3/RAWdataR/extdata/20160718_Dual_MM_MM160622SI1_20160718_2.5K_MVSH_00001.txt"</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"New name:"</span>,<span class="va">f.new</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "New name: /private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/Rtmpfc79LS/temp_libpath12df7c326a02/RAWdataR/extdata/20160718_Dual_MM_vsm_MM160622SI1_20160718_2.5K_MVSH_00001.txt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "New name: /private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpVRlcj0/temp_libpathd6e27d378d3/RAWdataR/extdata/20160718_Dual_MM_vsm_MM160622SI1_20160718_2.5K_MVSH_00001.txt"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -104,7 +104,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer></div>

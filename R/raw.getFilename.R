@@ -3,6 +3,7 @@
 #' @param file.list path and filenames
 #' @param MD5 checksum, can be any length
 #' @return filename with certain MD5 checksum, returns \code{NA} if not found
+#' @importFrom tools md5sum
 #' @examples
 #' file.list = file.path(raw.getSampleFiles())
 #' raw.getFilenameByMD5(file.list,'24fefa')
