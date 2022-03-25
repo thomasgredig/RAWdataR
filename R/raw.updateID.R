@@ -18,6 +18,7 @@
 #' @param pRESULTS path for results
 #' @param idFile name of file with IDs
 #' @param forceRegenerate logical, regenerate file, use with great care only
+#' @param fixDuplicates logical, if \code{TRUE}, duplicates are removed, use with care only
 #' @param verbose logical, if \code{TRUE} outputs information about the process
 #'
 #'
@@ -30,6 +31,7 @@ raw.updateID <- function(pRAW,
                          pRESULTS,
                          idFile = 'RAW-ID.csv',
                          forceRegenerate = FALSE,
+                         fixDuplicates = FALSE,
                          verbose = FALSE) {
   if(missing(pRAW) & exists("path.RAW")) pRAW = path.RAW
   if(missing(pRESULTS) & exists("path.RESULTS")) pRESULTS = path.RESULTS
@@ -52,6 +54,11 @@ raw.updateID <- function(pRAW,
 
   # check if any files are missing or have changed:
   if(nrow(rID)>0) {
+    ## remove duplicates??
+    if (fixDuplicates) {
+      m1 = which(duplicated(rID$crc)==TRUE)
+      if (length(m1)>0) rID <- rID[-m1,]
+    }
     for(j in 1:nrow(rID)) {
       fname = file.path(rID$path[j], rID$filename[j])
       if (file.exists(fname)) {

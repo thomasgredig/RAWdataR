@@ -61,8 +61,6 @@ test_that("test RAW ID", {
   file.rename(from=f5, to=f5.new)
 
   file.remove(f3)
-  q = raw.updateID(pRAW, pRESULTS)
+  q = raw.updateID(pRAW, pRESULTS, fixDuplicates=TRUE)
   expect_equal(length(which(q$missing)),1)
-
-
 })

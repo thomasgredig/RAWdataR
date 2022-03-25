@@ -9,6 +9,7 @@ raw.updateID(
   pRESULTS,
   idFile = "RAW-ID.csv",
   forceRegenerate = FALSE,
+  fixDuplicates = FALSE,
   verbose = FALSE
 )
 }
@@ -20,6 +21,8 @@ raw.updateID(
 \item{idFile}{name of file with IDs}
 
 \item{forceRegenerate}{logical, regenerate file, use with great care only}
+
+\item{fixDuplicates}{logical, if \code{TRUE}, duplicates are removed, use with care only}
 
 \item{verbose}{logical, if \code{TRUE} outputs information about the process}
 }
