@@ -5,7 +5,7 @@ devtools::document()
 pkgdown::build_site()
 
 library(covr)
-report()
+covr::report()
 
 file.remove('./RAW/test/test.txt')
 file.remove('./RAW/test2.txt')

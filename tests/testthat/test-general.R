@@ -4,6 +4,16 @@ test_that("go up one directory", {
 })
 
 
+
+test_that("split filename and search for sample names", {
+  f = c('20010101_project_user_inst_sample_desc.DAT')
+  f = c(f,f,f)
+  df = raw.splitFilename(f)
+  expect_equal(nrow(df), 3)
+  expect_equal(df$Sample, c("sample","sample","sample"))
+})
+
+
 test_that("test RAW ID", {
   pRESULTS = tempdir()
 
@@ -63,4 +73,8 @@ test_that("test RAW ID", {
   file.remove(f3)
   q = raw.updateID(pRAW, pRESULTS, fixDuplicates=TRUE)
   expect_equal(length(which(q$missing)),1)
+
+  # find approximate match, evertyhing in the "sub" folder:
+  n = raw.getIDbyFile('sub', pRESULTS, exactNameMatch = FALSE)
+  expect_equal(nrow(n), 3)
 })

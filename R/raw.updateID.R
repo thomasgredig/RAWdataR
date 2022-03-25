@@ -21,6 +21,7 @@
 #' @param fixDuplicates logical, if \code{TRUE}, duplicates are removed, use with care only
 #' @param verbose logical, if \code{TRUE} outputs information about the process
 #'
+#' @importFrom utils read.csv write.csv
 #'
 #' @return returns \code{TRUE} if name has a valid format
 #' @examples
@@ -166,15 +167,17 @@ raw.getFileByID <- function(ID,
 #' Return filename by ID
 #'
 #' @param file.list list of file names
-#' @param pRESULTS results folder
+#' @param pRESULTS results folder, if missing and path.RESULTS is defined will use that folder
 #' @param idFile name of the file the the RAW IDs
+#' @param exactNameMatch logical, if \code{FALSE} will match partial file names
 #'
 #' @seealso \code{\link{raw.getIDbyFile}}, \code{\link{raw.updateID}}
 #'
 #' @export
 raw.getIDbyFile <- function(file.list,
                             pRESULTS,
-                            idFile = 'RAW-ID.csv') {
+                            idFile = 'RAW-ID.csv',
+                            exactNameMatch = TRUE) {
 
   if(missing(pRESULTS) & exists("path.RESULTS")) pRESULTS = path.RESULTS
 
@@ -186,22 +189,28 @@ raw.getIDbyFile <- function(file.list,
   }
 
   rID = read.csv(fIDfile)
-  # m = which(rID$filename %in% filename)
-  # if (length(m)==0) return(data.frame(ID=0))
+
+
   m = c()
   for(f in file.list) {
-
-    if (file.exists(f)) {
-      crc = .getCRC(f)
-      m1 = which(crc == rID$crc)
-      if (length(m1)==0 | length(m1)>1) warning("Run raw.updatedID() first.")
+    if (exactNameMatch) {
+      if (file.exists(f)) {
+        crc = .getCRC(f)
+        m1 = which(crc == rID$crc)
+        if (length(m1)==0 | length(m1)>1) warning("Run raw.updateID() first.")
+      } else {
+        fn = basename(f)
+        m1 = which(fn == rID$filename)
+        if (length(m1)==0 | length(m1)>1) warning("Run raw.updateID() first.")
+      }
     } else {
-      fn = basename(f)
-      m1 = which(fn == rID$filename)
-      if (length(m1)==0 | length(m1)>1) warning("Run raw.updatedID() first.")
+      # match can be approximate
+      m1 = grep(f, file.path(rID$path, rID$filename))
     }
 
-    m = c(m, m1)
+    if (length(m1)>0) {
+      m = c(m, m1)
+    }
   }
   rID[m,]
 }

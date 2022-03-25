@@ -4,14 +4,21 @@
 \alias{raw.getIDbyFile}
 \title{Return filename by ID}
 \usage{
-raw.getIDbyFile(file.list, pRESULTS, idFile = "RAW-ID.csv")
+raw.getIDbyFile(
+  file.list,
+  pRESULTS,
+  idFile = "RAW-ID.csv",
+  exactNameMatch = TRUE
+)
 }
 \arguments{
 \item{file.list}{list of file names}
 
-\item{pRESULTS}{results folder}
+\item{pRESULTS}{results folder, if missing and path.RESULTS is defined will use that folder}
 
 \item{idFile}{name of the file the the RAW IDs}
+
+\item{exactNameMatch}{logical, if \code{FALSE} will match partial file names}
 }
 \description{
 Return filename by ID

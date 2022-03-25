@@ -16,6 +16,6 @@ data frame
 splits filename into fields
 }
 \examples{
-raw.splitFilename('20010101-project-user-inst-sample.DAT')
+raw.splitFilename('20010101_project_user_inst_sample_desc.DAT')
 
 }
