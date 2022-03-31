@@ -137,7 +137,7 @@ raw.updateID <- function(pRAW,
   }
   if (nrow(rID)>0)  write.csv(rID, fIDfile, row.names = FALSE)
 
-  rID
+  invisible(rID)
 }
 
 #' Return filename by ID
