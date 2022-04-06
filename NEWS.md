@@ -1,5 +1,9 @@
 # RAWdataR 0.5.2
 
+* `raw.updateID` uses `data-raw` as the default raw folder and also for results
+
+# RAWdataR 0.5.2
+
 * allow to search for partial filename matching in `raw.getIDfromFile`
 * add `raw.updateID` to build unique IDs for files based on MD5
 * add function `path.goUpOneDir` to easily go up one directory

@@ -7,16 +7,18 @@
 #'
 #' @section
 #' Possible scenarios:
-#' (1) RAW ID file does not exist and must be generated
-#' (2) new RAW file is added,
-#' (3) RAW file is missing,
-#' (4) RAW file has duplicate in different folder,
-#' (5) RAW file has duplicate with new name,
-#' (6) RAW file moved to a different folder, and folder needs update
+#' \describe{
+#'   \item{\code{(rule 1)}}{ RAW ID file does not exist and must be generated}
+#'   \item{\code{(rule 2)}}{ new RAW file is added,}
+#'   \item{\code{(rule 3)}}{ RAW file is missing,}
+#'   \item{\code{(rule 4)}}{ RAW file has duplicate in different folder,}
+#'   \item{\code{(rule 5)}}{ RAW file has duplicate with new name,}
+#'   \item{\code{(rule 6)}}{ RAW file moved to a different folder, and folder needs update}
+#' }
 #'
-#' @param pRAW path with raw data
-#' @param pRESULTS path for results
-#' @param idFile name of file with IDs
+#' @param pRAW path with raw data, default: uses `data-raw` folder, or creates it
+#' @param pRESULTS path for results, default: uses pRAW
+#' @param idFile name of file with IDs, default: RAW-ID.csv
 #' @param forceRegenerate logical, regenerate file, use with great care only
 #' @param fixDuplicates logical, if \code{TRUE}, duplicates are removed, use with care only
 #' @param verbose logical, if \code{TRUE} outputs information about the process
@@ -24,9 +26,12 @@
 #' @importFrom utils read.csv write.csv
 #'
 #' @return returns \code{TRUE} if name has a valid format
-#' @examples
-#' if (FALSE) raw.updateID(path.RAW, path.RESULTS)
 #'
+#' @seealso \code{\link{raw.getFileByID}}, \code{\link{raw.getIDbyFile}}
+#' @examples
+#' \dontrun{
+#'   raw.updateID()
+#' }
 #' @export
 raw.updateID <- function(pRAW,
                          pRESULTS,
@@ -34,8 +39,11 @@ raw.updateID <- function(pRAW,
                          forceRegenerate = FALSE,
                          fixDuplicates = FALSE,
                          verbose = FALSE) {
-  if(missing(pRAW) & exists("path.RAW")) pRAW = path.RAW
-  if(missing(pRESULTS) & exists("path.RESULTS")) pRESULTS = path.RESULTS
+  if(missing(pRAW)) {
+    pRAW = 'data-raw'
+    if (!dir.exists(pRAW)) dir.create(pRAW)
+  }
+  if(missing(pRESULTS)) pRESULTS = pRAW
 
   # name for file that stores the RAW IDs
   fIDfile = file.path(pRESULTS, idFile)
@@ -145,14 +153,14 @@ raw.updateID <- function(pRAW,
 #' @param ID list of RAW file IDs
 #' @param pRESULTS results folder
 #' @param idFile name of the file the the RAW IDs
+#' @returns data frame with filename, path, and other information about the file
 #'
 #' @seealso \code{\link{raw.getIDbyFile}}, \code{\link{raw.updateID}}
 #'
 #' @export
 raw.getFileByID <- function(ID,
-                            pRESULTS,
+                            pRESULTS = 'data-raw',
                             idFile = 'RAW-ID.csv') {
-  if(missing(pRESULTS) & exists("path.RESULTS")) pRESULTS = path.RESULTS
 
   # name for file that stores the RAW IDs
   fIDfile = file.path(pRESULTS, idFile)
@@ -175,11 +183,9 @@ raw.getFileByID <- function(ID,
 #'
 #' @export
 raw.getIDbyFile <- function(file.list,
-                            pRESULTS,
+                            pRESULTS = 'data-raw',
                             idFile = 'RAW-ID.csv',
                             exactNameMatch = TRUE) {
-
-  if(missing(pRESULTS) & exists("path.RESULTS")) pRESULTS = path.RESULTS
 
   # name for file that stores the RAW IDs
   fIDfile = file.path(pRESULTS, idFile)
@@ -233,7 +239,7 @@ NULL
   if (grepl('\\_AFM',f)) type = "AFM"
   if (grepl('\\_EDS',f)) type = "EDS"
   if (grepl('\\_SEM',f)) type = "SEM"
-  if (grepl('\\_Rxxvs',f)) type = "AMR"
+  if (grepl('\\_Rxx',f)) type = "AMR"
 
   type
 }

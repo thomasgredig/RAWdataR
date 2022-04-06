@@ -4,7 +4,7 @@
 \alias{raw.getFileByID}
 \title{Return filename by ID}
 \usage{
-raw.getFileByID(ID, pRESULTS, idFile = "RAW-ID.csv")
+raw.getFileByID(ID, pRESULTS = "data-raw", idFile = "RAW-ID.csv")
 }
 \arguments{
 \item{ID}{list of RAW file IDs}
@@ -12,6 +12,9 @@ raw.getFileByID(ID, pRESULTS, idFile = "RAW-ID.csv")
 \item{pRESULTS}{results folder}
 
 \item{idFile}{name of the file the the RAW IDs}
+}
+\value{
+data frame with filename, path, and other information about the file
 }
 \description{
 Return filename by ID

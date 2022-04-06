@@ -14,11 +14,11 @@ raw.updateID(
 )
 }
 \arguments{
-\item{pRAW}{path with raw data}
+\item{pRAW}{path with raw data, default: uses `data-raw` folder, or creates it}
 
-\item{pRESULTS}{path for results}
+\item{pRESULTS}{path for results, default: uses pRAW}
 
-\item{idFile}{name of file with IDs}
+\item{idFile}{name of file with IDs, default: RAW-ID.csv}
 
 \item{forceRegenerate}{logical, regenerate file, use with great care only}
 
@@ -37,15 +37,21 @@ has changed, the ID will remain the same, but the file is changing
 }
 \section{Possible scenarios}{
 
-(1) RAW ID file does not exist and must be generated
-(2) new RAW file is added,
-(3) RAW file is missing,
-(4) RAW file has duplicate in different folder,
-(5) RAW file has duplicate with new name,
-(6) RAW file moved to a different folder, and folder needs update
+\describe{
+  \item{\code{(rule 1)}}{ RAW ID file does not exist and must be generated}
+  \item{\code{(rule 2)}}{ new RAW file is added,}
+  \item{\code{(rule 3)}}{ RAW file is missing,}
+  \item{\code{(rule 4)}}{ RAW file has duplicate in different folder,}
+  \item{\code{(rule 5)}}{ RAW file has duplicate with new name,}
+  \item{\code{(rule 6)}}{ RAW file moved to a different folder, and folder needs update}
+}
 }
 
 \examples{
-if (FALSE) raw.updateID(path.RAW, path.RESULTS)
-
+\dontrun{
+  raw.updateID()
+}
+}
+\seealso{
+\code{\link{raw.getFileByID}}, \code{\link{raw.getIDbyFile}}
 }

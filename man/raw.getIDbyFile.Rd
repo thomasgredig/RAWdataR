@@ -6,7 +6,7 @@
 \usage{
 raw.getIDbyFile(
   file.list,
-  pRESULTS,
+  pRESULTS = "data-raw",
   idFile = "RAW-ID.csv",
   exactNameMatch = TRUE
 )
