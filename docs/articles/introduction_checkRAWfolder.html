@@ -8,8 +8,8 @@
 <meta name="description" content="RAWdataR">
 <title>Introduction RAWdataR • RAWdataR</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Roboto-0.4.0/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.2/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Introduction RAWdataR">
@@ -27,7 +27,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">RAWdataR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,9 +66,10 @@
 
 
 <div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Introduction RAWdataR</h1>
-                        <h4 data-toc-skip class="author">Thomas Gredig</h4>
+                        <h4 data-toc-skip class="author">Thomas
+Gredig</h4>
             
             <h4 data-toc-skip class="date">12/16/2019</h4>
       
@@ -81,49 +82,51 @@
 <div class="section level2">
 <h2 id="inspect-directory">Inspect Directory<a class="anchor" aria-label="anchor" href="#inspect-directory"></a>
 </h2>
-<p>We can find out about <code>projects</code> and <code>users</code> for a particular directory by inspecting it.</p>
+<p>We can find out about <code>projects</code> and <code>users</code>
+for a particular directory by inspecting it.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">path.RAW</span> <span class="op">=</span> <span class="fu"><a href="../reference/raw.getSamplePath.html">raw.getSamplePath</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="../reference/raw.inspectFolder.html">raw.inspectFolder</a></span><span class="op">(</span><span class="va">path.RAW</span><span class="op">)</span>
-<span class="co">#&gt; $hasSubfolders</span>
-<span class="co">#&gt; [1] FALSE</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $projects</span>
-<span class="co">#&gt; [1] "Dual,FePc,Optical"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $users</span>
-<span class="co">#&gt; [1] "AN,MM,TG"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $samples</span>
-<span class="co">#&gt; [1] "20160718,NM20151109CuPc100gl150-A2(UDS).txt,Tb33Al66"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $instruments</span>
-<span class="co">#&gt; [1] "mm160622si1,spectrophotometer,vsm"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $validFiles</span>
-<span class="co">#&gt; [1] 3</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $invalidFiles</span>
-<span class="co">#&gt; [1] 1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">path.RAW</span> <span class="op">=</span> <span class="fu"><a href="../reference/raw.getSamplePath.html">raw.getSamplePath</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/raw.inspectFolder.html">raw.inspectFolder</a></span><span class="op">(</span><span class="va">path.RAW</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $hasSubfolders</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $projects</span></span>
+<span><span class="co">#&gt; [1] "Dual,FePc,Optical"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $users</span></span>
+<span><span class="co">#&gt; [1] "AN,MM,TG"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $samples</span></span>
+<span><span class="co">#&gt; [1] "20160718,NM20151109CuPc100gl150-A2(UDS).txt,Tb33Al66"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $instruments</span></span>
+<span><span class="co">#&gt; [1] "mm160622si1,spectrophotometer,vsm"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $validFiles</span></span>
+<span><span class="co">#&gt; [1] 3</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $invalidFiles</span></span>
+<span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
 <p>One of the instruments is off, let us inspect which file that is:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="fu"><a href="../reference/raw.findFiles.html">raw.findFiles</a></span><span class="op">(</span><span class="va">path.RAW</span>, instrument<span class="op">=</span><span class="st">'MM160622SI1'</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] "20160718_Dual_MM_MM160622SI1_20160718_2.5K_MVSH_00001.txt"</span></code></pre></div>
-<p>The data filename is missing an instrument. It appears to be a <code>vsm</code> data file. The instrument can be added as follows:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="fu"><a href="../reference/raw.findFiles.html">raw.findFiles</a></span><span class="op">(</span><span class="va">path.RAW</span>, instrument<span class="op">=</span><span class="st">'MM160622SI1'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "20160718_Dual_MM_MM160622SI1_20160718_2.5K_MVSH_00001.txt"</span></span></code></pre></div>
+<p>The data filename is missing an instrument. It appears to be a
+<code>vsm</code> data file. The instrument can be added as follows:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="fu"><a href="../reference/raw.findFiles.html">raw.findFiles</a></span><span class="op">(</span><span class="va">path.RAW</span>, instrument<span class="op">=</span><span class="st">'MM160622SI1'</span><span class="op">)</span><span class="op">)</span>
-<span class="va">f.new</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="fu"><a href="../reference/raw.fixInvalidFile.html">raw.fixInvalidFile</a></span><span class="op">(</span><span class="va">f</span>, addInstrument<span class="op">=</span><span class="st">'vsm'</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Change:"</span>,<span class="va">f</span>,<span class="st">"to:"</span>,<span class="va">f.new</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Change: 20160718_Dual_MM_MM160622SI1_20160718_2.5K_MVSH_00001.txt to: 20160718_Dual_MM_vsm_MM160622SI1_20160718_2.5K_MVSH_00001.txt"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="fu"><a href="../reference/raw.findFiles.html">raw.findFiles</a></span><span class="op">(</span><span class="va">path.RAW</span>, instrument<span class="op">=</span><span class="st">'MM160622SI1'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">f.new</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="fu"><a href="../reference/raw.fixInvalidFile.html">raw.fixInvalidFile</a></span><span class="op">(</span><span class="va">f</span>, addInstrument<span class="op">=</span><span class="st">'vsm'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Change:"</span>,<span class="va">f</span>,<span class="st">"to:"</span>,<span class="va">f.new</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Change: 20160718_Dual_MM_MM160622SI1_20160718_2.5K_MVSH_00001.txt to: 20160718_Dual_MM_vsm_MM160622SI1_20160718_2.5K_MVSH_00001.txt"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="find-duplicate-raw-data-files">Find duplicate RAW data files<a class="anchor" aria-label="anchor" href="#find-duplicate-raw-data-files"></a>
 </h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">path.RAW</span> <span class="op">=</span> <span class="fu"><a href="../reference/raw.getSamplePath.html">raw.getSamplePath</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="../reference/raw.findDuplicates.html">raw.findDuplicates</a></span><span class="op">(</span><span class="va">path.RAW</span>,isValid<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
-<span class="va">d1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>f<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span>,md5<span class="op">=</span><span class="fu"><a href="../reference/raw.getMD5.html">raw.getMD5</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span>,row.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">kable</span><span class="op">(</span><span class="va">d1</span>, col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Duplicated Files'</span>,<span class="st">'MD5'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">path.RAW</span> <span class="op">=</span> <span class="fu"><a href="../reference/raw.getSamplePath.html">raw.getSamplePath</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="../reference/raw.findDuplicates.html">raw.findDuplicates</a></span><span class="op">(</span><span class="va">path.RAW</span>,isValid<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">d1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>f<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span>,md5<span class="op">=</span><span class="fu"><a href="../reference/raw.getMD5.html">raw.getMD5</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span>,row.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">kable</span><span class="op">(</span><span class="va">d1</span>, col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Duplicated Files'</span>,<span class="st">'MD5'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="91%">
@@ -144,17 +147,18 @@
 </tr>
 </tbody>
 </table>
-<p>This is the list of duplicated files. We can find out what the original file:</p>
+<p>This is the list of duplicated files. We can find out what the
+original file:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">searchMD5</span> <span class="op">=</span> <span class="va">d1</span><span class="op">$</span><span class="va">md5</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html" class="external-link">duplicated</a></span><span class="op">(</span><span class="va">d1</span><span class="op">$</span><span class="va">md5</span><span class="op">)</span><span class="op">]</span>
-<span class="kw">for</span><span class="op">(</span><span class="va">m</span> <span class="kw">in</span> <span class="va">searchMD5</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Duplicates for files with MD5 = "</span>,<span class="va">m</span><span class="op">)</span><span class="op">)</span>
-  <span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="../reference/raw.findFiles.html">raw.findFiles</a></span><span class="op">(</span><span class="va">path.RAW</span>, md5<span class="op">=</span><span class="va">m</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="co">#&gt; [1] "Duplicates for files with MD5 =  7545cd"</span>
-<span class="co">#&gt; [1] "20141215_FePc_TG_vsm_Tb33Al66_20141215-Tb33Al66-ac1Oe-20Hz.txt"          </span>
-<span class="co">#&gt; [2] "20160607_Optical_AN_Spectrophotometer_NM20151109CuPc100gl150-A2(UDS).txt"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">searchMD5</span> <span class="op">=</span> <span class="va">d1</span><span class="op">$</span><span class="va">md5</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html" class="external-link">duplicated</a></span><span class="op">(</span><span class="va">d1</span><span class="op">$</span><span class="va">md5</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">m</span> <span class="kw">in</span> <span class="va">searchMD5</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Duplicates for files with MD5 = "</span>,<span class="va">m</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="../reference/raw.findFiles.html">raw.findFiles</a></span><span class="op">(</span><span class="va">path.RAW</span>, md5<span class="op">=</span><span class="va">m</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#&gt; [1] "Duplicates for files with MD5 =  7545cd"</span></span>
+<span><span class="co">#&gt; [1] "20141215_FePc_TG_vsm_Tb33Al66_20141215-Tb33Al66-ac1Oe-20Hz.txt"          </span></span>
+<span><span class="co">#&gt; [2] "20160607_Optical_AN_Spectrophotometer_NM20151109CuPc100gl150-A2(UDS).txt"</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -169,7 +173,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>
