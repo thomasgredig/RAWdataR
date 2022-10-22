@@ -156,6 +156,12 @@
 <span><span class="co"># this will return 'README.md'</span></span>
 <span><span class="va">filename</span> <span class="op">=</span> <span class="fu"><a href="reference/raw.getFilename.html">raw.getFilename</a></span><span class="op">(</span><span class="va">file.list</span>,<span class="va">s</span><span class="op">)</span></span></code></pre></div>
 </div>
+<div class="section level2">
+<h2 id="data-project">Data Project<a class="anchor" aria-label="anchor" href="#data-project"></a>
+</h2>
+<p>If you have a new project with RAW data, you can quickly initialize it using the <code><a href="reference/raw.dataProject.html">raw.dataProject()</a></code> function. It will prompt you to select a directory that has a <code>RAW</code> subfolder and then generate the R data package. Once generated, you can open the new data package and run the <code>_init.R</code> code, which helps you prepare a documented data package. Afterwards, it is recommended to add tests to verify data content.</p>
+<pre class="{r}"><code><span><span class="fu">RAWdataR</span><span class="fu">::</span><span class="fu"><a href="reference/raw.dataProject.html">raw.dataProject</a></span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
 </div>
   </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>

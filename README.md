@@ -103,3 +103,14 @@ file.list = dir()
 filename = raw.getFilename(file.list,s)
 ```
 
+
+## Data Project
+
+If you have a new project with RAW data, you can quickly initialize it using the `raw.dataProject()` function. It will prompt you to select a directory that has a `RAW` subfolder and then generate the R data package. Once generated, you can open the new data package and run the `_init.R` code, which helps you prepare a documented data package. Afterwards, it is recommended to add tests to verify data content.
+
+```{r}
+RAWdataR::raw.dataProject()
+```
+
+
+

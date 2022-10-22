@@ -14,3 +14,8 @@ Use the interactive directory selector to create a data R project:
 The selected folder should have a subdirectory called RAW and all
 the RAW data files are stored in that directory
 }
+\examples{
+\dontrun{
+RAWdataR::raw.dataProject()
+}
+}

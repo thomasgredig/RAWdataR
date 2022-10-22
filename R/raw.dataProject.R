@@ -7,7 +7,12 @@
 #' @param sourceDir if specified, R project will be generated in this directory, otherwise an interactive window allows user to select directory
 #'
 #' @importFrom rstudioapi selectDirectory isAvailable
-#' @importFrom usethis create_package proj_set use_proprietary_license use_readme_md use_news_md use_test
+#' @importFrom usethis create_package proj_set use_proprietary_license use_readme_md use_news_md use_test proj_activate
+#'
+#' @examples
+#' \dontrun{
+#' RAWdataR::raw.dataProject()
+#' }
 #' @export
 raw.dataProject <- function(sourceDir = NULL) {
   if (is.null(sourceDir)) sourceDir = rstudioapi::selectDirectory(caption="Select Directory with Project that contains RAW folder")
@@ -52,6 +57,7 @@ file.remove('NAMESPACE')
 roxygen2::roxygenise()
 usethis::use_data_raw()
 
+raw.generateDataMaker()
 source('data-raw/make.dataRAW.R')
 "
   fInit = file.path(sourceDir,"_init.R")
@@ -63,6 +69,6 @@ source('data-raw/make.dataRAW.R')
     warning("_init.R already exists; will not overwrite.")
   }
 
-  proj_activate(sourceDir)
+  usethis::proj_activate(sourceDir)
   invisible(TRUE)
 }
