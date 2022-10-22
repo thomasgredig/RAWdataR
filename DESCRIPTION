@@ -1,7 +1,7 @@
 Package: RAWdataR
 Type: Package
 Title: Supports scientifically reproducible RAW data processing
-Version: 0.5.3
+Version: 0.6
 Authors@R: person("Thomas", "Gredig", email = "tgredig@csulb.edu",
                   role = c("aut", "cre"),
                   comment = c(ORCID = "0000-0002-5824-7626"))
@@ -18,6 +18,8 @@ Imports:
 Suggests: 
     rmarkdown,
     knitr,
+    rstudioapi,
+    usethis,
     testthat (>= 2.1.0),
     covr
 VignetteBuilder: knitr

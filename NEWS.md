@@ -1,3 +1,7 @@
+# RAWdataR 0.6
+
+* adding `raw.dataProject()` to generate a data R project start framework quickly
+
 # RAWdataR 0.5.2
 
 * `raw.updateID` uses `data-raw` as the default raw folder and also for results
