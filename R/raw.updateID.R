@@ -241,6 +241,15 @@ NULL
   if (grepl('\\_SEM',f)) type = "SEM"
   if (grepl('\\_Rxx',f)) type = "AMR"
 
+  if (type=="") {
+    f = tools::file_ext(filename)
+    if (grepl('nid',f)) type = 'AFM'
+    if (grepl('ibw',f)) type = 'AFM'
+    if (grepl('tiff',f)) type = 'AFM'
+    if (grepl('\\d{3}',f)) type = 'AFM'
+    if (grepl('csv',f)) type = 'table'
+  }
+
   type
 }
 

@@ -112,5 +112,5 @@ If you have a new project with RAW data, you can quickly initialize it using the
 RAWdataR::raw.dataProject()
 ```
 
-
+You can use `raw.dataMaker()` to generate a make.data..R file that creates a dataset.
 

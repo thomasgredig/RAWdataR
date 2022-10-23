@@ -55,10 +55,12 @@ library(RAWdataR)
 
 file.remove('NAMESPACE')
 roxygen2::roxygenise()
-usethis::use_data_raw()
+dir.create('data-raw')
 
-raw.generateDataMaker()
-source('data-raw/make.dataRAW.R')
+raw.dataMaker('make.dataRAW.R')
+
+devtools::document()
+pkgdown::build_site()
 "
   fInit = file.path(sourceDir,"_init.R")
   if (!file.exists(fInit)) {
