@@ -4,7 +4,7 @@
 \alias{fig2tex}
 \title{Save figure to TeX snippet}
 \usage{
-fig2tex(g, fileGraph, caption)
+fig2tex(g, fileGraph, caption, ...)
 }
 \arguments{
 \item{g}{figure of class ggplot}

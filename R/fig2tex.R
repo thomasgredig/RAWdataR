@@ -18,12 +18,12 @@
 #' fig2tex(g, file.path(q,"test.png"), "First Graph.")
 #'
 #' @export
-fig2tex <- function(g, fileGraph, caption) {
+fig2tex <- function(g, fileGraph, caption, ...) {
   if (!length(grep('ggplot',class(g)))>0) stop("Graph needs to be a ggplot object.")
 
-  ggsave(fileGraph, plot=g, dpi=300)
-  fileTeX = gsub(file_ext(fileGraph),'tex',basename(fileGraph))
-  label = gsub(file_ext(fileGraph),'',fileGraph)
+  ggsave(fileGraph, plot=g, ...)
+  fileTeX = gsub(file_ext(fileGraph),'tex',fileGraph)
+  label = gsub(file_ext(fileGraph),'',basename(fileGraph))
 
   texBase = paste0("
 \\begin{figure}[htbp]
