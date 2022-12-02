@@ -6,6 +6,7 @@
 #' @param g figure of class ggplot
 #' @param filename file name to save figure
 #' @param caption caption for figure
+#' @param ... parameters passed to ggsave() such as dpi,width
 #'
 #' @importFrom ggplot2 ggsave ggplot geom_point aes theme_bw
 #' @importFrom tools file_ext
@@ -24,11 +25,12 @@ fig2tex <- function(g, fileGraph, caption, ...) {
   ggsave(fileGraph, plot=g, ...)
   fileTeX = gsub(file_ext(fileGraph),'tex',fileGraph)
   label = gsub(file_ext(fileGraph),'',basename(fileGraph))
+  label = gsub('\\.','',label)
 
   texBase = paste0("
 \\begin{figure}[htbp]
-   \\centering
-   \\includegraphics{",fileGraph,"} % requires the graphicx package
+   \\centering  % requires the graphicx package
+   \\includegraphics[width=0.95\\columnwidth]{",basename(fileGraph),"}
    \\caption{", caption, "}
    \\label{fig:", label, "}
 \\end{figure}

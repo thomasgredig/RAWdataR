@@ -11,6 +11,8 @@ fig2tex(g, fileGraph, caption, ...)
 
 \item{caption}{caption for figure}
 
+\item{...}{parameters passed to ggsave() such as dpi,width}
+
 \item{filename}{file name to save figure}
 }
 \description{
