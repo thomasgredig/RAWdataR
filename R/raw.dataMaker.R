@@ -6,7 +6,7 @@
 #'
 #' @importFrom utils menu
 #'
-#' @example
+#' @examples
 #' \donotrun{
 #' raw.dataMaker()
 #' }
@@ -109,6 +109,7 @@ usethis::use_data(dataAFM, overwrite = TRUE)
            { codeSel = codeAFM; fileData='make.dataAFM.R' })
   } else {
     codeSel = NULL
+    fileData = fileMaker
     if (fileMaker=='make.dataRAW.R') codeSel = codeRAW
     else if (fileMaker=='make.dataAFM.R') codeSel = codeAFM
   }

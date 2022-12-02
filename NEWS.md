@@ -1,3 +1,7 @@
+# RAWdataR 0.6.1
+
+* function `fig2tex()` to save graphs as a TeX snippet for import
+
 # RAWdataR 0.6
 
 * adding `raw.dataProject()` to generate a data R project start framework quickly

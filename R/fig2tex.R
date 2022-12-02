@@ -1,0 +1,43 @@
+#' Save figure to TeX snippet
+#'
+#' @description Saves the figure and creates a small TeX snippet with caption and label, which can be
+#'              compiled into a LaTeX document.
+#'
+#' @param g figure of class ggplot
+#' @param filename file name to save figure
+#' @param caption caption for figure
+#'
+#' @importFrom ggplot2 ggsave ggplot geom_point aes theme_bw
+#' @importFrom tools file_ext
+#'
+#' @examples
+#' q = tempdir()
+#' x=seq(-10,10,0.1); y=x^2-2
+#' g = ggplot2::ggplot(data.frame(x,y), ggplot2::aes(x,y)) +
+#'   ggplot2::geom_point(col='red') + ggplot2::theme_bw()
+#' fig2tex(g, file.path(q,"test.png"), "First Graph.")
+#'
+#' @export
+fig2tex <- function(g, fileGraph, caption) {
+  if (!length(grep('ggplot',class(g)))>0) stop("Graph needs to be a ggplot object.")
+
+  ggsave(fileGraph, plot=g, dpi=300)
+  fileTeX = gsub(file_ext(fileGraph),'tex',basename(fileGraph))
+  label = gsub(file_ext(fileGraph),'',fileGraph)
+
+  texBase = paste0("
+\\begin{figure}[htbp]
+   \\centering
+   \\includegraphics{",fileGraph,"} % requires the graphicx package
+   \\caption{", caption, "}
+   \\label{fig:", label, "}
+\\end{figure}
+")
+
+    fileConn<-file(fileTeX,"wt")
+    writeLines(texBase, fileConn)
+    close(fileConn)
+
+    fileTeX
+}
+

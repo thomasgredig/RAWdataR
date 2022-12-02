@@ -12,3 +12,8 @@ raw.dataMaker(fileMaker = NULL)
 \description{
 The
 }
+\examples{
+\donotrun{
+raw.dataMaker()
+}
+}

@@ -1,11 +1,11 @@
-pandoc: '2.18'
+pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   MD5-Validation: MD5-Validation.html
   RAW-data-file-validation: RAW-data-file-validation.html
   introduction_checkRAWfolder: introduction_checkRAWfolder.html
-last_built: 2022-10-22T20:39Z
+last_built: 2022-12-02T03:43Z
 urls:
   reference: https://thomasgredig.github.io/RAWdataR/reference
   article: https://thomasgredig.github.io/RAWdataR/articles
