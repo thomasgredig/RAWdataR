@@ -4,9 +4,11 @@
 [![Codecov test coverage](https://codecov.io/gh/thomasgredig/RAWdataR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/thomasgredig/RAWdataR?branch=master)
 <!-- badges: end -->
 
-The goal of RAWdataR is to validate the scientific RAW folder and perform some standard file checks in R language.
+The goal of RAWdataR is to validate the scientific RAW folder and perform some standard file checks in R language. From the National Science Foundation, the [Open Data at NSF](https://www.nsf.gov/data/) describes the underlying goals and fosters maintaing metadata. 
 
-From the National Science Foundation, the [Open Data at NSF](https://www.nsf.gov/data/) describes the underlying goals and fosters maintaing metadata. 
+This `R package` supports the following workflow: (1) create an R data package, (2) to be used in an R analysis package. The data package needs to include meta data and descriptions; it should only include raw data, no transformations, etc. 
+
+**General usage:** In the project folder, create a subfolder `RAW` that contains all RAW data. It can have subfolders. Run the interactive function `raw.dataProject()`. 
 
 ## Installation
 

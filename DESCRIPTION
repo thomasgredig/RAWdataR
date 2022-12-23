@@ -1,6 +1,6 @@
 Package: RAWdataR
 Type: Package
-Title: Supports scientifically reproducible RAW data processing
+Title: Scientifically Reproducible RAW Data Processing
 Version: 0.6.1
 Authors@R: person("Thomas", "Gredig", email = "tgredig@csulb.edu",
                   role = c("aut", "cre"),
@@ -12,7 +12,7 @@ Description: Allows for analsysis and processing of RAW data in a reproducible
 License: file LICENSE
 Encoding: UTF-8
 URL: https://thomasgredig.github.io/RAWdataR/
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Imports:
     tools
 Suggests: 
