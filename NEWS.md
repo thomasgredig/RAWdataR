@@ -1,5 +1,6 @@
 # RAWdataR 0.6.1
 
+* `RAW` folder can be in a folder above the selected folder with `raw.dataProject()`
 * function `fig2tex()` to save graphs as a TeX snippet for import
 
 # RAWdataR 0.6

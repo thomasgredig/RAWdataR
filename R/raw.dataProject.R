@@ -1,8 +1,8 @@
 #' makes a data R project
 #'
 #' Use the interactive directory selector to create a data R project:
-#' The selected folder should have a subdirectory called RAW and all
-#' the RAW data files are stored in that directory
+#' The selected folder should have a sub directory called RAW and all
+#' the RAW data files are stored in that directory or above that directory
 #'
 #' @param sourceDir if specified, R project will be generated in this directory, otherwise an interactive window allows user to select directory
 #'
@@ -18,8 +18,14 @@ raw.dataProject <- function(sourceDir = NULL) {
   if (is.null(sourceDir)) sourceDir = rstudioapi::selectDirectory(caption="Select Directory with Project that contains RAW folder")
   if (is.null(sourceDir)) stop("No directory is selected.")
   sourceDirRAW = file.path(sourceDir, 'RAW')
-  if (!dir.exists(sourceDirRAW)) stop(paste("RAW directory path not found",sourceDirRAW))
-
+  if (!dir.exists(sourceDirRAW)) {
+    warning(paste("RAW directory not in",sourceDirRAW))
+    sourceDirUp = path.goUpOneDir(sourceDir)
+    sourceDirRAW = file.path(sourceDirUp, 'RAW')
+    if (!dir.exists(sourceDirRAW)) {
+      stop(paste("RAW directory path not found",sourceDirRAW))
+    }
+  }
   # check if project already exists:
   if (file.exists(file.path(sourceDir,'DESCRIPTION'))) {
     warning("Project already exists. Using existing project description.")

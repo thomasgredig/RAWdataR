@@ -39,7 +39,7 @@ close(fileConn)
 
 codeAFM = "
 library(dplyr)
-library(nanoscopeAFM)
+library(nanoAFMr)
 library(RAWdataR)
 verbose = TRUE
 

@@ -11,7 +11,7 @@
 raw.getMD5 <- function(filename,num=6) {
   fdel=c()
   for(c in 1:length(filename)) {
-    if (!file.exists(filename[c])) { fdel=c(fdel,c)}
+    if (!file.exists(filename[c])) { fdel=c(fdel,c) }
   }
   # remove files that cannot be found
   if(length(fdel)>0) filename=filename[-fdel]
