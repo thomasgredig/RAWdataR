@@ -240,6 +240,7 @@ NULL
   if (grepl('\\_EDS',f)) type = "EDS"
   if (grepl('\\_SEM',f)) type = "SEM"
   if (grepl('\\_Rxx',f)) type = "AMR"
+  if (grepl('\\_DAT',f)) type = "VSM"
 
   if (type=="") {
     f = tools::file_ext(filename)

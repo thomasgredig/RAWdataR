@@ -17,11 +17,13 @@ Imports:
     tools
 Suggests: 
     tools,
-    ggplot2,
     rmarkdown,
     knitr,
+    testthat (>= 2.1.0)
+VignetteBuilder: knitr
+Depends: 
+    ggplot2,
     rstudioapi,
     usethis,
-    testthat (>= 2.1.0),
-    covr
-VignetteBuilder: knitr
+    R (>= 2.10)
+LazyData: true

@@ -6,3 +6,4 @@
 inst/doc
 RAW-ID.csv
 *.png
+_profiling.R

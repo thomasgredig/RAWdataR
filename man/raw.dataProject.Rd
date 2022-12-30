@@ -11,8 +11,8 @@ raw.dataProject(sourceDir = NULL)
 }
 \description{
 Use the interactive directory selector to create a data R project:
-The selected folder should have a subdirectory called RAW and all
-the RAW data files are stored in that directory
+The selected folder should have a sub directory called RAW and all
+the RAW data files are stored in that directory or above that directory
 }
 \examples{
 \dontrun{
