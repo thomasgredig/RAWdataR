@@ -9,11 +9,11 @@ fig2tex(g, fileGraph, caption, ...)
 \arguments{
 \item{g}{figure of class ggplot}
 
+\item{fileGraph}{file name to save figure}
+
 \item{caption}{caption for figure}
 
 \item{...}{parameters passed to ggsave() such as dpi,width}
-
-\item{filename}{file name to save figure}
 }
 \description{
 Saves the figure and creates a small TeX snippet with caption and label, which can be

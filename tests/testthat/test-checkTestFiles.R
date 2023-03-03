@@ -61,3 +61,5 @@ test_that("Add user name and sample", {
   expect_equal(f.new,'20211213_myProj_MM_vsm_MM211202B_IrMn_measure.png')
 })
 
+
+

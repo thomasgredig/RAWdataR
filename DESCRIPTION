@@ -1,7 +1,7 @@
 Package: RAWdataR
 Type: Package
 Title: Scientifically Reproducible RAW Data Processing
-Version: 0.6.1
+Version: 0.6.2
 Authors@R: person("Thomas", "Gredig", email = "tgredig@csulb.edu",
                   role = c("aut", "cre"),
                   comment = c(ORCID = "0000-0002-5824-7626"))
@@ -16,7 +16,6 @@ RoxygenNote: 7.2.3
 Imports:
     tools
 Suggests: 
-    tools,
     rmarkdown,
     knitr,
     testthat (>= 2.1.0)

@@ -1,3 +1,7 @@
+# RAWdataR 0.6.2
+
+* add `XRR` file type
+
 # RAWdataR 0.6.1
 
 * `RAW` folder can be in a folder above the selected folder with `raw.dataProject()`

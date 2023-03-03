@@ -13,7 +13,7 @@ raw.dataMaker(fileMaker = NULL)
 The
 }
 \examples{
-\donotrun{
+\donttest{
 raw.dataMaker()
 }
 }

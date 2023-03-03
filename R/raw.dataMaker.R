@@ -7,7 +7,7 @@
 #' @importFrom utils menu
 #'
 #' @examples
-#' \donotrun{
+#' \donttest{
 #' raw.dataMaker()
 #' }
 #' @export

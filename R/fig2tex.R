@@ -4,7 +4,7 @@
 #'              compiled into a LaTeX document.
 #'
 #' @param g figure of class ggplot
-#' @param filename file name to save figure
+#' @param fileGraph file name to save figure
 #' @param caption caption for figure
 #' @param ... parameters passed to ggsave() such as dpi,width
 #'

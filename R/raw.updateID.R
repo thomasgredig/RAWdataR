@@ -234,6 +234,7 @@ NULL
   type = ""
   f = basename(filename)
   if (grepl('\\_XRD',f)) type = "XRD"
+  if (grepl('\\_XRR',f)) type = "XRR"
   if (grepl('\\_AMR',f)) type = "AMR"
   if (grepl('\\_FMR',f)) type = "FMR"
   if (grepl('\\_AFM',f)) type = "AFM"
@@ -245,6 +246,7 @@ NULL
   if (type=="") {
     f = tools::file_ext(filename)
     if (grepl('nid',f)) type = 'AFM'
+    if (grepl('ras[x]*',f)) type = 'XRD'
     if (grepl('ibw',f)) type = 'AFM'
     if (grepl('tiff',f)) type = 'AFM'
     if (grepl('\\d{3}',f)) type = 'AFM'
