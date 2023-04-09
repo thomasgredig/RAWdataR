@@ -2,7 +2,7 @@
 % Please edit documentation in R/raw.dataMaker.R
 \name{raw.dataMaker}
 \alias{raw.dataMaker}
-\title{creates a maker file inside the data-raw folder}
+\title{Creates a maker file inside the data-raw folder}
 \usage{
 raw.dataMaker(fileMaker = NULL)
 }
@@ -10,7 +10,9 @@ raw.dataMaker(fileMaker = NULL)
 \item{fileMaker}{type of file to generate, if \code{NULL} options are provided via terminal}
 }
 \description{
-The
+Creates template files that help create data sets; several
+data set makers are supported; use no arguments to see the
+interactive menu.
 }
 \examples{
 \donotrun{

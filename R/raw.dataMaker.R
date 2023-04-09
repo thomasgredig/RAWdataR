@@ -1,6 +1,9 @@
-#' creates a maker file inside the data-raw folder
+#' Creates a maker file inside the data-raw folder
 #'
-#' The
+#' @description
+#' Creates template files that help create data sets; several
+#' data set makers are supported; use no arguments to see the
+#' interactive menu.
 #'
 #' @param fileMaker type of file to generate, if \code{NULL} options are provided via terminal
 #'
@@ -38,80 +41,106 @@ close(fileConn)
 "
 
 codeAFM = "
-library(dplyr)
-library(nanoAFMr)
+# save the AFM data into a database
+
+library(tidyverse)
 library(RAWdataR)
+library(nanoAFMr)
+library(DBI)
 verbose = TRUE
 
-# 1. Find Image Files
-# ===========================
-raw.updateID('RAW','data-raw', verbose=TRUE)
-dataRAW %>% filter(type=='AFM' & missing==FALSE) -> rFile
-if (verbose) print(paste('Found: ', nrow(rFile), 'AFM images.'))
+# dataAFM.filenameSQL is set in zzz.R
+if (verbose) cat('AFM SQL dbname:', dataAFM.filenameSQL)
 
-getDirection <- function(filename) {
-  s = ''
-  if (grepl('Backward', filename)) s= 'Backward'
-  if (grepl('Forward', filename)) s = 'Forward'
-  s
+# find all AFM files, then add them to the SQL DB
+dataRAW %>%
+  filter(type == 'AFM') %>%
+  filter(missing == FALSE) %>%
+  mutate(fname = file.path(path, filename)) %>%
+  select(ID, fname) -> fileList
+
+if (verbose) cat('Found', nrow(fileList), 'AFM files.\n')
+
+mydb <- dbConnect(RSQLite::SQLite(), dataAFM.filenameSQL)
+# which AFM images are already saved?
+tbList <- dbListTables(mydb)
+savedIDs = c()
+if ('afmData' %in% tbList) {
+  tb1 = dbGetQuery(mydb, 'SELECT ID FROM afmData')
+  savedIDs = tb1$ID
 }
 
+if (verbose) cat('--> Will update DB only; . = added, - = skipped, X = error\n\n')
+for(i in 1:nrow(fileList)) {
+  if (i %% 40 == 0) cat('\n')
+  # check whether file is already in DB
+  ID = fileList$ID[i]
+  if (ID %in% savedIDs) {
+    cat("-")
+    next
+  }
 
-# 2. Make Data File Table
-# ==========================
-result = data.frame()
-for(j in 1:nrow(rFile) ) {
-  fname = file.path(rFile$path[j], rFile$filename[j])
-  d = AFM.import(fname)
+  # get filename
+  afmFile = fileList$fname[i]
 
-  result = rbind(result, data.frame(
-    ID = rFile$ID[j] ,
-    sample = rFile$sample[j],
-    direction = getDirection(rFile$filename[j]),
-    imageNo = as.numeric(gsub('.*\\\\_(\\\\d{3})\\\\..*','\\\\1', rFile$filename[j])),
-    summary(d)
-  ))
+  # try loading the AFM image
+  try({ a = NULL; a = AFM.import(afmFile) })
+  if (is.null(a)) { cat('X') }
+  else {
+    AFM.writeDB(a, mydb, ID, verbose=FALSE)
+    cat('.')
+  }
 }
-result$history <- NULL
+cat('\n')
 
-# 3. Select high quality images
-# ==========================
-afmIDs = c(8, 12, 15)
-result$quality = ''
-result$quality[which(result$ID %in% afmIDs)] = 'high'
+DBI::dbDisconnect(mydb)
 
-# 4. Save Data Table to DB
-# ==========================
-dataFilesAFM = result
-usethis::use_data(dataFilesAFM, overwrite = TRUE)
+if (verbose) cat('Saved AFM images in database:', dataAFM.filenameSQL,'\n')
+"
 
+codeZZZ = "
+.onLoad <- function(libname, pkgname) {
+  dataAFM.filenameSQL <<- paste0(pkgname, '_',
+                                as.character(packageVersion('dataAhir')),
+                                '.sqlite'')
+  RAWfolder <<- 'RAW''
+  repoURL <- 'https://www.REPLACE.com/repo'
+  if (!file.exists(dataAFM.filenameSQL)) {
+    # try to download it
+    sourceURL = paste0(repoURL,dataAFM.filenameSQL)
 
-# 5. Gather AFM data
-# ==========================
-dataRAW %>% filter(ID %in% afmIDs) -> rFile
-afmd = list()
-for(j in 1:nrow(rFile) ) {
-  fname = file.path(rFile$path[j], rFile$filename[j])
-  d = AFM.import(fname)
-  afmd[[rFile$ID[j]]] = AFM.selectChannel(d, 1)
+    # determine if file is found
+    con <- url(sourceURL)
+    check <- suppressWarnings(try(open.connection(con,open='rt',timeout=2),silent=T)[1])
+    suppressWarnings(try(close.connection(con),silent=T))
+    urlExists = ifelse(is.null(check),TRUE,FALSE)
+
+    if(urlExists) {
+      # download and save file
+      cat('Found online SQL database; downloading data file now.\n')
+      download.file(url=sourceURL,destfile=dataAFM.filenameSQL, method='curl')
+    } else {
+      warning('SQL data file not found.')
+    }
+  }
+  if (!dir.exists(RAWfolder)) cat('RAW folder is not found. Package for view only.\n')
+  cat('AFM SQL database:', dataAFM.filenameSQL,'\n')
+
+  invisible()
 }
-
-
-# 6. Save AFM files to DB
-# ==========================
-dataAFM = afmd
-usethis::use_data(dataAFM, overwrite = TRUE)
 "
   if(is.null(fileMaker)) {
-    switch(menu(c("dataRAW files", "AFM data files")) + 1,
+    switch(menu(c("dataRAW files", "AFM data files", "ZZZ file")) + 1,
            codeSel = NULL,
            { codeSel = codeRAW; fileData='make.dataRAW.R' },
-           { codeSel = codeAFM; fileData='make.dataAFM.R' })
+           { codeSel = codeAFM; fileData='make.dataAFM.R' },
+           { codeSel = codeZZZ; fileData='zzz.R' })
   } else {
     codeSel = NULL
     fileData = fileMaker
     if (fileMaker=='make.dataRAW.R') codeSel = codeRAW
     else if (fileMaker=='make.dataAFM.R') codeSel = codeAFM
+    else if (fileMaker=='zzz.R') codeSel = codeZZZ
   }
 
   if (!is.null(codeSel)) {

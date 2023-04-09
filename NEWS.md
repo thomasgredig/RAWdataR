@@ -1,3 +1,7 @@
+# RAWdataR 0.6.3
+
+* update AFM data maker (SQL integration)
+
 # RAWdataR 0.6.2
 
 * add `XRR` file type
