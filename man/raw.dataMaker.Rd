@@ -15,7 +15,7 @@ data set makers are supported; use no arguments to see the
 interactive menu.
 }
 \examples{
-\donotrun{
+\dontshow{
 raw.dataMaker()
 }
 }

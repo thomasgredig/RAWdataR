@@ -10,7 +10,7 @@
 #' @importFrom utils menu
 #'
 #' @examples
-#' \donotrun{
+#' \dontshow{
 #' raw.dataMaker()
 #' }
 #' @export
@@ -129,9 +129,12 @@ codeZZZ = "
   invisible()
 }
 "
+  codeSel = NULL
   if(is.null(fileMaker)) {
-    switch(menu(c("dataRAW files", "AFM data files", "ZZZ file")) + 1,
-           codeSel = NULL,
+    switch(menu(c("dataRAW files",
+                  "AFM data files",
+                  "ZZZ file")) ,
+
            { codeSel = codeRAW; fileData='make.dataRAW.R' },
            { codeSel = codeAFM; fileData='make.dataAFM.R' },
            { codeSel = codeZZZ; fileData='zzz.R' })
