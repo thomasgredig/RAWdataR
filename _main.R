@@ -49,3 +49,11 @@ raw.getFileByID(45, pRAW='./RAW', pRESULTS='./RESULTS')
 raw.getFileByID(c(10:15, 18),  pRESULTS = './RESULTS')$filename -> file.list
 raw.getIDbyFile(c("bogus.txt",file.list), pRESULTS = './RESULTS')$ID
 
+# test fig2tex
+
+d = data.frame(x=1:30, y=(1:30)^2)
+g1 <- ggplot(d, aes(x,y)) + geom_point(size=3, col='red') + theme_bw()
+plot(g1)
+figFile = tempfile()
+fig2tex(g1, fileGraph="test.png", caption="today")
+raw.texArticle('.')

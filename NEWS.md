@@ -1,3 +1,7 @@
+# RAWdataR 0.6.4
+
+* allow generation of a TeX article that shows all figures
+
 # RAWdataR 0.6.3
 
 * update AFM data maker (SQL integration)
