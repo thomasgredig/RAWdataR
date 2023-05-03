@@ -2,7 +2,7 @@
 % Please edit documentation in R/fig2tex.R
 \name{fig2tex}
 \alias{fig2tex}
-\title{Save figure to TeX snippet}
+\title{Save ggplot Figure to TeX Snippet}
 \usage{
 fig2tex(g, fileGraph, caption, ...)
 }
@@ -16,8 +16,10 @@ fig2tex(g, fileGraph, caption, ...)
 \item{...}{parameters passed to ggsave() such as dpi,width}
 }
 \description{
-Saves the figure and creates a small TeX snippet with caption and label, which can be
-             compiled into a LaTeX document.
+Creates two files (.tex and .png); the .png file contains the figure (ggplot)
+that is submitted and the .tex file contains the snipped to load the figure
+use (\\input{file.tex} in your TeX document) to include the figure with the
+caption.
 }
 \examples{
 q = tempdir()
@@ -26,4 +28,10 @@ g = ggplot2::ggplot(data.frame(x,y), ggplot2::aes(x,y)) +
   ggplot2::geom_point(col='red') + ggplot2::theme_bw()
 fig2tex(g, file.path(q,"test.png"), "First Graph.")
 
+}
+\seealso{
+\code{\link{raw.texArticle}}
+}
+\author{
+Thomas Gredig
 }
