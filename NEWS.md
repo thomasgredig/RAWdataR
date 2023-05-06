@@ -1,5 +1,6 @@
 # RAWdataR 0.6.4
 
+* add SQL installation function `raw.installSQLremote()`
 * allow generation of a TeX article that shows all figures
 
 # RAWdataR 0.6.3
