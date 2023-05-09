@@ -1,5 +1,14 @@
 #' Install SQL AFM Database from Remote Site
 #'
+#' @description
+#' Installs a large SQL AFM database from a remote site; in order
+#' for data R packages to load more quickly and not take up large
+#' space on GitHub; it can separately store the AFM images in a
+#' SQL database, which can usually be the size of about 1 GB. This
+#' database is stored in the `inst/extdata` data folder. First,
+#' create an empty SQL database file in the inst/extdata folder
+#'
+#'
 #' @param pkgname name of the package
 #' @param urlREPO URL of directory with repository of SQL database
 #'
@@ -16,13 +25,13 @@ raw.installSQLremote <- function(pkgname, urlREPO) {
   baseSQLfile = paste0(pkgname,"AFM_",
                        as.character(packageVersion(pkgname)),
                        ".sqlite")
-  dataAFM.filenameSQL <- file.path(system.file(package = pkgname),
-                                   'extdata',baseSQLfile)
+  # dataAFM.filenameSQL <- file.path(system.file(package = pkgname),
+  #                                  'extdata',baseSQLfile)
+  dataAFM.filenameSQL <- system.file('extdata', baseSQLfile, package = pkgname)
 
-
-  if (!file.exists(dataAFM.filenameSQL)) {
+  if (dataAFM.filenameSQL == "") {
     # try to download it
-    sourceURL = paste0(urlREPO,basename(dataAFM.filenameSQL))
+    sourceURL = paste0(urlREPO,baseSQLfile)
 
     # determine if file is found
     con <- url(sourceURL)
