@@ -57,3 +57,17 @@ plot(g1)
 figFile = tempfile()
 fig2tex(g1, fileGraph="test.png", caption="today")
 raw.texArticle('.')
+
+
+#
+
+
+fname = file.path(tempdir(), "afm.sqlite")
+mydb <- DBI::dbConnect(RSQLite::SQLite(), fname)
+afmFile = AFM.getSampleImages(type='tiff')[1]
+a = AFM.import(afmFile)
+AFM.writeDB(a, mydb, 7, verbose=FALSE)
+b = AFM.readDB(mydb, 7)
+DBI::dbDisconnect(mydb)
+plot(b)
+fname

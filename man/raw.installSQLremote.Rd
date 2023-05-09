@@ -12,8 +12,15 @@ raw.installSQLremote(pkgname, urlREPO)
 \item{urlREPO}{URL of directory with repository of SQL database}
 }
 \value{
+logical, \code{TRUE}, if SQL db exists or was successfully installed
+
 path and file name of installed SQL database
 }
 \description{
-Install SQL AFM Database from Remote Site
+Installs a large SQL AFM database from a remote site; in order
+for data R packages to load more quickly and not take up large
+space on GitHub; it can separately store the AFM images in a
+SQL database, which can usually be the size of about 1 GB. This
+database is stored in the `inst/extdata` data folder. First,
+create an empty SQL database file in the inst/extdata folder
 }
