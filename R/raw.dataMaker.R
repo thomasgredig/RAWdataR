@@ -59,7 +59,7 @@ dataRAW %>%
   mutate(fname = file.path(path, filename)) %>%
   select(ID, fname) -> fileList
 
-if (verbose) cat('Found', nrow(fileList), 'AFM files.\n')
+if (verbose) cat('Found', nrow(fileList), 'AFM files.\\n')
 
 mydb <- dbConnect(RSQLite::SQLite(), dataAFM.filenameSQL)
 # which AFM images are already saved?
@@ -69,17 +69,16 @@ if ('afmData' %in% tbList) {
   tb1 = dbGetQuery(mydb, 'SELECT ID FROM afmData')
   savedIDs = tb1$ID
 }
+if (verbose) cat('Will update DB only; . = added, - = skipped, X = error\\n')
 
-if (verbose) cat('--> Will update DB only; . = added, - = skipped, X = error\n\n')
 for(i in 1:nrow(fileList)) {
-  if (i %% 40 == 0) cat('\n')
+  if (i %% 40 == 0) cat('\\n')
   # check whether file is already in DB
   ID = fileList$ID[i]
   if (ID %in% savedIDs) {
-    cat("-")
+    cat('-')
     next
   }
-
   # get filename
   afmFile = fileList$fname[i]
 
@@ -91,11 +90,11 @@ for(i in 1:nrow(fileList)) {
     cat('.')
   }
 }
-cat('\n')
+cat('\\n')
 
 DBI::dbDisconnect(mydb)
 
-if (verbose) cat('Saved AFM images in database:', dataAFM.filenameSQL,'\n')
+if (verbose) cat('Saved AFM images in database:', dataAFM.filenameSQL,'\\n')
 "
 
 codeZZZ = "
@@ -117,14 +116,14 @@ codeZZZ = "
 
     if(urlExists) {
       # download and save file
-      cat('Found online SQL database; downloading data file now.\n')
+      cat('Found online SQL database; downloading data file now.\\n')
       download.file(url=sourceURL,destfile=dataAFM.filenameSQL, method='curl')
     } else {
       warning('SQL data file not found.')
     }
   }
-  if (!dir.exists(RAWfolder)) cat('RAW folder is not found. Package for view only.\n')
-  cat('AFM SQL database:', dataAFM.filenameSQL,'\n')
+  if (!dir.exists(RAWfolder)) cat('RAW folder is not found. Package for view only.\\n')
+  cat('AFM SQL database:', dataAFM.filenameSQL,'\\n')
 
   invisible()
 }
