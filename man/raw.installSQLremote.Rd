@@ -4,17 +4,19 @@
 \alias{raw.installSQLremote}
 \title{Install SQL AFM Database from Remote Site}
 \usage{
-raw.installSQLremote(pkgname, urlREPO)
+raw.installSQLremote(dbName, targetDir, urlRepo)
 }
 \arguments{
-\item{pkgname}{name of the package}
+\item{dbName}{file name of the SQL db package}
+
+\item{targetDir}{target directory to install, usually `inst/extdata`}
 
 \item{urlREPO}{URL of directory with repository of SQL database}
 }
 \value{
 logical, \code{TRUE}, if SQL db exists or was successfully installed
 
-path and file name of installed SQL database
+logical, if \code{TRUE} DB is available
 }
 \description{
 Installs a large SQL AFM database from a remote site; in order

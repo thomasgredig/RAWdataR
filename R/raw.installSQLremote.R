@@ -16,7 +16,7 @@
 #' @param targetDir target directory to install, usually `inst/extdata`
 #' @param urlREPO URL of directory with repository of SQL database
 #'
-#' @return path and file name of installed SQL database
+#' @return logical, if \code{TRUE} DB is available
 #'
 #' @export
 raw.installSQLremote <- function(dbName, targetDir, urlRepo) {
