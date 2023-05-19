@@ -3,39 +3,53 @@
 #' @description
 #' Installs a large SQL AFM database from a remote site; in order
 #' for data R packages to load more quickly and not take up large
-#' space on GitHub; it can separately store the AFM images in a
-#' SQL database, which can usually be the size of about 1 GB. This
-#' database is stored in the `inst/extdata` data folder. First,
-#' create an empty SQL database file in the inst/extdata folder
+#' space on external repositories, this function implements a solution
+#' that stores the database remotely. When needed, it will be installed
+#' locally in the `extdata/` folder. The function returns the name of
+#' the database.
+#'
+#' If new data is added to the SQL databse, a new version is generally
+#' generated; this can be done by upgrading from an existing old version.
 #'
 #'
-#' @return logical, \code{TRUE}, if SQL db exists or was successfully installed
-#'
-#'
-#' @param dbName file name of the SQL db package
-#' @param targetDir target directory to install, usually `inst/extdata`
+#' @param pkgname file name of the SQL db package
 #' @param urlREPO URL of directory with repository of SQL database
+#' @param upgradeFrom old version, string such as "0.2.1", black if not an upgrade
 #'
-#' @return logical, if \code{TRUE} DB is available
+#' @return SQL database filename and path
 #'
 #' @export
-raw.installSQLremote <- function(dbName, targetDir, urlRepo) {
-  status = FALSE
+raw.installSQLremote <- function(pkgname, urlRepo, upgradeFrom = "") {
+  # determine directory for SQL DB
+  targetDir = file.path(system.file(package=pkgname), 'extdata')
+  if (!dir.exists(targetDir)) stop("Package ",pkgname," not installed or extdata folder not found at:",targetDir)
 
-  # check that report file exists
-  sourceURL = paste0(urlRepo,'/',dbName)
-  con <- url(sourceURL)
-  check <- suppressWarnings(try(open.connection(con,open="rt",timeout=2),silent=T)[1])
-  suppressWarnings(try(close.connection(con),silent=T))
-  urlExists = ifelse(is.null(check),TRUE,FALSE)
+  # determine file name for SQL DB
+  pkgVersion = as.character(packageVersion(pkgname))
+  if (upgradeFrom=="") upgradeFrom = pkgVersion
+  baseSQLnew = paste0(pkgname,"AFM_",pkgVersion,".sqlite")
+  baseSQLupgrade = paste0(pkgname,"AFM_",upgradeFrom,".sqlite")
 
-  if(urlExists) {
-    check <- download.file(url=sourceURL,
-                           destfile=file.path(targetDir,dbName),
-                           method='curl')
-    status = TRUE
-  } else {
-    warning("Target repository does not exist: ", sourceURL)
+  dbSQL = file.path(targetDir, baseSQLupgrade)
+  dbSQLnew = file.path(targetDir, baseSQLnew)
+
+  # download file, if needed
+  if (!file.exists(dbSQLnew)) {
+
+    # check that URL has SQL
+    sourceURL = paste0(urlRepo,'/',baseSQLupgrade)
+    con <- url(sourceURL)
+    check <- suppressWarnings(try(open.connection(con,open="rt",timeout=2),silent=T)[1])
+    suppressWarnings(try(close.connection(con),silent=T))
+    urlExists = ifelse(is.null(check),TRUE,FALSE)
+
+    # URL is verified, then download
+    if(urlExists) {
+      check <- download.file(url=sourceURL,destfile=dbSQL,method='curl')
+      # rename required during upgrade??
+      if (!(upgradeFrom == "")) file.rename(from = dbSQL, to = dbSQLnew)
+    }
   }
-  status
+
+  dbSQLnew
 }

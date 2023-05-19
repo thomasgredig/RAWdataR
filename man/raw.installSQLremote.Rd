@@ -4,25 +4,26 @@
 \alias{raw.installSQLremote}
 \title{Install SQL AFM Database from Remote Site}
 \usage{
-raw.installSQLremote(dbName, targetDir, urlRepo)
+raw.installSQLremote(pkgname, urlRepo, upgradeFrom = "")
 }
 \arguments{
-\item{dbName}{file name of the SQL db package}
+\item{pkgname}{file name of the SQL db package}
 
-\item{targetDir}{target directory to install, usually `inst/extdata`}
+\item{upgradeFrom}{old version, string such as "0.2.1", black if not an upgrade}
 
 \item{urlREPO}{URL of directory with repository of SQL database}
 }
 \value{
-logical, \code{TRUE}, if SQL db exists or was successfully installed
-
-logical, if \code{TRUE} DB is available
+SQL database filename and path
 }
 \description{
 Installs a large SQL AFM database from a remote site; in order
 for data R packages to load more quickly and not take up large
-space on GitHub; it can separately store the AFM images in a
-SQL database, which can usually be the size of about 1 GB. This
-database is stored in the `inst/extdata` data folder. First,
-create an empty SQL database file in the inst/extdata folder
+space on external repositories, this function implements a solution
+that stores the database remotely. When needed, it will be installed
+locally in the `extdata/` folder. The function returns the name of
+the database.
+
+If new data is added to the SQL databse, a new version is generally
+generated; this can be done by upgrading from an existing old version.
 }
