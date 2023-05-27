@@ -11,7 +11,7 @@ raw.installSQLremote(pkgname, urlRepo, upgradeFrom = "")
 
 \item{upgradeFrom}{old version, string such as "0.2.1", black if not an upgrade}
 
-\item{urlREPO}{URL of directory with repository of SQL database}
+\item{urlREPO}{URL or PATH of directory with repository of SQL database}
 }
 \value{
 SQL database filename and path

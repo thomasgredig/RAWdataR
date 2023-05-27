@@ -13,7 +13,7 @@
 #'
 #'
 #' @param pkgname file name of the SQL db package
-#' @param urlREPO URL of directory with repository of SQL database
+#' @param urlREPO URL or PATH of directory with repository of SQL database
 #' @param upgradeFrom old version, string such as "0.2.1", black if not an upgrade
 #'
 #' @return SQL database filename and path
@@ -38,16 +38,26 @@ raw.installSQLremote <- function(pkgname, urlRepo, upgradeFrom = "") {
 
     # check that URL has SQL
     sourceURL = paste0(urlRepo,'/',baseSQLupgrade)
-    con <- url(sourceURL)
-    check <- suppressWarnings(try(open.connection(con,open="rt",timeout=2),silent=T)[1])
-    suppressWarnings(try(close.connection(con),silent=T))
-    urlExists = ifelse(is.null(check),TRUE,FALSE)
+    if (grepl("^http",sourceURL)) {
+      # It is a PATH
+      sourceURL = file.path(urlRepo,baseSQLupgrade)
+      if (file.exists(sourceURL)) {
+        file.copy(from=sourceURL, to=dbSQL)
+        if (!(upgradeFrom == "")) file.rename(from = dbSQL, to = dbSQLnew)
+      }
+    } else {
+      # It is a URL
+      con <- url(sourceURL)
+      check <- suppressWarnings(try(open.connection(con,open="rt",timeout=2),silent=T)[1])
+      suppressWarnings(try(close.connection(con),silent=T))
+      urlExists = ifelse(is.null(check),TRUE,FALSE)
 
-    # URL is verified, then download
-    if(urlExists) {
-      check <- download.file(url=sourceURL,destfile=dbSQL,method='curl')
-      # rename required during upgrade??
-      if (!(upgradeFrom == "")) file.rename(from = dbSQL, to = dbSQLnew)
+      # URL is verified, then download
+      if(urlExists) {
+        check <- download.file(url=sourceURL,destfile=dbSQL,method='curl')
+        # rename required during upgrade??
+        if (!(upgradeFrom == "")) file.rename(from = dbSQL, to = dbSQLnew)
+      }
     }
   }
 
