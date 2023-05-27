@@ -38,7 +38,7 @@ raw.installSQLremote <- function(pkgname, urlRepo, upgradeFrom = "") {
 
     # check that URL has SQL
     sourceURL = paste0(urlRepo,'/',baseSQLupgrade)
-    if (grepl("^http",sourceURL)) {
+    if (!grepl("^http",sourceURL)) {
       # It is a PATH
       sourceURL = file.path(urlRepo,baseSQLupgrade)
       if (file.exists(sourceURL)) {
