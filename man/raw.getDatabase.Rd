@@ -4,7 +4,7 @@
 \alias{raw.getDatabase}
 \title{Manage SQL Database with Data Package}
 \usage{
-raw.getDatabase(pkgname, dbImportPath = NULL, searchForOldDB = FALSE)
+raw.getDatabase(pkgname, dbPath = NULL, verbose = FALSE)
 }
 \arguments{
 \item{pkgname}{name of the R data package}

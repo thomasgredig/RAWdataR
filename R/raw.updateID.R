@@ -41,7 +41,7 @@ raw.updateID <- function(pRAW,
                          verbose = FALSE) {
   if(missing(pRAW)) {
     pRAW = 'data-raw'
-    if (!dir.exists(pRAW)) dir.create(pRAW)
+    if (!dir.exists(pRAW)) { dir.create(pRAW); if (verbose) cat("data-raw directory created.\n") }
   }
   if(missing(pRESULTS)) pRESULTS = pRAW
 
@@ -58,6 +58,7 @@ raw.updateID <- function(pRAW,
     if (verbose) cat("Found",nrow(rID),'IDs in IDfile.\n')
     if (nrow(rID)>0) ID = max(rID$ID) + 1
   } else {
+    if (verbose) cat("No IDs found, will create a brand-new data file.\n")
     rID = data.frame()
   }
 
@@ -66,13 +67,17 @@ raw.updateID <- function(pRAW,
     ## remove duplicates??
     if (fixDuplicates) {
       m1 = which(duplicated(rID$crc)==TRUE)
-      if (length(m1)>0) rID <- rID[-m1,]
+      if (length(m1)>0) {
+        if (verbose) cat("Removing duplicated ", length(m1)," files.\n")
+        rID <- rID[-m1,]
+      }
     }
     for(j in 1:nrow(rID)) {
       fname = file.path(rID$path[j], rID$filename[j])
       if (file.exists(fname)) {
         crc = .getCRC(fname)
         if (crc != rID$crc[j]) {
+          if (verbose) cat("File ", rID$filename[j], " had changed content! Making new ID.\n")
           # file has changed, make new ID ?
           rID$altered[j] = TRUE
           rID$size[j] = file.info(fname)$size

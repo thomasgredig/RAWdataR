@@ -6,9 +6,10 @@
 
 The goal of RAWdataR is to validate the scientific RAW folder and perform some standard file checks in R language. From the National Science Foundation, the [Open Data at NSF](https://www.nsf.gov/data/) describes the underlying goals and fosters maintaing metadata. 
 
-This `R package` supports the following workflow: (1) create an R data package, (2) to be used in an R analysis package. The data package needs to include meta data and descriptions; it should only include raw data, no transformations, etc. 
+This `R package` supports the following workflow: 
+* Managing the `data R package` that contains all the RAW data information
+* Managing access to the `project R package` that generates graphs, reports and publication materials.
 
-**General usage:** In the project folder, create a subfolder `RAW` that contains all RAW data. It can have subfolders. Run the interactive function `raw.dataProject()`. 
 
 ## Installation
 
@@ -24,19 +25,32 @@ devtools::install_github("thomasgredig/RAWdataR")
 The **[reference documentation](https://thomasgredig.github.io/RAWdataR/)** has examples and a list of all functions published in this package.
 
 
+## RAW Data Management Protocol
+
+RAW data is considered the direct output of a scientific instrument (XRD, AFM, etc.). We will follow a few principles for the `data R package`:
+
+1) The data is stored in a **non-proprietory format**, such as comma separated values (.csv) and R Data (.rda) or SQLite database (.sqlite); therefore, the data can be accessed beyond the instrument lifetime. 
+
+2) All RAW data files in the project are given a unique `RAW ID`. The ID refers to a particular file and is associated with additional parameters, such as a sample name, temperature, etc.
+
+3) Multiple collaborators can add data without corruption; i.e. data can be appended.
+
+4) The data package should include a sufficient description of samples and procedures to understand the instrument RAW data.
+
+While the data package makes the RAW accessible, it does not process it. The `project R package` is responsible for maintaining models and functions that process the data (example: extracting the peak position of XRD data)
 
 
 ## Naming Convention
 
 In order to achieve scientifically reproducible data, we shall follow the follow principles: 
 
-- RAW data filenames must be **unique** and the content cannot be altered, 
-- the filenames cannot be changed since graphing routines may rely on their unique data filenames, 
+- RAW data filenames should be **unique** and the content cannot be altered, 
+- Data is accessed via unique RAW ID; i.e. once the files are added, in principle, the file name can be changed (or fixed) and will be automatically reconciled using the MD5 CRC string.
 - all data files must be in non-proprietary formats, if not, then a second file with the converted text or ASCII format content needs to be saved as well. All data files should have the following format:
 
 >  Date_Project_Initials_Tool_Sample_RunInfo.csv 
 
-- all files are in the same folder (no sub-folders). The RAW folder has a flat structrure.
+- sub folders in the RAW folder are useful and can contain additional information; not, that this information and the filename can be changed, while the RAW ID remains fixed.
 
 The **date** is in `yyyymmdd` format and represents the date of the data collection start. The **project string** is assigned by the project manager and the initials are from the person collecting data.
 
@@ -70,14 +84,14 @@ d = raw.getTable(p)
 
 For graphing and data analysis the correct files need to be loaded. A common approach would be searching data files by `project`, `date`, `user`, or by `instrument`. 
 
-```r
+``` r
 # for instance, find all VSM files from 2018
 file.list = raw.findFiles(path.RAW, date='2018', instrument='vsm')
 ```
 
 As more data is stored, the `file.list` may change overtime. Therefore, the  approach to ensure reproducibility requires the generation of a MD5 string using `raw.getPartialMD5str`, once the exact file list is established, it can be hard-coded as a string (see below for 4 files). Even if more files are generated, the file list is restricted by the MD5 codes. 
 
-```r
+``` r
 md5String = raw.getPartialMD5str(file.list)
 file.list = raw.findFiles(path.RAW, date='2018', instrument='vsm',
     md5 = 'a25f3a,66c5d1,4a0333,1b94b5')
@@ -87,7 +101,7 @@ file.list = raw.findFiles(path.RAW, date='2018', instrument='vsm',
 
 You can also find files with invalid naming convention using the following function, where date is optional
 
-```r
+``` r
 raw.getInvalidFiles(path.RAW, date='2020')
 ```
 
@@ -96,7 +110,7 @@ raw.getInvalidFiles(path.RAW, date='2020')
 
 Instead of using direct filenames, you can use checksums from the files. For a project that has data added all the time, you could have the following code:
 
-```r
+``` r
 library(RAWdataR)
 s = raw.getPartialMD5("README.md")
 
@@ -110,7 +124,7 @@ filename = raw.getFilename(file.list,s)
 
 If you have a new project with RAW data, you can quickly initialize it using the `raw.dataProject()` function. It will prompt you to select a directory that has a `RAW` subfolder and then generate the R data package. Once generated, you can open the new data package and run the `_init.R` code, which helps you prepare a documented data package. Afterwards, it is recommended to add tests to verify data content.
 
-```{r}
+``` r
 RAWdataR::raw.dataProject()
 ```
 

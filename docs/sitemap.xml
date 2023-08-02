@@ -13,6 +13,9 @@
     <loc>https://thomasgredig.github.io/RAWdataR/articles/RAW-data-file-validation.html</loc>
   </url>
   <url>
+    <loc>https://thomasgredig.github.io/RAWdataR/articles/RAWdataR.html</loc>
+  </url>
+  <url>
     <loc>https://thomasgredig.github.io/RAWdataR/articles/index.html</loc>
   </url>
   <url>
@@ -56,6 +59,9 @@
   </url>
   <url>
     <loc>https://thomasgredig.github.io/RAWdataR/reference/raw.generateDataMaker.html</loc>
+  </url>
+  <url>
+    <loc>https://thomasgredig.github.io/RAWdataR/reference/raw.getDatabase.html</loc>
   </url>
   <url>
     <loc>https://thomasgredig.github.io/RAWdataR/reference/raw.getFileByID.html</loc>
@@ -106,10 +112,16 @@
     <loc>https://thomasgredig.github.io/RAWdataR/reference/raw.inspectFolder.html</loc>
   </url>
   <url>
+    <loc>https://thomasgredig.github.io/RAWdataR/reference/raw.installSQLremote.html</loc>
+  </url>
+  <url>
     <loc>https://thomasgredig.github.io/RAWdataR/reference/raw.isValid.html</loc>
   </url>
   <url>
     <loc>https://thomasgredig.github.io/RAWdataR/reference/raw.splitFilename.html</loc>
+  </url>
+  <url>
+    <loc>https://thomasgredig.github.io/RAWdataR/reference/raw.texArticle.html</loc>
   </url>
   <url>
     <loc>https://thomasgredig.github.io/RAWdataR/reference/raw.tryFixInvalidFile.html</loc>

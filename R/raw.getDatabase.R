@@ -18,40 +18,55 @@
 #'
 #' @param pkgname name of the R data package
 #'
+#' @importFrom utils packageVersion
+#'
 #' @return SQL database filename and path
 #'
 #' @export
-raw.getDatabase <- function(pkgname, dbImportPath = NULL, searchForOldDB = FALSE) {
-  # Make sure R data package exists
-  if (is.na(packageDescription(pkgname))) return(NULL)
+raw.getDatabase <- function(pkgname, dbPath = NULL, verbose = FALSE) {
+  dbFolderListFile <- "database-folders.csv"
+  dbFile <- NULL
 
-  # Generate the database filename
+  if (!nzchar(system.file(package = pkgname))) {
+    if (verbose) cat("Package", pkgname,"not installed.")
+    return (NULL)
+  }
   pkgVersion = as.character(packageVersion(pkgname))
-  dbFilename = paste0(pkgname,"-",pkgVersion,".sqlite")
-  dbPath = system.file('extdata',package=pkgname)
-  dbFile = file.path(dbPath, dbFilename)
+  dbFileName = paste0(pkgname,"-",pkgVersion,".sqlite")
+  if (verbose) cat("SQL Database filename:", dbFileName,"\n")
 
-  # Check whether the database needs to be installed from a local version
-  if (!is.null(dbImportPath)) {
-    dbSource = file.path(dbImportPath, dbFilename)
-    if (file.exists(dbSource)) {
-      file.copy(from=dbSource,
-                to = file.path(dbPath, dbFilename))
-    }
-    else warning("Cannot import file.")
+  # possible file locations to check:
+  dbSearchPaths = c(".")
+
+  if (!is.null(dbPath)) {
+    dbSearchPaths = c(dbSearchPaths, dbPath)
   }
 
+  # Search for location of
+  srcFile <- system.file("csv", dbFolderListFile, package=pkgname)
+  if (nchar(srcFile)==0) srcFile <- system.file(dbFolderListFile, package=pkgname)
+  if (nchar(srcFile)==0) srcFile <- system.file(file.path('inst','csv'), dbFolderListFile, package=pkgname)
 
-  if (!file.exists(dbFile)) warning("Current version of AFM DB file not found:",dbFile)
+  if (nchar(srcFile) > 0) {
+    # Read all lines from the file
+    dbFolders <- readLines(srcFile,warn = FALSE)
+    for(dbFolder in dbFolders) {
+      if (dir.exists(dbFolder)) dbSearchPaths = c(dbSearchPaths, dbFolder)
+    }
+  } else {
+    if (verbose) cat("Could not find database folder list ",dbFolderListFile," in package ", pkgname, "\n",
+                     "Searched:", system.file("csv", package=pkgname),"and",
+                     system.file(package=pkgname),"\n")
+  }
 
-  if ((searchForOldDB) & (!file.exists(dbFile))) {
-    warning("Searching for alternative DB file.")
-    # check if there is an older version
+  if (verbose) cat("Searching", length(dbSearchPaths), "folders.\n")
 
-    oldFiles = c(dir(path=dbPath, pattern=paste0(pkgname,"*.\\.sqlite")),
-                 dir(path=here::here(), pattern=paste0(pkgname,"*.\\.sqlite")))
-    if (length(oldFiles)>0) dbFile = file.path(dbPath, oldFiles[1]) else warning("No AFM SQL Database found. Install DB with raw.getDatabase(pkgname='",pkgname,"',dbImportPath='.')")
-
+  for(pfad in dbSearchPaths) {
+    dbFileCheck <- file.path(pfad,dbFileName)
+    if (file.exists(dbFileCheck)) { dbFile <- dbFileCheck } else {
+      dbFileNameAlternative = dir(pfad, pattern=paste0(pkgname,'.*sqlite$'))
+      if (length(dbFileNameAlternative)>0) dbFile <- file.path(pfad, dbFileNameAlternative[1])
+    }
   }
 
   dbFile
