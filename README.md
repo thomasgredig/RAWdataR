@@ -7,7 +7,8 @@
 The goal of RAWdataR is to validate the scientific RAW folder and perform some standard file checks in R language. From the National Science Foundation, the [Open Data at NSF](https://www.nsf.gov/data/) describes the underlying goals and fosters maintaing metadata. 
 
 This `R package` supports the following workflow: 
-* Managing the `data R package` that contains all the RAW data information
+
+* Managing the `R data package` that contains all the RAW data information
 * Managing access to the `project R package` that generates graphs, reports and publication materials.
 
 
