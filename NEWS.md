@@ -1,3 +1,5 @@
+# RAWdataR 1.0.1
+
 # RAWdataR 0.6.4
 
 * add SQL installation function `raw.installSQLremote()`
