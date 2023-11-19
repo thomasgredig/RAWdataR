@@ -40,10 +40,16 @@ raw.updateID <- function(pRAW,
                          fixDuplicates = FALSE,
                          verbose = FALSE) {
   if(missing(pRAW)) {
-    pRAW = 'data-raw'
-    if (!dir.exists(pRAW)) { dir.create(pRAW); if (verbose) cat("data-raw directory created.\n") }
+    pRAW = ""
+    while(TRUE) {
+      pRAW = readline(prompt="Enter RAW data folder: ")
+      if (dir.exists(pRAW)) break
+      cat("RAW folder not found.\n")
+    }
+
+    # if (!dir.exists(pRAW)) { dir.create(pRAW); if (verbose) cat("data-raw directory created.\n") }
   }
-  if(missing(pRESULTS)) pRESULTS = pRAW
+  if(missing(pRESULTS)) pRESULTS = 'data-raw'
 
   # name for file that stores the RAW IDs
   fIDfile = file.path(pRESULTS, idFile)
@@ -53,6 +59,10 @@ raw.updateID <- function(pRAW,
   ID = 7
   if (file.exists(fIDfile) & !forceRegenerate) {
     rID = read.csv(fIDfile)
+    if (length(grep("date",names(rID))) == 0) {
+      # old version, then add "date" column
+      rID$date = ""
+    }
     ## Use this to randomly change the crc
     ## rID$crc = rID$crc + floor(runif(nrow(rID), min=0, max=2))
     if (verbose) cat("Found",nrow(rID),'IDs in IDfile.\n')
@@ -105,6 +115,7 @@ raw.updateID <- function(pRAW,
       ID = ID,
       path = dirname(f),
       filename = basename(f),
+      date = file.info(f)$atime,
       crc = .getCRC(f),
       size = file.info(f)$size,
       type = .getFileType(f),
