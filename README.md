@@ -4,12 +4,12 @@
 [![Codecov test coverage](https://codecov.io/gh/thomasgredig/RAWdataR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/thomasgredig/RAWdataR?branch=master)
 <!-- badges: end -->
 
-The goal of RAWdataR is to validate the scientific RAW folder and perform some standard file checks in R language. From the National Science Foundation, the [Open Data at NSF](https://www.nsf.gov/data/) describes the underlying goals and fosters maintaing metadata. 
+This R package called `RAWdataR` aims to update and validate the scientific data folder and perform some standard file checks. Aligned with the National Science Foundation, the [Open Data at NSF](https://www.nsf.gov/data/) describes the underlying goals; it also fosters maintaining metadata. 
 
-This `R package` supports the following workflow: 
+The `RAWdataR` R package supports the following workflow: 
 
-* Managing the `R data package` that contains all the RAW data information
-* Managing access to the `project R package` that generates graphs, reports and publication materials.
+* Creation of unique IDs for all files in a data project
+* Basic validation and organization of the scientific data
 
 
 ## Installation
@@ -28,37 +28,43 @@ The **[reference documentation](https://thomasgredig.github.io/RAWdataR/)** has 
 
 ## RAW Data Management Protocol
 
-RAW data is considered the direct output of a scientific instrument (XRD, AFM, etc.). We will follow a few principles for the `data R package`:
+`Raw data` is considered the direct output of a scientific instrument (XRD, AFM, etc.). We will follow a few principles for the `data R package`:
 
-1) The data is stored in a **non-proprietory format**, such as comma separated values (.csv) and R Data (.rda) or SQLite database (.sqlite); therefore, the data can be accessed beyond the instrument lifetime. 
+1) The data is stored in a **non-proprietory format**, such as comma separated values (.csv) and R Data (.rda) or SQLite database (.sqlite); therefore, the data can be accessed beyond the instrument's lifetime. If an instrument uses a proprietary data format, then it needs to be converted into an open-source data format.
 
-2) All RAW data files in the project are given a unique `RAW ID`. The ID refers to a particular file and is associated with additional parameters, such as a sample name, temperature, etc.
+2) All `Raw data` files in the project are given a unique `RAW ID`. The ID refers to a particular file and is associated with additional parameters, such as a sample name, temperature, etc. - the ID is limited to the data package and different packages may have the same ID.
 
-3) Multiple collaborators can add data without corruption; i.e. data can be appended.
+3) Multiple collaborators can add data without corruption; i.e. data can be appended without the need for full access to the `Raw data`.
 
-4) The data package should include a sufficient description of samples and procedures to understand the instrument RAW data.
+4) Some `Raw data` may not become part of the data package to limit the size. Large data files are stored in SQL format (`sqlite`) outside the package.
 
-While the data package makes the RAW accessible, it does not process it. The `project R package` is responsible for maintaining models and functions that process the data (example: extracting the peak position of XRD data)
+5) The data package should include a sufficient description of samples and procedures to understand the instrument RAW data.
 
 
-## Naming Convention
+### Data and Project
 
-In order to achieve scientifically reproducible data, we shall follow the follow principles: 
+The analysis and graphing of the data is in a separate project package. The data package is distinct and provides access to the data in a convenient format. If possible, it does not apply modeling or analysis to the data, but rather makes all data available in a central package.
 
-- RAW data filenames should be **unique** and the content cannot be altered, 
-- Data is accessed via unique RAW ID; i.e. once the files are added, in principle, the file name can be changed (or fixed) and will be automatically reconciled using the MD5 CRC string.
-- all data files must be in non-proprietary formats, if not, then a second file with the converted text or ASCII format content needs to be saved as well. All data files should have the following format:
+![Data package and Project package play distinct roles.](inst/img/Raw-Data-Project-Package.png)
+
+### Naming Convention
+
+In order to achieve scientifically reproducible data, we shall follow these follow principles: 
+
+- `Raw data` cannot be altered and are assigned a unique ID for reliable data analysis.
+- `Raw data` file names can be changed or corrected or stored in a different subfolder without affecting the unique IE, which is automatically reconciled using the MD5 CRC string.
+- All data files must be in non-proprietary formats, if not, then a second file with the converted text or ASCII format content needs to be saved as well. If possible, data file names should include the following formatting information:
 
 >  Date_Project_Initials_Tool_Sample_RunInfo.csv 
 
-- sub folders in the RAW folder are useful and can contain additional information; not, that this information and the filename can be changed, while the RAW ID remains fixed.
+- sub folders in the RAW folder are useful and can contain additional information; but note that the path file name is mutable and the unique ID must be used.
 
 The **date** is in `yyyymmdd` format and represents the date of the data collection start. The **project string** is assigned by the project manager and the initials are from the person collecting data.
 
 **Tools** are short strings and represent the machine taking the data, see [Tool List](https://github.com/thomasgredig/MSthesis-Guidelines).
 
-Each **sample** should have a unique name, generally starting witht he initials of the person, and following the date of sample creation. 
-If more than 1 data collection is made in one day, then **RunInfo** is added to discriminate or to add more description to the RAW data file. 
+Each **sample** should have a unique name, generally starting with the initials of the person, and following the date of sample creation. 
+If more than 1 data collection is made in one day, then **RunInfo** is added to distinguish or to add more description to the RAW data file. 
 
 
 ## Example
@@ -67,21 +73,10 @@ This is a basic example which shows you how to check your RAW folder
 
 ``` r
 library(RAWdataR)
-
-# folder path
-p = 'Research-User/RAW'
-
-# does it have the proper structure?
-raw.checkNoSubfolders(p)
-
-# find all the project names
-raw.getNamesProjects(p)
-
-# make a data frame with all fields
-d = raw.getTable(p)
+raw.updateID(path.RAW)
 ```
 
-## Loading RAW Data
+### Loading RAW Data
 
 For graphing and data analysis the correct files need to be loaded. A common approach would be searching data files by `project`, `date`, `user`, or by `instrument`. 
 
@@ -98,7 +93,7 @@ file.list = raw.findFiles(path.RAW, date='2018', instrument='vsm',
     md5 = 'a25f3a,66c5d1,4a0333,1b94b5')
 ```
 
-## Invalid Files
+### Invalid Files
 
 You can also find files with invalid naming convention using the following function, where date is optional
 
@@ -107,7 +102,7 @@ raw.getInvalidFiles(path.RAW, date='2020')
 ```
 
 
-## File Checking
+### File Checking
 
 Instead of using direct filenames, you can use checksums from the files. For a project that has data added all the time, you could have the following code:
 

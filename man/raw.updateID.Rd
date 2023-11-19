@@ -2,7 +2,7 @@
 % Please edit documentation in R/raw.updateID.R
 \name{raw.updateID}
 \alias{raw.updateID}
-\title{Assigns ID to each RAW data file}
+\title{Assigns a Unique ID to Each RAW Data File}
 \usage{
 raw.updateID(
   pRAW,
@@ -30,10 +30,10 @@ raw.updateID(
 returns \code{TRUE} if name has a valid format
 }
 \description{
-Code finds all RAW files and assigns an ID, once the ID is assigned,
-it should stay with that file; the file is identified by the CRC checksum
-code and filesize, so not necessarily by the filename; if the filename
-has changed, the ID will remain the same, but the file is changing
+Code finds all RAW files and assigns a unique ID. Once the ID is assigned,
+it is immutable; the file is identified by the CRC checksum
+code and file size, so not necessarily by the file name; if the file name
+has changed, the ID will remain the same.
 }
 \section{Possible scenarios}{
 
