@@ -17,6 +17,8 @@
 #' database filename and return its path.
 #'
 #' @param pkgname name of the R data package
+#' @param dbPath path
+#' @param verbose logical, additional information
 #'
 #' @importFrom utils packageVersion
 #'

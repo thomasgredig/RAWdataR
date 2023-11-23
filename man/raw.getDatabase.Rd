@@ -8,6 +8,10 @@ raw.getDatabase(pkgname, dbPath = NULL, verbose = FALSE)
 }
 \arguments{
 \item{pkgname}{name of the R data package}
+
+\item{dbPath}{path}
+
+\item{verbose}{logical, additional information}
 }
 \value{
 SQL database filename and path

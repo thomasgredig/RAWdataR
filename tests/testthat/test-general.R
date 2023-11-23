@@ -4,6 +4,14 @@ test_that("go up one directory", {
 })
 
 
+# generate a random file
+.randomFile <- function(pRAW) {
+  fout = file.path(pRAW, paste0('file',floor(runif(1,100,1e4)),'.txt'))
+  df = data.frame(no = runif(10))
+  write.csv(df, fout)
+  fout
+}
+
 
 test_that("split filename and search for sample names", {
   f = c('20010101_project_user_inst_sample_desc.DAT')
@@ -24,23 +32,15 @@ test_that("test RAW ID", {
   q = raw.updateID(pRAW, pRESULTS, forceRegenerate = TRUE)
   expect_equal(nrow(q),0)
 
-  # generate a random file
-  .randomFile <- function() {
-    fout = file.path(pRAW, paste0('file',floor(runif(1,100,1e4)),'.txt'))
-    df = data.frame(no = runif(10))
-    write.csv(df, fout)
-    fout
-  }
-
-  .randomFile() -> f1
+  .randomFile(pRAW) -> f1
 
   # update RAW ID, should have 3 files now
   q = raw.updateID(pRAW, pRESULTS)
   expect_equal(nrow(q),1)
   firstID = raw.getIDbyFile(f1, pRESULTS)
 
-  .randomFile() -> f2
-  .randomFile() -> f3
+  .randomFile(pRAW) -> f2
+  .randomFile(pRAW) -> f3
 
   q = raw.updateID(pRAW, pRESULTS)
 
@@ -59,8 +59,8 @@ test_that("test RAW ID", {
 
   # move all files into a new directory
   dir.create(file.path(pRAW,'sub'))
-  .randomFile() -> f4
-  .randomFile() -> f5
+  .randomFile(pRAW) -> f4
+  .randomFile(pRAW) -> f5
   # switch two files
   f5.new = file.path(pRAW,'sub',basename(f5))
   f4.new = file.path(pRAW,'sub',basename(f4))
@@ -77,4 +77,22 @@ test_that("test RAW ID", {
   # find approximate match, evertyhing in the "sub" folder:
   n = raw.getIDbyFile('sub', pRESULTS, exactNameMatch = FALSE)
   expect_equal(nrow(n), 3)
+})
+
+
+test_that("Check Variable Formats in RAW file", {
+  pRESULTS = tempdir()
+  pRAW = file.path(pRESULTS,'RAW')
+  if (!dir.exists(pRAW)) dir.create(pRAW)
+
+  .randomFile(pRAW) -> f1
+  .randomFile(pRAW) -> f2
+
+  rID = raw.updateID(pRAW, pRESULTS)
+  expect_true(all(rID$crc > 0))
+
+  expect_true(all(rID$size > 0) )
+
+  # check dates
+  expect_true(all(format(as.Date(rID$date),"%Y") >= 2023))
 })

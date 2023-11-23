@@ -126,3 +126,14 @@ RAWdataR::raw.dataProject()
 
 You can use `raw.dataMaker()` to generate a make.data..R file that creates a dataset.
 
+
+## Data Standards
+
+We distinguish between digital data from experimental instruments (AFM, XRD, spectrometer, etc.) and analog data (observations, sample names, etc.). All raw instrument data is stored in standardized, open-accessible formats and/or CSV tables, if possible. 
+
+A quality control procedure should be in place.
+
+Data analysis will be organized, reproducible and open access. Raw and meta data is saved in R packages. The primary analysis of scientific data is either in R packages or jupyter notebooks. Naming conventions are to be followed. 
+
+
+

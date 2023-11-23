@@ -10,7 +10,7 @@
 #' @importFrom utils menu
 #'
 #' @examples
-#' \dontshow{
+#' \donotrun{
 #' raw.dataMaker()
 #' }
 #' @export
@@ -23,7 +23,7 @@ library(RAWdataR)
 verbose = TRUE
 
 raw.updateID('RAW','data-raw', verbose=TRUE)
-dataRAW <- read.csv('data-raw/RAW-ID.csv')
+dataRAW <- raw.readRAWIDfile('data-raw/RAW-ID.csv')
 dataRAW$path = gsub('.*/RAW/','',dataRAW$path)
 dataRAW$sample = gsub('.*([A-Z][A-Z]\\\\d{6}[A-Z]*).*','\\\\1', dataRAW$filename)
 

@@ -1,5 +1,9 @@
 # RAWdataR 1.1.0
 
+* create new column in dataRAW with META data
+* add file generation date
+* store data in header
+
 # RAWdataR 1.0.1
 
 * updated documentation

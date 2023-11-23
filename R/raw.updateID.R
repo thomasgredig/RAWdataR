@@ -16,14 +16,13 @@
 #'   \item{\code{(rule 6)}}{ RAW file moved to a different folder, and folder needs update}
 #' }
 #'
-#' @param pRAW path with raw data, default: uses `data-raw` folder, or creates it
+#' @param pRAW path with raw data, if missing, then will prompt for path
 #' @param pRESULTS path for results, default: uses pRAW
 #' @param idFile name of file with IDs, default: RAW-ID.csv
 #' @param forceRegenerate logical, regenerate file, use with great care only
 #' @param fixDuplicates logical, if \code{TRUE}, duplicates are removed, use with care only
 #' @param verbose logical, if \code{TRUE} outputs information about the process
 #'
-#' @importFrom utils read.csv write.csv
 #'
 #' @return returns \code{TRUE} if name has a valid format
 #'
@@ -33,38 +32,32 @@
 #'   raw.updateID()
 #' }
 #' @export
-raw.updateID <- function(pRAW,
-                         pRESULTS,
+raw.updateID <- function(pRAW = "",
+                         pRESULTS = 'data-raw',
                          idFile = 'RAW-ID.csv',
                          forceRegenerate = FALSE,
                          fixDuplicates = FALSE,
                          verbose = FALSE) {
-  if(missing(pRAW)) {
+
+  # if no RAW folder is defined, then ask to enter:
+  if (pRAW == "" | (!dir.exists(pRAW))) {
     pRAW = ""
     while(TRUE) {
-      pRAW = readline(prompt="Enter RAW data folder: ")
+      pRAW = readline(prompt="Enter path with RAW data: ")
       if (dir.exists(pRAW)) break
-      cat("RAW folder not found.\n")
+      cat("RAW data folder not found.\n")
     }
-
-    # if (!dir.exists(pRAW)) { dir.create(pRAW); if (verbose) cat("data-raw directory created.\n") }
   }
-  if(missing(pRESULTS)) pRESULTS = 'data-raw'
 
   # name for file that stores the RAW IDs
   fIDfile = file.path(pRESULTS, idFile)
   if (verbose) cat("RAW ID File:", fIDfile,"\n")
 
   # check if ID file already exists
-  ID = 7
+  # -------------------------------
+  ID <- 7     # lowest ID
   if (file.exists(fIDfile) & !forceRegenerate) {
-    rID = read.csv(fIDfile)
-    if (length(grep("date",names(rID))) == 0) {
-      # old version, then add "date" column
-      rID$date = ""
-    }
-    ## Use this to randomly change the crc
-    ## rID$crc = rID$crc + floor(runif(nrow(rID), min=0, max=2))
+    rID = raw.readRAWIDfile(fIDfile)
     if (verbose) cat("Found",nrow(rID),'IDs in IDfile.\n')
     if (nrow(rID)>0) ID = max(rID$ID) + 1
   } else {
@@ -74,14 +67,7 @@ raw.updateID <- function(pRAW,
 
   # check if any files are missing or have changed:
   if(nrow(rID)>0) {
-    ## remove duplicates??
-    if (fixDuplicates) {
-      m1 = which(duplicated(rID$crc)==TRUE)
-      if (length(m1)>0) {
-        if (verbose) cat("Removing duplicated ", length(m1)," files.\n")
-        rID <- rID[-m1,]
-      }
-    }
+    # check all files for changes
     for(j in 1:nrow(rID)) {
       fname = file.path(rID$path[j], rID$filename[j])
       if (file.exists(fname)) {
@@ -95,6 +81,14 @@ raw.updateID <- function(pRAW,
         }
       } else {
         rID$missing[j] = TRUE
+      }
+    }
+    ## remove duplicates??
+    if (fixDuplicates) {
+      m1 = which(duplicated(rID$crc)==TRUE)
+      if (length(m1)>0) {
+        if (verbose) cat("Removing duplicated ", length(m1)," files.\n")
+        rID <- rID[-m1,]
       }
     }
   }
@@ -113,15 +107,16 @@ raw.updateID <- function(pRAW,
 
     r = data.frame(
       ID = ID,
-      path = dirname(f),
+      path = gsub(pRAW,'',dirname(f)),
       filename = basename(f),
-      date = file.info(f)$atime,
       crc = .getCRC(f),
       size = file.info(f)$size,
       type = .getFileType(f),
       missing = FALSE,
       altered = FALSE,
-      sample = ""
+      sample = "",
+      date = format(file.info(f)$atime),
+      meta = ""
     )
     if (is.na(r$crc)) {
       warning(paste("Cannot generate MD5 for file:",f))
@@ -159,7 +154,17 @@ raw.updateID <- function(pRAW,
     }
 
   }
-  if (nrow(rID)>0)  write.csv(rID, fIDfile, row.names = FALSE)
+
+  # ADD header as special data
+  # ----------------------------
+  rID_list = list(
+    pgm = "RAWdataR",
+    path = pRAW,
+    version = packageVersion("RAWdataR")
+  )
+  # ----------------------------
+
+  if (nrow(rID)>0) raw.writeRAWIDfile(rID, rID_list, fIDfile)
 
   invisible(rID)
 }
@@ -182,7 +187,7 @@ raw.getFileByID <- function(ID,
   fIDfile = file.path(pRESULTS, idFile)
   if(!file.exists(fIDfile)) return(NULL)
 
-  rID = read.csv(fIDfile)
+  rID = raw.readRAWIDfile(fIDfile)
   m = which(rID$ID %in% ID)
   rID[m,]
 }
@@ -210,7 +215,7 @@ raw.getIDbyFile <- function(file.list,
     return(NULL)
   }
 
-  rID = read.csv(fIDfile)
+  rID = raw.readRAWIDfile(fIDfile)
 
 
   m = c()

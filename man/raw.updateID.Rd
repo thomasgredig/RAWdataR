@@ -5,8 +5,8 @@
 \title{Assigns a Unique ID to Each RAW Data File}
 \usage{
 raw.updateID(
-  pRAW,
-  pRESULTS,
+  pRAW = "",
+  pRESULTS = "data-raw",
   idFile = "RAW-ID.csv",
   forceRegenerate = FALSE,
   fixDuplicates = FALSE,
@@ -14,7 +14,7 @@ raw.updateID(
 )
 }
 \arguments{
-\item{pRAW}{path with raw data, default: uses `data-raw` folder, or creates it}
+\item{pRAW}{path with raw data, if missing, then will prompt for path}
 
 \item{pRESULTS}{path for results, default: uses pRAW}
 
