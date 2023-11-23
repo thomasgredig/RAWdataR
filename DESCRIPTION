@@ -1,7 +1,7 @@
 Package: RAWdataR
 Type: Package
 Title: Scientifically Reproducible RAW Data Processing
-Version: 1.0.1
+Version: 1.1.0
 Authors@R: person("Thomas", "Gredig", email = "tgredig@csulb.edu",
                   role = c("aut", "cre"),
                   comment = c(ORCID = "0000-0002-5824-7626"))

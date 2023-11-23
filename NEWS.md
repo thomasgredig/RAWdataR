@@ -1,3 +1,5 @@
+# RAWdataR 1.1.0
+
 # RAWdataR 1.0.1
 
 * updated documentation
