@@ -38,6 +38,7 @@ raw.updateID <- function(pRAW = "",
                          idFile = 'RAW-ID.csv',
                          forceRegenerate = FALSE,
                          fixDuplicates = FALSE,
+                         removeIDs = c(),
                          noData = FALSE,
                          verbose = TRUE) {
   # name for file that stores the RAW IDs
@@ -172,6 +173,22 @@ raw.updateID <- function(pRAW = "",
   rID_list$path = pRAW
   # ----------------------------
 
+  if (length(removeIDs)>0) {
+    m <- which(rID$ID %in% removeIDs)
+    if (length(m)>0) {
+      if (verbose) cat("Removing:",length(m),"IDs.\n")
+      rID <- rID[-m, ]
+    }
+  }
+
+  # CLEAN UP Paths
+  # ----------------------------
+  for(p in rID_list$paths) {
+    rID$path = gsub(paste0("^",p),"",rID$path)
+  }
+
+  # SAVE RAW ID File
+  # ----------------------------
   if(nrow(rID)>0) raw.writeRAWIDfile(rID, rID_list, fIDfile = fIDfile)
 
   if (noData) {
@@ -181,6 +198,9 @@ raw.updateID <- function(pRAW = "",
   }
   invisible(result)
 }
+
+
+
 
 #' Return filename by ID
 #'

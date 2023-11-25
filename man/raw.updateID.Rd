@@ -10,6 +10,7 @@ raw.updateID(
   idFile = "RAW-ID.csv",
   forceRegenerate = FALSE,
   fixDuplicates = FALSE,
+  removeIDs = c(),
   noData = FALSE,
   verbose = TRUE
 )
