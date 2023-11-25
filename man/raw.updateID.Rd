@@ -10,7 +10,8 @@ raw.updateID(
   idFile = "RAW-ID.csv",
   forceRegenerate = FALSE,
   fixDuplicates = FALSE,
-  verbose = FALSE
+  noData = FALSE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -24,6 +25,8 @@ raw.updateID(
 
 \item{fixDuplicates}{logical, if \code{TRUE}, duplicates are removed, use with care only}
 
+\item{noData}{logical, if \code{TRUE}, returns RAW ID file name otherwise RAW data}
+
 \item{verbose}{logical, if \code{TRUE} outputs information about the process}
 }
 \value{
@@ -31,9 +34,9 @@ returns \code{TRUE} if name has a valid format
 }
 \description{
 Code finds all RAW files and assigns a unique ID. Once the ID is assigned,
-it is immutable; the file is identified by the CRC checksum
-code and file size, so not necessarily by the file name; if the file name
-has changed, the ID will remain the same.
+it is immutable; each file is identified by its CRC check sum,
+code and file size, so not by the file name; if the file name
+has changed, the ID will remain the same, and the file name is updated.
 }
 \section{Possible scenarios}{
 

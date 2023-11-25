@@ -4,7 +4,7 @@
 \alias{raw.readRAWIDheader}
 \title{Reads an RAW ID header}
 \usage{
-raw.readRAWIDheader(fIDfile)
+raw.readRAWIDheader(fIDfile = "data-raw/RAW-ID.csv")
 }
 \description{
 Header information is preseded by # and separated name:value with colon

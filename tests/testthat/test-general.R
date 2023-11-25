@@ -29,20 +29,20 @@ test_that("test RAW ID", {
   if (!dir.exists(pRAW)) dir.create(pRAW)
 
   # create RAW ID file and expect it to be empty
-  q = raw.updateID(pRAW, pRESULTS, forceRegenerate = TRUE)
+  q = raw.updateID(pRAW, pRESULTS, forceRegenerate = TRUE, verbose=FALSE)
   expect_equal(nrow(q),0)
 
   .randomFile(pRAW) -> f1
 
   # update RAW ID, should have 3 files now
-  q = raw.updateID(pRAW, pRESULTS)
+  q = raw.updateID(pRAW, pRESULTS, verbose=FALSE)
   expect_equal(nrow(q),1)
   firstID = raw.getIDbyFile(f1, pRESULTS)
 
   .randomFile(pRAW) -> f2
   .randomFile(pRAW) -> f3
 
-  q = raw.updateID(pRAW, pRESULTS)
+  q = raw.updateID(pRAW, pRESULTS, verbose=FALSE)
 
   f1.ID = raw.getIDbyFile(f1, pRESULTS)
   expect_equal(f1.ID$ID, firstID$ID)
@@ -50,7 +50,7 @@ test_that("test RAW ID", {
   # rename one file
   f1.new = paste0(f1,'.newFile')
   file.rename(from=f1, to=f1.new)
-  q = raw.updateID(pRAW, pRESULTS)
+  q = raw.updateID(pRAW, pRESULTS, verbose=FALSE)
   expect_equal(nrow(q),3)
   expect_equal(length(which(q$missing)),0)
 
@@ -71,7 +71,7 @@ test_that("test RAW ID", {
   file.rename(from=f5, to=f5.new)
 
   file.remove(f3)
-  q = raw.updateID(pRAW, pRESULTS, fixDuplicates=TRUE)
+  q = raw.updateID(pRAW, pRESULTS, fixDuplicates=TRUE, verbose=FALSE)
   expect_equal(length(which(q$missing)),1)
 
   # find approximate match, evertyhing in the "sub" folder:
@@ -88,7 +88,7 @@ test_that("Check Variable Formats in RAW file", {
   .randomFile(pRAW) -> f1
   .randomFile(pRAW) -> f2
 
-  rID = raw.updateID(pRAW, pRESULTS)
+  rID = raw.updateID(pRAW, pRESULTS, verbose=FALSE)
   expect_true(all(rID$crc > 0))
 
   expect_true(all(rID$size > 0) )

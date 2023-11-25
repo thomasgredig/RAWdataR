@@ -1,9 +1,9 @@
 #' Assigns a Unique ID to Each RAW Data File
 #'
 #' Code finds all RAW files and assigns a unique ID. Once the ID is assigned,
-#' it is immutable; the file is identified by the CRC checksum
-#' code and file size, so not necessarily by the file name; if the file name
-#' has changed, the ID will remain the same.
+#' it is immutable; each file is identified by its CRC check sum,
+#' code and file size, so not by the file name; if the file name
+#' has changed, the ID will remain the same, and the file name is updated.
 #'
 #' @section
 #' Possible scenarios:
@@ -21,6 +21,7 @@
 #' @param idFile name of file with IDs, default: RAW-ID.csv
 #' @param forceRegenerate logical, regenerate file, use with great care only
 #' @param fixDuplicates logical, if \code{TRUE}, duplicates are removed, use with care only
+#' @param noData logical, if \code{TRUE}, returns RAW ID file name otherwise RAW data
 #' @param verbose logical, if \code{TRUE} outputs information about the process
 #'
 #'
@@ -37,32 +38,39 @@ raw.updateID <- function(pRAW = "",
                          idFile = 'RAW-ID.csv',
                          forceRegenerate = FALSE,
                          fixDuplicates = FALSE,
-                         verbose = FALSE) {
-
-  # if no RAW folder is defined, then ask to enter:
-  if (pRAW == "" | (!dir.exists(pRAW))) {
-    pRAW = ""
-    while(TRUE) {
-      pRAW = readline(prompt="Enter path with RAW data: ")
-      if (dir.exists(pRAW)) break
-      cat("RAW data folder not found.\n")
-    }
-  }
-
+                         noData = FALSE,
+                         verbose = TRUE) {
   # name for file that stores the RAW IDs
   fIDfile = file.path(pRESULTS, idFile)
   if (verbose) cat("RAW ID File:", fIDfile,"\n")
+  # use the last entered path, if not specified
+  if (pRAW == "") pRAW = raw.readRAWIDheader(fIDfile)$path
+
+  # if no RAW folder is defined, then ask to enter:
+  if (pRAW == "" | (!dir.exists(pRAW))) {
+    c=0; while(c<9) {
+      pRAW = readline(prompt="Enter path with RAW data: ")
+      if (dir.exists(pRAW)) break
+      cat("RAW data folder not found.\n")
+      c=c+1
+    }
+  }
+
 
   # check if ID file already exists
   # -------------------------------
   ID <- 7     # lowest ID
   if (file.exists(fIDfile) & !forceRegenerate) {
-    rID = raw.readRAWIDfile(fIDfile)
+    rID <- raw.readRAWIDfile(fIDfile)
+    rID_list <- raw.readRAWIDheader(fIDfile)
+
     if (verbose) cat("Found",nrow(rID),'IDs in IDfile.\n')
     if (nrow(rID)>0) ID = max(rID$ID) + 1
   } else {
     if (verbose) cat("No IDs found, will create a brand-new data file.\n")
-    rID = data.frame()
+
+    rID <- data.frame()
+    rID_list <- list(pgm = "RAWdataR", path = pRAW, paths= c())
   }
 
   # check if any files are missing or have changed:
@@ -130,6 +138,8 @@ raw.updateID <- function(pRAW = "",
       for(m in m1) {
         if (r$size == rID$size[m]) {
           if (r$filename == rID$filename[m]) {
+            if (is.na(rID$path[m])) rID$path[m] = ""
+            if (is.na(r$path)) r$path = ""
             if (r$path != rID$path[m]) {
               # path has changed, set to previous path
               rID$path[m] = r$path
@@ -155,18 +165,21 @@ raw.updateID <- function(pRAW = "",
 
   }
 
-  # ADD header as special data
+  # UPDATE header information
   # ----------------------------
-  rID_list = list(
-    pgm = "RAWdataR",
-    path = pRAW,
-    version = packageVersion("RAWdataR")
-  )
+  rID_list$version = packageVersion("RAWdataR")
+  if (!(pRAW %in% rID_list$paths)) rID_list$paths = c(pRAW, rID_list$paths)
+  rID_list$path = pRAW
   # ----------------------------
 
-  if (nrow(rID)>0) raw.writeRAWIDfile(rID, rID_list, fIDfile)
+  if(nrow(rID)>0) raw.writeRAWIDfile(rID, rID_list, fIDfile = fIDfile)
 
-  invisible(rID)
+  if (noData) {
+    result = fIDfile
+  } else {
+    result <- raw.readRAWIDfile(fIDfile)
+  }
+  invisible(result)
 }
 
 #' Return filename by ID
@@ -193,54 +206,6 @@ raw.getFileByID <- function(ID,
 }
 
 
-#' Return filename by ID
-#'
-#' @param file.list list of file names
-#' @param pRESULTS results folder, if missing and path.RESULTS is defined will use that folder
-#' @param idFile name of the file the the RAW IDs
-#' @param exactNameMatch logical, if \code{FALSE} will match partial file names
-#'
-#' @seealso \code{\link{raw.getIDbyFile}}, \code{\link{raw.updateID}}
-#'
-#' @export
-raw.getIDbyFile <- function(file.list,
-                            pRESULTS = 'data-raw',
-                            idFile = 'RAW-ID.csv',
-                            exactNameMatch = TRUE) {
-
-  # name for file that stores the RAW IDs
-  fIDfile = file.path(pRESULTS, idFile)
-  if(!file.exists(fIDfile)) {
-    warning("Please run first raw.updateID() to generate RAW-ID file.")
-    return(NULL)
-  }
-
-  rID = raw.readRAWIDfile(fIDfile)
-
-
-  m = c()
-  for(f in file.list) {
-    if (exactNameMatch) {
-      if (file.exists(f)) {
-        crc = .getCRC(f)
-        m1 = which(crc == rID$crc)
-        if (length(m1)==0 | length(m1)>1) warning("Run raw.updateID() first.")
-      } else {
-        fn = basename(f)
-        m1 = which(fn == rID$filename)
-        if (length(m1)==0 | length(m1)>1) warning("Run raw.updateID() first.")
-      }
-    } else {
-      # match can be approximate
-      m1 = grep(f, file.path(rID$path, rID$filename))
-    }
-
-    if (length(m1)>0) {
-      m = c(m, m1)
-    }
-  }
-  rID[m,]
-}
 
 
 NULL

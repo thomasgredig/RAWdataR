@@ -4,7 +4,7 @@
 \alias{raw.readRAWIDfile}
 \title{Reads an RAW ID file}
 \usage{
-raw.readRAWIDfile(fIDfile)
+raw.readRAWIDfile(fIDfile = "data-raw/RAW-ID.csv")
 }
 \arguments{
 \item{fIDfile}{file name, usually RAW_ID.csv}

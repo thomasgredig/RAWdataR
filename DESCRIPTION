@@ -14,15 +14,16 @@ Encoding: UTF-8
 URL: https://thomasgredig.github.io/RAWdataR/
 RoxygenNote: 7.2.3
 Imports:
-    tools
+    ggplot2,
+    methods,
+    tools,
+    usethis
 Suggests: 
     rmarkdown,
     knitr,
     testthat (>= 2.1.0)
 VignetteBuilder: knitr
 Depends: 
-    ggplot2,
     rstudioapi,
-    usethis,
     R (>= 2.10)
 LazyData: true

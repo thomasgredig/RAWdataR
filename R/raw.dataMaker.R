@@ -10,7 +10,7 @@
 #' @importFrom utils menu
 #'
 #' @examples
-#' \donotrun{
+#' \dontrun{
 #' raw.dataMaker()
 #' }
 #' @export

@@ -8,7 +8,8 @@
 #' @importFrom stats runif setNames
 #'
 #' @export
-raw.readRAWIDfile <- function(fIDfile) {
+raw.readRAWIDfile <- function(fIDfile = 'data-raw/RAW-ID.csv') {
+  if (!file.exists(fIDfile)) return(data.frame())
   df <- read.csv(fIDfile, comment.char = "#")
 
   # read header information
@@ -19,7 +20,23 @@ raw.readRAWIDfile <- function(fIDfile) {
     df$date = ""
     df$meta = ""
   } else {
-    df$path = file.path(df_header$path, df$path)
+    df$missing = TRUE
+    for(j in 1:length(df_header$paths)) {
+      p <- df_header$paths[j]
+      if (dir.exists(p)) {
+        # check if any missing files are part of this path?
+        for(i in 1:nrow(df)) {
+          if (df$missing[i]) {
+            if (is.na(df$path[i])) df$path[i] = ""
+            # print(file.path(p, df$path[i], df$filename[i]))
+            if (file.exists(file.path(p, df$path[i], df$filename[i]))) {
+              df$path[i] = file.path(p, df$path[i])
+              df$missing[i] = FALSE
+            }
+          }
+        }
+      }
+    }
   }
 
   df
