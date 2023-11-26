@@ -139,8 +139,8 @@ raw.updateID <- function(pRAW = "",
       for(m in m1) {
         if (r$size == rID$size[m]) {
           if (r$filename == rID$filename[m]) {
-            if (is.na(rID$path[m])) rID$path[m] = ""
-            if (is.na(r$path)) r$path = ""
+            # if (is.na(rID$path[m])) rID$path[m] = ""
+            # if (is.na(r$path)) r$path = ""
             if (r$path != rID$path[m]) {
               # path has changed, set to previous path
               rID$path[m] = r$path

@@ -37,6 +37,7 @@ test_that("Find files in two Paths", {
   q = raw.updateID(pRAW2, pRESULTS, forceRegenerate = TRUE, verbose=FALSE)
   fID = file.path(pRESULTS,'RAW-ID.csv')
   q = raw.readRAWIDfile(fID)
+  expect_equal(all(!is.na(q)), TRUE)
   expect_equal(nrow(q),2)
 
   q = raw.updateID(pRAW1, pRESULTS, verbose=FALSE)

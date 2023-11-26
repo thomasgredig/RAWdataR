@@ -3,6 +3,8 @@
 #' Header information is preseded by # and separated name:value with colon
 #' for example # Version: 1.0
 #'
+#' @param fIDfile path and file name for RAW-ID.csv file
+#'
 #' @importFrom utils read.csv
 #'
 #' @examples

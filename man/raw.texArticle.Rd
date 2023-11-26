@@ -9,7 +9,7 @@ raw.texArticle(figPath, fileTeX = "_main.tex")
 \arguments{
 \item{figPath}{path for figures, should contain tex figure files generated with \code{fig2tex}}
 
-\item{fileTex}{name of article that is generated in figPath}
+\item{fileTeX}{name of article that is generated in figPath}
 }
 \description{
 After saving TeX snippets into a folder (\code{figPath}) with \code{\link{fig2tex}},

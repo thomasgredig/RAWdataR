@@ -11,6 +11,8 @@
 raw.readRAWIDfile <- function(fIDfile = 'data-raw/RAW-ID.csv') {
   if (!file.exists(fIDfile)) return(data.frame())
   df <- read.csv(fIDfile, comment.char = "#")
+  # convert NA back to empty strings
+  df[is.na(df)]=""
 
   # read header information
   df_header <- raw.readRAWIDheader(fIDfile)
@@ -27,7 +29,7 @@ raw.readRAWIDfile <- function(fIDfile = 'data-raw/RAW-ID.csv') {
         # check if any missing files are part of this path?
         for(i in 1:nrow(df)) {
           if (df$missing[i]) {
-            if (is.na(df$path[i])) df$path[i] = ""
+            # if (is.na(df$path[i])) df$path[i] = ""
             # print(file.path(p, df$path[i], df$filename[i]))
             if (file.exists(file.path(p, df$path[i], df$filename[i]))) {
               df$path[i] = file.path(p, df$path[i])

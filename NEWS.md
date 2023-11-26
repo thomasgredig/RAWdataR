@@ -3,6 +3,7 @@
 * create new column in dataRAW with META data
 * add file generation date
 * store data in header
+* fix NA with empty strings after writing and reading CSV
 
 # RAWdataR 1.0.1
 

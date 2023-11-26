@@ -9,7 +9,7 @@
 #'
 #'
 #' @param figPath path for figures, should contain tex figure files generated with \code{fig2tex}
-#' @param fileTex name of article that is generated in figPath
+#' @param fileTeX name of article that is generated in figPath
 #'
 #' @seealso \code{\link{fig2tex}}
 #'
