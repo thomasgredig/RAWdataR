@@ -169,6 +169,8 @@ raw.updateID <- function(pRAW = "",
   # UPDATE header information
   # ----------------------------
   rID_list$version = packageVersion("RAWdataR")
+  rID_list$pgm = "RAWdataR"
+  rID_list$stamp = Sys.time()
   if (!(pRAW %in% rID_list$paths)) rID_list$paths = c(pRAW, rID_list$paths)
   rID_list$path = pRAW
   # ----------------------------
@@ -186,6 +188,7 @@ raw.updateID <- function(pRAW = "",
   for(p in rID_list$paths) {
     rID$path = gsub(paste0("^",p),"",rID$path)
   }
+  rID$path = gsub("^/+","/",rID$path)
 
   # SAVE RAW ID File
   # ----------------------------
