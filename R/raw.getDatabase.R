@@ -53,6 +53,7 @@ raw.getDatabase <- function(pkgname, dbPath = NULL, verbose = FALSE) {
     # Read all lines from the file
     dbFolders <- readLines(srcFile,warn = FALSE)
     for(dbFolder in dbFolders) {
+      if (verbose) cat("Searching folder:", dbFolder,"\n")
       if (dir.exists(dbFolder)) dbSearchPaths = c(dbSearchPaths, dbFolder)
     }
   } else {
@@ -69,6 +70,10 @@ raw.getDatabase <- function(pkgname, dbPath = NULL, verbose = FALSE) {
       dbFileNameAlternative = dir(pfad, pattern=paste0(pkgname,'.*sqlite$'))
       if (length(dbFileNameAlternative)>0) dbFile <- file.path(pfad, dbFileNameAlternative[1])
     }
+  }
+
+  if (verbose) {
+    if (file.exists(dbFile)) cat("SQL DB size:", round(file.info(dbFile)$size/1024/1024,1),"MB\n")
   }
 
   dbFile
