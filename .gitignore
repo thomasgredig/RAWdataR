@@ -5,7 +5,7 @@
 .DS_Store
 inst/doc
 RAW-ID.csv
-_profiling.R
 .RDataTmp
-_main.R
-Untitled.R
+_*.R
+
+docs/

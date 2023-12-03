@@ -1,9 +1,11 @@
-#' Assigns a Unique ID to Each RAW Data File
+#' Assigns a Unique ID to each RAW Data File
 #'
-#' Code finds all RAW files and assigns a unique ID. Once the ID is assigned,
+#' Finds all RAW files and assigns a unique ID. Once the ID is assigned,
 #' it is immutable; each file is identified by its CRC check sum,
-#' code and file size, so not by the file name; if the file name
-#' has changed, the ID will remain the same, and the file name is updated.
+#' code and file size, so not by the file name; if the file name or location
+#' has changed, the ID will remain the same, but the file name is updated.
+#' Some meta data with paths to RAW data is stored as header information, currently
+#' located at the end of the file.
 #'
 #' @section
 #' Possible scenarios:
@@ -19,8 +21,10 @@
 #' @param pRAW path with raw data, if missing, then will prompt for path
 #' @param pRESULTS path for results, default: uses pRAW
 #' @param idFile name of file with IDs, default: RAW-ID.csv
+#' @param f_post function to customize sample, type etc.
 #' @param forceRegenerate logical, regenerate file, use with great care only
 #' @param fixDuplicates logical, if \code{TRUE}, duplicates are removed, use with care only
+#' @param removeIDs CAUTION: will delete IDs listed as vector
 #' @param noData logical, if \code{TRUE}, returns RAW ID file name otherwise RAW data
 #' @param verbose logical, if \code{TRUE} outputs information about the process
 #'
@@ -36,26 +40,19 @@
 raw.updateID <- function(pRAW = "",
                          pRESULTS = 'data-raw',
                          idFile = 'RAW-ID.csv',
+                         f_post = NA,
                          forceRegenerate = FALSE,
                          fixDuplicates = FALSE,
                          removeIDs = c(),
                          noData = FALSE,
                          verbose = TRUE) {
-  # name for file that stores the RAW IDs
-  fIDfile = file.path(pRESULTS, idFile)
+  # Get RAW-ID.csv File name and location
+  fIDfile = raw.RAWIDfile(pRESULTS, idFile)
   if (verbose) cat("RAW ID File:", fIDfile,"\n")
-  # use the last entered path, if not specified
-  if (pRAW == "") pRAW = raw.readRAWIDheader(fIDfile)$path
 
-  # if no RAW folder is defined, then ask to enter:
-  if (pRAW == "" | (!dir.exists(pRAW))) {
-    c=0; while(c<9) {
-      pRAW = readline(prompt="Enter path with RAW data: ")
-      if (dir.exists(pRAW)) break
-      cat("RAW data folder not found.\n")
-      c=c+1
-    }
-  }
+  # Get path for RAW data
+  if (pRAW == "") pRAW = raw.readRAWIDheader(fIDfile)$path
+  if (pRAW == "" | (!dir.exists(pRAW))) pRAW = .promptRAWpath()
 
 
   # check if ID file already exists
@@ -66,12 +63,20 @@ raw.updateID <- function(pRAW = "",
     rID_list <- raw.readRAWIDheader(fIDfile)
 
     if (verbose) cat("Found",nrow(rID),'IDs in IDfile.\n')
-    if (nrow(rID)>0) ID = max(rID$ID) + 1
+    if ('IDmax' %in% names(rID_list)) {
+      ID = as.numeric(rID_list$IDmax) + 1
+    } else {
+      if (nrow(rID)>0) ID = max(rID$ID) + 1
+    }
   } else {
-    if (verbose) cat("No IDs found, will create a brand-new data file.\n")
+    if ( (forceRegenerate) & (interactive()) ) {
+      a = readline(prompt="Are you sure to delete RAW-ID.csv (yes/NO):")
+      if (tolower(a) != 'yes') stop("Call raw.updateID() with forceRegenerate=FALSE.")
+    }
+    if (verbose) cat("Will create a brand-new data file.\n")
 
     rID <- data.frame()
-    rID_list <- list(pgm = "RAWdataR", path = pRAW, paths= c())
+    rID_list <- list(pgm = "RAWdataR", path = pRAW, paths = c())
   }
 
   # check if any files are missing or have changed:
@@ -82,13 +87,25 @@ raw.updateID <- function(pRAW = "",
       if (file.exists(fname)) {
         crc = .getCRC(fname)
         if (crc != rID$crc[j]) {
-          if (verbose) cat("File ", rID$filename[j], " had changed content! Making new ID.\n")
-          # file has changed, make new ID ?
-          rID$altered[j] = TRUE
-          rID$size[j] = file.info(fname)$size
-          rID$crc[j] = crc  # update new CRC code
+          if (verbose) cat("Content in file ", rID$filename[j], " has changed! Making new ID.\n")
+          # file name is the same, but different CRC code; therefore, either the file was
+          # altered, or the same file name is used for a different data set: therefore, maintain
+          # the old ID as a missing file, then create a new ID for this file.
+          rID$missing[j] = TRUE
+          r <- .addFile(fname, ID, pRAW)
+          if (!(crc %in% rID$crc)) {
+            # add the file as a new file
+            r$altered = TRUE
+            ID <- ID + 1
+            rID <- rbind(rID, r)
+          } else {
+            # CRC is found elsewhere
+            j2 <- which(rID$crc == crc)[1]
+            if (fname != file.path(rID$path[j2], rID$filename[j2])) rID[j2,] = r
+          }
         }
       } else {
+        # filename is not found anymore, declare missing
         rID$missing[j] = TRUE
       }
     }
@@ -106,73 +123,69 @@ raw.updateID <- function(pRAW = "",
 
 
   # Files in the RAW folder
+  if (verbose) cat("--> Updating / adding new files from",pRAW,".\n")
   file.list = dir(pRAW, recursive = TRUE)
   file.list = file.path(pRAW, file.list)
   if (verbose) cat("Found",length(file.list),'files in RAW folder.\n')
 
-
   for(f in file.list) {
+    # if it is a directory, then do not add
     if (dir.exists(f)) next;
 
-    r = data.frame(
-      ID = ID,
-      path = gsub(pRAW,'',dirname(f)),
-      filename = basename(f),
-      crc = .getCRC(f),
-      size = file.info(f)$size,
-      type = .getFileType(f),
-      missing = FALSE,
-      altered = FALSE,
-      sample = "",
-      date = format(file.info(f)$atime),
-      meta = ""
-    )
-    if (is.na(r$crc)) {
-      warning(paste("Cannot generate MD5 for file:",f))
-      next
-    }
+    # add the file
+    r <- .addFile(f, ID, pRAW)
 
     # check if file already has an ID
-    if(r$crc %in% rID$crc) {
-      # check if the filename is the same
-      m1 = grep(r$crc, rID$crc)
-      for(m in m1) {
-        if (r$size == rID$size[m]) {
-          if (r$filename == rID$filename[m]) {
-            # if (is.na(rID$path[m])) rID$path[m] = ""
-            # if (is.na(r$path)) r$path = ""
-            if (r$path != rID$path[m]) {
-              # path has changed, set to previous path
+    if (nrow(rID)>0) {
+      if (r$crc %in% rID$crc) {
+        # check if the file name is the same
+        m1 = grep(r$crc, rID$crc)
+        for(m in m1) {
+          if (r$size == rID$size[m]) {
+            if (r$filename == rID$filename[m]) {
+              if (r$path != rID$path[m]) {
+                # path has changed, set to previous path
+                rID$path[m] = r$path
+                rID$missing[m] = FALSE
+              } else {
+                # path and filename are the same, do not add
+              }
+            } else {
+              rID$filename[m] = r$filename
               rID$path[m] = r$path
               rID$missing[m] = FALSE
-            } else {
-              # path and filename are the same, do not add
             }
           } else {
-            rID$filename[m] = r$filename
-            rID$path[m] = r$path
-            rID$missing[m] = FALSE
+            warning("CRC matches, but file size differs in file:",f)
+            # rare case: crc matches, but file size different
+            rID = rbind(rID, r)
+            ID = ID + 1
           }
-        } else {
-          # rare case: crc matches, but file size different
-          rID = rbind(rID, r)
-          ID = ID + 1
-        }
-      } # end FOR
+        } # end FOR
+      } else {
+        # CRC is not in RAW-ID, so add it:
+        rID = rbind(rID, r)
+        ID = ID + 1
+      }
     } else {
-      rID = rbind(rID, r)
+      # first ID to add
+      rID = r
       ID = ID + 1
     }
 
   }
+
+  # CUSTOMIZE with post function
+  if (is(f_post,"function")) rID <- f_post(rID)
 
   # UPDATE header information
   # ----------------------------
   rID_list$version = packageVersion("RAWdataR")
   rID_list$pgm = "RAWdataR"
   rID_list$stamp = Sys.time()
-  if (!(pRAW %in% rID_list$paths)) rID_list$paths = c(pRAW, rID_list$paths)
   rID_list$path = pRAW
+  if (!(pRAW %in% rID_list$paths)) rID_list$paths = c(pRAW, rID_list$paths)
+  rID_list$IDmax = ID
   # ----------------------------
 
   if (length(removeIDs)>0) {
@@ -192,6 +205,8 @@ raw.updateID <- function(pRAW = "",
 
   # SAVE RAW ID File
   # ----------------------------
+  if (verbose) cat("Writing RAW ID file: ",fIDfile,"\nTable:\n")
+  if (verbose) print(rID)
   if(nrow(rID)>0) raw.writeRAWIDfile(rID, rID_list, fIDfile = fIDfile)
 
   if (noData) {
@@ -236,6 +251,35 @@ NULL
 
 .getCRC <- function(filename) {
   strtoi( raw.getMD5(filename, 7), base = 16 )
+}
+
+.promptRAWpath <- function() {
+  if (!interactive()) stop("Provide pRAW argument in raw.updateID().")
+  while(TRUE) {
+    pRAW = readline(prompt="Enter path with RAW data: ")
+    if (pRAW == "") stop("Need a RAW location folder to proceed.")
+    if (dir.exists(pRAW)) break
+    cat("RAW data folder not found.\n")
+  }
+}
+
+.addFile <- function(f, ID, pRAW) {
+  r = data.frame(
+    ID = ID,
+    path = gsub(pRAW,'',dirname(f)),
+    filename = basename(f),
+    crc = .getCRC(f),
+    size = file.info(f)$size,
+    type = .getFileType(f),
+    missing = !file.exists(f),
+    altered = FALSE,
+    sample = "",
+    date = format(file.info(f)$atime),
+    meta = ""
+  )
+  if (is.na(r$crc)) stop("Cannot generate MD5 check sum for file:",f)
+
+  r
 }
 
 # returns file type

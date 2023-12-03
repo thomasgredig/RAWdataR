@@ -1,7 +1,7 @@
 Package: RAWdataR
 Type: Package
 Title: Scientifically Reproducible RAW Data Processing
-Version: 1.1.0
+Version: 1.2.0
 Authors@R: person("Thomas", "Gredig", email = "tgredig@csulb.edu",
                   role = c("aut", "cre"),
                   comment = c(ORCID = "0000-0002-5824-7626"))
@@ -16,6 +16,8 @@ RoxygenNote: 7.2.3
 Imports:
     ggplot2,
     methods,
+    rstudioapi,
+    stats,
     tools,
     usethis
 Suggests: 
@@ -24,6 +26,5 @@ Suggests:
     testthat (>= 2.1.0)
 VignetteBuilder: knitr
 Depends: 
-    rstudioapi,
     R (>= 2.10)
 LazyData: true

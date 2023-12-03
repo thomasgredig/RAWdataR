@@ -1,3 +1,7 @@
+# RAWdataR 1.2.0
+
+* add post function to `raw.updateID()`, such that type or sample names could be adjusted according to specific rules. 
+
 # RAWdataR 1.1.0
 
 * create new column in dataRAW with META data

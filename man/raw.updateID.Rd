@@ -2,12 +2,13 @@
 % Please edit documentation in R/raw.updateID.R
 \name{raw.updateID}
 \alias{raw.updateID}
-\title{Assigns a Unique ID to Each RAW Data File}
+\title{Assigns a Unique ID to each RAW Data File}
 \usage{
 raw.updateID(
   pRAW = "",
   pRESULTS = "data-raw",
   idFile = "RAW-ID.csv",
+  f_post = NA,
   forceRegenerate = FALSE,
   fixDuplicates = FALSE,
   removeIDs = c(),
@@ -22,9 +23,13 @@ raw.updateID(
 
 \item{idFile}{name of file with IDs, default: RAW-ID.csv}
 
+\item{f_post}{function to customize sample, type etc.}
+
 \item{forceRegenerate}{logical, regenerate file, use with great care only}
 
 \item{fixDuplicates}{logical, if \code{TRUE}, duplicates are removed, use with care only}
+
+\item{removeIDs}{CAUTION: will delete IDs listed as vector}
 
 \item{noData}{logical, if \code{TRUE}, returns RAW ID file name otherwise RAW data}
 
@@ -34,10 +39,12 @@ raw.updateID(
 returns \code{TRUE} if name has a valid format
 }
 \description{
-Code finds all RAW files and assigns a unique ID. Once the ID is assigned,
+Finds all RAW files and assigns a unique ID. Once the ID is assigned,
 it is immutable; each file is identified by its CRC check sum,
-code and file size, so not by the file name; if the file name
-has changed, the ID will remain the same, and the file name is updated.
+code and file size, so not by the file name; if the file name or location
+has changed, the ID will remain the same, but the file name is updated.
+Some meta data with paths to RAW data is stored as header information, currently
+located at the end of the file.
 }
 \section{Possible scenarios}{
 

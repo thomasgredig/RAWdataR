@@ -27,6 +27,8 @@ test_that("test RAW ID", {
 
   pRAW = file.path(pRESULTS,'RAW')
   if (!dir.exists(pRAW)) dir.create(pRAW)
+  fID = file.path(pRESULTS,'RAW-ID.csv')
+  if (file.exists(fID)) file.remove(fID)
 
   # create RAW ID file and expect it to be empty
   q = raw.updateID(pRAW, pRESULTS, forceRegenerate = TRUE, verbose=FALSE)
@@ -43,6 +45,7 @@ test_that("test RAW ID", {
   .randomFile(pRAW) -> f3
 
   q = raw.updateID(pRAW, pRESULTS, verbose=FALSE)
+  expect_equal(nrow(q),3)
 
   f1.ID = raw.getIDbyFile(f1, pRESULTS)
   expect_equal(f1.ID$ID, firstID$ID)

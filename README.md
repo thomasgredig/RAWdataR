@@ -4,7 +4,7 @@
 [![Codecov test coverage](https://codecov.io/gh/thomasgredig/RAWdataR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/thomasgredig/RAWdataR?branch=master)
 <!-- badges: end -->
 
-This R package called `RAWdataR` aims to update and validate the scientific data folder and perform some standard file checks. Aligned with the National Science Foundation, the [Open Data at NSF](https://www.nsf.gov/data/) describes the underlying goals; it also fosters maintaining metadata. 
+`RAWdataR` provides a framework to uniquely track and analyse raw data from scientific instruments. It assigns unique file IDs based on MD5 sums. This means that even after renaming the files or moving them to different folders, the analysis package can refer to its ID to retrieve the data.  Aligned with the National Science Foundation, the [Open Data at NSF](https://www.nsf.gov/data/) describes the underlying goals; it also fosters maintaining metadata. 
 
 The `RAWdataR` R package supports the following workflow: 
 
@@ -133,7 +133,7 @@ We distinguish between digital data from experimental instruments (AFM, XRD, spe
 
 A quality control procedure should be in place.
 
-Data analysis will be organized, reproducible and open access. Raw and meta data is saved in R packages. The primary analysis of scientific data is either in R packages or jupyter notebooks. Naming conventions are to be followed. 
+Data analysis will be organized, reproducible and open access. Raw and m'';'lkjhgfd eta data is saved in R packages. The primary analysis of scientific data is either in R packages or jupyter notebooks. Naming conventions are to be followed. 
 
 
 
