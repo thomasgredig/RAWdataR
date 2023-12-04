@@ -4,7 +4,18 @@
 \alias{raw.dataFilesAFM}
 \title{Create dataFilesAFM Table}
 \usage{
-raw.dataFilesAFM(fIDfile = "data-raw/RAW-ID.csv", dataFilesAFM = NULL)
+raw.dataFilesAFM(
+  fIDfile = "data-raw/RAW-ID.csv",
+  dataFilesAFM = NULL,
+  f_post = NA
+)
+}
+\arguments{
+\item{fIDfile}{RAW-ID file with path}
+
+\item{dataFilesAFM}{table with the AFM data}
+
+\item{f_post}{function to customize sample, type etc.}
 }
 \description{
 Create dataFilesAFM Table
