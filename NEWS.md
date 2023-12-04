@@ -1,3 +1,9 @@
+# RAWdataR 1.2.1
+
+* add `raw.dataFilesAFM()` for AFM file support
+* `raw.getDatabase()` will now append the folder to the package
+* fix bugs
+
 # RAWdataR 1.2.0
 
 * add post function to `raw.updateID()`, such that type or sample names could be adjusted according to specific rules. 

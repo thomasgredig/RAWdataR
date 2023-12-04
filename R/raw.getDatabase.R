@@ -52,6 +52,9 @@ raw.getDatabase <- function(pkgname, dbPath = NULL, verbose = FALSE) {
   if (nchar(srcFile) > 0) {
     # Read all lines from the file
     dbFolders <- readLines(srcFile,warn = FALSE)
+    if (!is.null(dbPath)) { # append path if not in the list already
+      if (!(dbPath %in% dbFolders)) write(dbPath, srcFile, append = TRUE)
+    }
     for(dbFolder in dbFolders) {
       if (verbose) cat("Searching folder:", dbFolder,"\n")
       if (dir.exists(dbFolder)) dbSearchPaths = c(dbSearchPaths, dbFolder)
@@ -64,6 +67,7 @@ raw.getDatabase <- function(pkgname, dbPath = NULL, verbose = FALSE) {
 
   if (verbose) cat("Searching", length(dbSearchPaths), "folders.\n")
 
+  dbFile = ""
   for(pfad in dbSearchPaths) {
     dbFileCheck <- file.path(pfad,dbFileName)
     if (file.exists(dbFileCheck)) { dbFile <- dbFileCheck } else {

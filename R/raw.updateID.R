@@ -53,7 +53,7 @@ raw.updateID <- function(pRAW = "",
   # Get path for RAW data
   if (pRAW == "") pRAW = raw.readRAWIDheader(fIDfile)$path
   if (pRAW == "" | (!dir.exists(pRAW))) pRAW = .promptRAWpath()
-
+  if (verbose) cat("RAW folder: ",pRAW,"\n")
 
   # check if ID file already exists
   # -------------------------------
@@ -261,6 +261,8 @@ NULL
     if (dir.exists(pRAW)) break
     cat("RAW data folder not found.\n")
   }
+
+  pRAW
 }
 
 .addFile <- function(f, ID, pRAW) {
