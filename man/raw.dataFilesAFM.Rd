@@ -7,7 +7,8 @@
 raw.dataFilesAFM(
   fIDfile = "data-raw/RAW-ID.csv",
   dataFilesAFM = NULL,
-  f_post = NA
+  f_post = NA,
+  verbose = FALSE
 )
 }
 \arguments{
@@ -16,6 +17,8 @@ raw.dataFilesAFM(
 \item{dataFilesAFM}{table with the AFM data}
 
 \item{f_post}{function to customize sample, type etc.}
+
+\item{verbose}{logical for extra information}
 }
 \description{
 Create dataFilesAFM Table

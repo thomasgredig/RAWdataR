@@ -3,6 +3,7 @@
 #' @param fIDfile RAW-ID file with path
 #' @param dataFilesAFM table with the AFM data
 #' @param f_post function to customize sample, type etc.
+#' @param verbose logical for extra information
 #'
 #' @importFrom dplyr "%>%" filter
 #' @importFrom nanoAFMr AFM.import AFMinfo AFMinfo.item AFM.partial
@@ -10,7 +11,8 @@
 #' @export
 raw.dataFilesAFM <- function(fIDfile = 'data-raw/RAW-ID.csv',
                              dataFilesAFM = NULL,
-                             f_post = NA) {
+                             f_post = NA,
+                             verbose=FALSE) {
   if (!file.exists(fIDfile)) stop("Cannot find RAW-ID file.")
   dataRAW <- raw.readRAWIDfile(fIDfile)
   # Find AFM images that could be added
