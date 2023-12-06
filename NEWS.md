@@ -1,3 +1,7 @@
+# RAWdataR 1.2.2
+
+* add `raw.dataXRD()` for XRD
+
 # RAWdataR 1.2.1
 
 * add `raw.dataFilesAFM()` for AFM file support

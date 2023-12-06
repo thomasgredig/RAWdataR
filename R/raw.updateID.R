@@ -206,7 +206,6 @@ raw.updateID <- function(pRAW = "",
   # SAVE RAW ID File
   # ----------------------------
   if (verbose) cat("Writing RAW ID file: ",fIDfile,"\nTable:\n")
-  if (verbose) print(rID)
   if(nrow(rID)>0) raw.writeRAWIDfile(rID, rID_list, fIDfile = fIDfile)
 
   if (noData) {
@@ -254,7 +253,7 @@ NULL
 }
 
 .promptRAWpath <- function() {
-  if (!interactive()) stop("Provide pRAW argument in raw.updateID().")
+  if (interactive()==FALSE) stop("Provide pRAW argument in raw.updateID().")
   while(TRUE) {
     pRAW = readline(prompt="Enter path with RAW data: ")
     if (pRAW == "") stop("Need a RAW location folder to proceed.")

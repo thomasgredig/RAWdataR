@@ -21,7 +21,7 @@ raw.readRAWIDheader <- function(fIDfile = 'data-raw/RAW-ID.csv') {
 
   df <- read.csv(fIDfile)
   h <- df[grep("^#",df$ID),'ID']
-  if (is.integer(h)) return(list(version="0.1"))
+  if (is.integer(h)) return(list(version="0.1", path=""))
 
   h <- trimws(gsub('^#','',h))
   header = setNames(as.list(trimws(sapply(strsplit(h,":"),'[[',2 ))),
@@ -34,7 +34,6 @@ raw.readRAWIDheader <- function(fIDfile = 'data-raw/RAW-ID.csv') {
       header[[keys]] <- strsplit(v,";")[[1]]
     }
   }
-
 
   header
 }
