@@ -1,3 +1,5 @@
+# RAWdataR 1.2.3
+
 # RAWdataR 1.2.2
 
 * add `raw.dataXRD()` for XRD
