@@ -10,7 +10,7 @@ raw.readRAWIDheader(fIDfile = "data-raw/RAW-ID.csv")
 \item{fIDfile}{path and file name for RAW-ID.csv file}
 }
 \description{
-Header information is preseded by # and separated name:value with colon
+Header information is presided by # and separated name:value with colon
 for example # Version: 1.0
 }
 \examples{

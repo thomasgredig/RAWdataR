@@ -1,6 +1,6 @@
 #' Reads an RAW ID header
 #'
-#' Header information is preseded by # and separated name:value with colon
+#' Header information is presided by # and separated name:value with colon
 #' for example # Version: 1.0
 #'
 #' @param fIDfile path and file name for RAW-ID.csv file
@@ -19,8 +19,9 @@ raw.readRAWIDheader <- function(fIDfile = 'data-raw/RAW-ID.csv') {
     return(header)
   }
 
-  df <- read.csv(fIDfile)
-  h <- df[grep("^#",df$ID),'ID']
+  df <- readLines(con <- file(fIDfile))
+  close(con)
+  h <- df[grep("^#",df)]
   if (is.integer(h)) return(list(version="0.1", path=""))
 
   h <- trimws(gsub('^#','',h))

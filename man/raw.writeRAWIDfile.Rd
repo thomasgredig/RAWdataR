@@ -11,7 +11,7 @@ raw.writeRAWIDfile(rID, header_list, fIDfile)
 
 \item{header_list}{list to be saved}
 
-\item{fIDfile}{filen ame RAW_ID.csv to be saved}
+\item{fIDfile}{filename RAW_ID.csv to be saved}
 }
 \description{
 Writes an RAW ID file with Header

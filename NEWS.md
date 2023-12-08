@@ -1,5 +1,7 @@
 # RAWdataR 1.2.3
 
+* move header to the front in RAW-ID.csv file
+
 # RAWdataR 1.2.2
 
 * add `raw.dataXRD()` for XRD

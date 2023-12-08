@@ -14,12 +14,16 @@ Encoding: UTF-8
 URL: https://thomasgredig.github.io/RAWdataR/
 RoxygenNote: 7.2.3
 Imports:
+    dplyr,
     ggplot2,
     methods,
+    nanoAFMr,
+    rigakuXRD,
     rstudioapi,
     stats,
     tools,
-    usethis
+    usethis,
+    utils
 Suggests: 
     rmarkdown,
     knitr,
