@@ -64,7 +64,7 @@ raw.updateID <- function(pRAW = "",
 
     if (verbose) cat("Found",nrow(rID),'IDs in IDfile.\n')
     if ('IDmax' %in% names(rID_list)) {
-      ID = as.numeric(rID_list$IDmax) + 1
+      ID = as.numeric(rID_list$IDmax)
     } else {
       if (nrow(rID)>0) ID = max(rID$ID) + 1
     }

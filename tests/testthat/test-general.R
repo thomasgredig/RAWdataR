@@ -83,6 +83,39 @@ test_that("test RAW ID", {
 })
 
 
+
+test_that("check maxID in RAW-ID file", {
+  pRESULTS = tempdir()
+
+  pRAW = file.path(pRESULTS,'RAW')
+  if (!dir.exists(pRAW)) dir.create(pRAW)
+  fID = file.path(pRESULTS,'RAW-ID.csv')
+  if (file.exists(fID)) file.remove(fID)
+
+  .randomFile(pRAW) -> f1
+  .randomFile(pRAW) -> f2
+
+  # create RAW ID file and expect it to be empty
+  q = raw.updateID(pRAW, pRESULTS, forceRegenerate = TRUE, verbose=FALSE)
+  df1 <- raw.readRAWIDheader(fID)
+
+  q = raw.updateID(pRAW, pRESULTS,  verbose=FALSE)
+  df2 <- raw.readRAWIDheader(fID)
+  expect_equal(as.numeric(df1$IDmax), as.numeric(df2$IDmax))
+
+  q = raw.updateID(pRAW, pRESULTS, forceRegenerate = TRUE, verbose=FALSE)
+  df2 <- raw.readRAWIDheader(fID)
+  expect_equal(as.numeric(df1$IDmax), as.numeric(df2$IDmax))
+
+  .randomFile(pRAW) -> f3
+
+  q = raw.updateID(pRAW, pRESULTS, verbose=FALSE)
+  df2 <- raw.readRAWIDheader(fID)
+  expect_equal(as.numeric(df1$IDmax) +1, as.numeric(df2$IDmax))
+})
+
+
+
 test_that("Check Variable Formats in RAW file", {
   pRESULTS = tempdir()
   pRAW = file.path(pRESULTS,'RAW')
