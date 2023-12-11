@@ -25,6 +25,9 @@ raw.dataFilesAFM <- function(fIDfile = 'data-raw/RAW-ID.csv',
     result = data.frame()
   } else {
     result = dataFilesAFM
+    # update rows / match to current version
+    colN = "ID,sample,filename,partial,note,quality,scanRate,cantilever,setPoint,scanAngle,driveFrequency,objectect,description,resolution,size,channel,z.min,z.max,z.units,dataType,res.px,size.nm,imgNo,direction"
+    result <- matchColNames(result, colN)
     if (verbose) cat("Already",nrow(result),"AFM images in dataFilesAFM\n")
   }
 
@@ -87,4 +90,33 @@ raw.dataFilesAFM <- function(fIDfile = 'data-raw/RAW-ID.csv',
   if (is(f_post,"function")) result <- f_post(result)
 
   result
+}
+
+NULL
+# r = dataFilesAFM
+# colN = column names
+#' @importFrom data.table setcolorder data.table
+matchColNames <- function(r, colN) {
+  if (paste(names(r), collapse = ",") == colN) return(r)
+  colNames.new <- strsplit(colN,",")[[1]]
+
+  rno.keep = c()
+  rno.add = c()
+  r2 = data.frame()
+  r0 = data.frame()
+  for(n in colNames.new) {
+    if (n %in% names(r)) {
+      rno.keep = c(rno.keep, which(n == names(r)))
+    } else {
+      rno.add = c(rno.add, which(n == colNames.new))
+    }
+  }
+  if (length(rno.keep) != length(names(r))) warning(length(names(r))-length(rno.keep)," columns of r not used.")
+
+  r0 = rbind(r0, rep("",length(rno.add)))
+  colnames(r0) = colNames.new[rno.add]
+
+  r2 = cbind(r[,rno.keep], r0)
+  r2 <- as.data.frame(setcolorder(data.table(r2), colNames.new))
+  r2
 }

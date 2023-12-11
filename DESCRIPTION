@@ -15,6 +15,7 @@ URL: https://thomasgredig.github.io/RAWdataR/
 RoxygenNote: 7.2.3
 Imports:
     angstromATE,
+    data.table,
     dplyr,
     ggplot2,
     methods,
