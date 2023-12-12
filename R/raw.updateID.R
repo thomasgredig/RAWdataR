@@ -205,7 +205,7 @@ raw.updateID <- function(pRAW = "",
 
   # SAVE RAW ID File
   # ----------------------------
-  if (verbose) cat("Writing RAW ID file: ",fIDfile,"\nTable:\n")
+  if (verbose) cat("Writing RAW ID file: ",fIDfile,"\n")
   if(nrow(rID)>0) raw.writeRAWIDfile(rID, rID_list, fIDfile = fIDfile)
 
   if (noData) {

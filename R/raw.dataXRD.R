@@ -12,13 +12,16 @@
 raw.dataXRD <- function(fIDfile = 'data-raw/RAW-ID.csv',
                              dataXRD = NULL,
                              verbose=FALSE) {
+
   if (!file.exists(fIDfile)) stop("Cannot find RAW-ID file.")
   dataRAW <- raw.readRAWIDfile(fIDfile)
 
   # filter out parsed XRD data files
+  if (!is.null(dataXRD)) if (nrow(dataXRD)==0) dataXRD=NULL
   if (is.null(dataXRD)) {
     ID.exclude = c()
     r = data.frame()
+    df.xrd <- data.frame()
   } else {
     dataXRD %>% group_by(ID) %>% summarize() -> df.xrd
     ID.exclude = df.xrd$ID
@@ -30,10 +33,11 @@ raw.dataXRD <- function(fIDfile = 'data-raw/RAW-ID.csv',
 
   # select XRD data files
   dataRAW %>% filter(missing == FALSE) %>%
-    filter(ID %notin% df.xrd$ID) %>%
     filter(type=='XRD' | type=='XRR') -> fileList
+  if (nrow(df.xrd)>0)
+    fileList <- fileList %>% filter(ID %notin% df.xrd$ID)
   if (verbose) print(paste("Found",nrow(fileList),"XRD / XRR files."))
-
+  if (nrow(fileList)==0) return(r)
 
   # read all data and generate dataXRD object
   # update with data from new files

@@ -4,10 +4,7 @@
 \alias{raw.dataMaker}
 \title{Creates a maker file inside the data-raw folder}
 \usage{
-raw.dataMaker(fileMaker = NULL)
-}
-\arguments{
-\item{fileMaker}{type of file to generate, if \code{NULL} options are provided via terminal}
+raw.dataMaker()
 }
 \description{
 Creates template files that help create data sets; several
@@ -18,4 +15,5 @@ interactive menu.
 \dontrun{
 raw.dataMaker()
 }
+
 }

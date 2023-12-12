@@ -1,6 +1,7 @@
 # RAWdataR 1.2.3
 
 * move header to the front in RAW-ID.csv file
+* update `raw.dataMaker()` to generate makeData()
 
 # RAWdataR 1.2.2
 
