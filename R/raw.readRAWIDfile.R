@@ -17,7 +17,7 @@ raw.readRAWIDfile <- function(fIDfile = 'data-raw/RAW-ID.csv') {
   # read header information
   df_header <- raw.readRAWIDheader(fIDfile)
   # check, whether columns need to be updated
-  if (df_header$version < "1.1") {
+  if (length(df_header)==0) {
     # need to update to later version:
     df$date = ""
     df$meta = ""

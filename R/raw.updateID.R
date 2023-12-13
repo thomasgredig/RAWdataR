@@ -52,7 +52,11 @@ raw.updateID <- function(pRAW = "",
 
   # Get path for RAW data
   if (pRAW == "") pRAW = raw.readRAWIDheader(fIDfile)$path
-  if (pRAW == "" | (!dir.exists(pRAW))) pRAW = .promptRAWpath()
+  if (is.null(pRAW)) {
+    pRAW = .promptRAWpath()
+  } else {
+    if (pRAW == "" | (!dir.exists(pRAW))) pRAW = .promptRAWpath()
+  }
   if (verbose) cat("RAW folder: ",pRAW,"\n")
 
   # check if ID file already exists
