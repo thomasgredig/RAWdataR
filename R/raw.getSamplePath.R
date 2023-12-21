@@ -21,6 +21,6 @@ raw.getSamplePath <- function() {
 #' @examples
 #' basename(raw.getSampleFiles())
 #' @export
-raw.getSampleFiles<- function() {
-  file.path(raw.getSamplePath(),dir(raw.getSamplePath()))
+raw.getSampleFiles <- function() {
+  file.path(raw.getSamplePath(),dir(pattern =".*[^R]$", raw.getSamplePath()))
 }

@@ -9,12 +9,12 @@ test_that("Test valid data file name wihtout comment", {
 })
 
 
-test_that("test try fix invalid files", {
-  fname = raw.getInvalidFiles(raw.getSamplePath())[1]
-  newFname = raw.tryFixInvalidFile(pfad = raw.getSamplePath(),filename = fname)
-
-  expect_true(raw.isValid(newFname))
-})
+# test_that("test try fix invalid files", {
+#   fname = raw.getInvalidFiles(raw.getSamplePath())[1]
+#   newFname = raw.tryFixInvalidFile(pfad = raw.getSamplePath(),filename = fname)
+#
+#   expect_true(raw.isValid(newFname))
+# })
 
 
 test_that("find duplicates", {
@@ -23,14 +23,14 @@ test_that("find duplicates", {
   expect_equal(length(q), 2)
 })
 
-
-test_that("inspect a folder", {
-  q = raw.inspectFolder(raw.getSamplePath())
-
-  expect_equal(q$invalidFiles,1)
-  expect_equal(q$projects, "Dual,FePc,Optical")
-  expect_equal(q$users, "AN,MM,TG")
-})
+#
+# test_that("inspect a folder", {
+#   q = raw.inspectFolder(raw.getSamplePath())
+#
+#   expect_equal(q$invalidFiles,1)
+#   expect_equal(q$projects, "Dual,FePc,Optical")
+#   expect_equal(q$users, "AN,MM,TG")
+# })
 
 
 

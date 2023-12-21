@@ -25,8 +25,8 @@ raw.readRAWIDheader <- function(fIDfile = 'data-raw/RAW-ID.csv') {
   if (is.integer(h)) return(list(version="0.1", path=""))
 
   h <- trimws(gsub('^#','',h))
-  header = setNames(as.list(trimws(sapply(strsplit(h,":"),'[[',2 ))),
-               trimws(sapply(strsplit(h,":"),'[[',1 )))
+  header = setNames(as.list(trimws(sapply(strsplit(h,": "),'[[',2 ))),
+               trimws(sapply(strsplit(h,": "),'[[',1 )))
 
   # un-serialize vectors
   for(keys in names(header)) {

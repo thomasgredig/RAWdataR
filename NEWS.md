@@ -1,5 +1,8 @@
 # RAWdataR 1.2.4
 
+* RAW file header can work with Windows paths that include a colon
+* Update tests
+
 # RAWdataR 1.2.3
 
 * move header to the front in RAW-ID.csv file

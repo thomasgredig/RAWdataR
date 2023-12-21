@@ -29,6 +29,6 @@ raw.getValidFiles <- function(pfad, recursive=FALSE) {
 #'
 #' @export
 raw.getInvalidFiles <- function(pfad, year='.*', recursive=FALSE) {
-  file.list = dir(pfad,pattern='', recursive = recursive)
+  file.list = dir(pfad, pattern='', recursive = recursive)
   file.list[!raw.isValid(file.list)]
 }
