@@ -271,7 +271,7 @@ NULL
 .addFile <- function(f, ID, pRAW) {
   r = data.frame(
     ID = ID,
-    path = gsub(pRAW,'',dirname(f)),
+    path = .truncatePath(pRAW, dirname(f)),
     filename = basename(f),
     crc = .getCRC(f),
     size = file.info(f)$size,
@@ -285,6 +285,11 @@ NULL
   if (is.na(r$crc)) stop("Cannot generate MD5 check sum for file:",f)
 
   r
+}
+
+.truncatePath <- function(pRAW, pfad) {
+  pRAW = gsub("\\\\","/",pRAW)
+  gsub(pRAW,'', pfad)
 }
 
 # returns file type

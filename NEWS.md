@@ -1,6 +1,7 @@
 # RAWdataR 1.2.4
 
-* RAW file header can work with Windows paths that include a colon
+* support Windows paths for RAW-ID.csv
+* support colon in "C:\" and convert forward to backslashes
 * Update tests
 
 # RAWdataR 1.2.3
