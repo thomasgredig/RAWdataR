@@ -168,6 +168,9 @@ raw.updateID <- function(pRAW = "",
         } # end FOR
       } else {
         # CRC is not in RAW-ID, so add it:
+        # if post function adds additional columns, such as substrate
+        # those must be added first to r, use fill = TRUE
+        if (ncol(r) != ncol(rID)) r = .extendColumns(r, names(rID))
         rID = rbind(rID, r)
         ID = ID + 1
       }
@@ -319,3 +322,15 @@ NULL
   type
 }
 
+.extendColumns <- function(df, dfNames) {
+  mIn = names(df)
+  d = df
+  for(m in dfNames) {
+    if (!(m %in% mIn)) {
+      dAdd = rep("", nrow(d))
+      d = cbind(d, dAdd)
+    }
+  }
+  names(d) = dfNames
+  d
+}

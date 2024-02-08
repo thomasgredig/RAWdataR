@@ -40,6 +40,7 @@ raw.dataFilesAFM <- function(fIDfile = 'data-raw/RAW-ID.csv',
     if (verbose) cat("Adding:",basename(fname),"\n")
 
     df     <- AFM.import(fname)
+    if (is.null(df)) next
     dfInfo <- AFMinfo(fname)
     note   <- AFMinfo.item(dfInfo, 'Note')
     scanRate      <- dfInfo$scanRate.Hz

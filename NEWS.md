@@ -1,3 +1,7 @@
+# RAWdataR 1.2.5
+
+* allow post-function to add extra columns in raw-id.csv data frame in `raw.updateID`
+
 # RAWdataR 1.2.4
 
 * support Windows paths for RAW-ID.csv
