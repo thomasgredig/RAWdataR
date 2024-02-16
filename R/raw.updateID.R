@@ -183,7 +183,9 @@ raw.updateID <- function(pRAW = "",
   }
 
   # CUSTOMIZE with post function
+  numRows = nrow(rID)
   if (is(f_post,"function")) rID <- f_post(rID)
+  if (numRows != nrow(rID)) stop("Error in f_post() function. Make sure to return same number of rows.")
 
   # UPDATE header information
   # ----------------------------
