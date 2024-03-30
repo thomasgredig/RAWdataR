@@ -4,7 +4,7 @@
 [![Codecov test coverage](https://codecov.io/gh/thomasgredig/RAWdataR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/thomasgredig/RAWdataR?branch=master)
 <!-- badges: end -->
 
-`RAWdataR` provides a framework to uniquely track and analyse raw data from scientific instruments. It assigns unique file IDs based on MD5 sums. This means that even after renaming the files or moving them to different folders, the analysis package can refer to its ID to retrieve the data.  Aligned with the National Science Foundation, the [Open Data at NSF](https://www.nsf.gov/data/) describes the underlying goals; it also fosters maintaining metadata. 
+`RAWdataR` provides a framework in R language to uniquely track and analyse raw data from scientific instruments. It assigns unique file IDs based on MD5 sums. This means that even after renaming the files or moving them to different folders, the analysis package can refer to its ID to retrieve the data.  Aligned with the National Science Foundation, the [Open Data at NSF](https://www.nsf.gov/data/) describes the underlying goals; it also fosters maintaining metadata. 
 
 The `RAWdataR` R package supports the following workflow: 
 
@@ -45,7 +45,9 @@ The **[reference documentation](https://thomasgredig.github.io/RAWdataR/)** has 
 
 The analysis and graphing of the data is in a separate project package. The data package is distinct and provides access to the data in a convenient format. If possible, it does not apply modeling or analysis to the data, but rather makes all data available in a central package.
 
-![Data package and Project package play distinct roles.](inst/img/Raw-Data-Project-Package.png)
+![Data package and Project package play distinct roles.](figures/Raw-Data-Project-Package.png)
+
+
 
 ### Naming Convention
 

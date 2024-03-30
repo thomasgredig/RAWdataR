@@ -10,8 +10,8 @@
       proper file formats and unique filenames.">
 <title>Scientifically Reproducible RAW Data Processing • RAWdataR</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="deps/Roboto-0.4.6/font.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Roboto-0.4.8/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Scientifically Reproducible RAW Data Processing">
@@ -31,7 +31,7 @@
     
     <a class="navbar-brand me-2" href="index.html">RAWdataR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,8 +73,12 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of RAWdataR is to validate the scientific RAW folder and perform some standard file checks in R language. From the National Science Foundation, the <a href="https://www.nsf.gov/data/" class="external-link">Open Data at NSF</a> describes the underlying goals and fosters maintaing metadata.</p>
-<p>This <code>R package</code> supports the following workflow: * Managing the <code>data R package</code> that contains all the RAW data information * Managing access to the <code>project R package</code> that generates graphs, reports and publication materials.</p>
+<p><code>RAWdataR</code> provides a framework in R language to uniquely track and analyse raw data from scientific instruments. It assigns unique file IDs based on MD5 sums. This means that even after renaming the files or moving them to different folders, the analysis package can refer to its ID to retrieve the data. Aligned with the National Science Foundation, the <a href="https://www.nsf.gov/data/" class="external-link">Open Data at NSF</a> describes the underlying goals; it also fosters maintaining metadata.</p>
+<p>The <code>RAWdataR</code> R package supports the following workflow:</p>
+<ul>
+<li>Creation of unique IDs for all files in a data project</li>
+<li>Basic validation and organization of the scientific data</li>
+</ul>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -91,33 +95,43 @@
 <div class="section level2">
 <h2 id="raw-data-management-protocol">RAW Data Management Protocol<a class="anchor" aria-label="anchor" href="#raw-data-management-protocol"></a>
 </h2>
-<p>RAW data is considered the direct output of a scientific instrument (XRD, AFM, etc.). We will follow a few principles for the <code>data R package</code>:</p>
+<p><code>Raw data</code> is considered the direct output of a scientific instrument (XRD, AFM, etc.). We will follow a few principles for the <code>data R package</code>:</p>
 <ol style="list-style-type: decimal">
-<li><p>The data is stored in a <strong>non-proprietory format</strong>, such as comma separated values (.csv) and R Data (.rda) or SQLite database (.sqlite); therefore, the data can be accessed beyond the instrument lifetime.</p></li>
-<li><p>All RAW data files in the project are given a unique <code>RAW ID</code>. The ID refers to a particular file and is associated with additional parameters, such as a sample name, temperature, etc.</p></li>
-<li><p>Multiple collaborators can add data without corruption; i.e. data can be appended.</p></li>
+<li><p>The data is stored in a <strong>non-proprietory format</strong>, such as comma separated values (.csv) and R Data (.rda) or SQLite database (.sqlite); therefore, the data can be accessed beyond the instrument’s lifetime. If an instrument uses a proprietary data format, then it needs to be converted into an open-source data format.</p></li>
+<li><p>All <code>Raw data</code> files in the project are given a unique <code>RAW ID</code>. The ID refers to a particular file and is associated with additional parameters, such as a sample name, temperature, etc. - the ID is limited to the data package and different packages may have the same ID.</p></li>
+<li><p>Multiple collaborators can add data without corruption; i.e. data can be appended without the need for full access to the <code>Raw data</code>.</p></li>
+<li><p>Some <code>Raw data</code> may not become part of the data package to limit the size. Large data files are stored in SQL format (<code>sqlite</code>) outside the package.</p></li>
 <li><p>The data package should include a sufficient description of samples and procedures to understand the instrument RAW data.</p></li>
 </ol>
-<p>While the data package makes the RAW accessible, it does not process it. The <code>project R package</code> is responsible for maintaining models and functions that process the data (example: extracting the peak position of XRD data)</p>
+<div class="section level3">
+<h3 id="data-and-project">Data and Project<a class="anchor" aria-label="anchor" href="#data-and-project"></a>
+</h3>
+<p>The analysis and graphing of the data is in a separate project package. The data package is distinct and provides access to the data in a convenient format. If possible, it does not apply modeling or analysis to the data, but rather makes all data available in a central package.</p>
+<div class="float">
+<img src="figures/Raw-Data-Project-Package.png" alt="Data package and Project package play distinct roles."><div class="figcaption">Data package and Project package play distinct roles.</div>
 </div>
-<div class="section level2">
-<h2 id="naming-convention">Naming Convention<a class="anchor" aria-label="anchor" href="#naming-convention"></a>
-</h2>
-<p>In order to achieve scientifically reproducible data, we shall follow the follow principles:</p>
+</div>
+<div class="section level3">
+<h3 id="naming-convention">Naming Convention<a class="anchor" aria-label="anchor" href="#naming-convention"></a>
+</h3>
+<p>In order to achieve scientifically reproducible data, we shall follow these follow principles:</p>
 <ul>
-<li>RAW data filenames should be <strong>unique</strong> and the content cannot be altered,</li>
-<li>Data is accessed via unique RAW ID; i.e. once the files are added, in principle, the file name can be changed (or fixed) and will be automatically reconciled using the MD5 CRC string.</li>
-<li>all data files must be in non-proprietary formats, if not, then a second file with the converted text or ASCII format content needs to be saved as well. All data files should have the following format:</li>
+<li>
+<code>Raw data</code> cannot be altered and are assigned a unique ID for reliable data analysis.</li>
+<li>
+<code>Raw data</code> file names can be changed or corrected or stored in a different subfolder without affecting the unique IE, which is automatically reconciled using the MD5 CRC string.</li>
+<li>All data files must be in non-proprietary formats, if not, then a second file with the converted text or ASCII format content needs to be saved as well. If possible, data file names should include the following formatting information:</li>
 </ul>
 <blockquote>
 <p>Date_Project_Initials_Tool_Sample_RunInfo.csv</p>
 </blockquote>
 <ul>
-<li>sub folders in the RAW folder are useful and can contain additional information; not, that this information and the filename can be changed, while the RAW ID remains fixed.</li>
+<li>sub folders in the RAW folder are useful and can contain additional information; but note that the path file name is mutable and the unique ID must be used.</li>
 </ul>
 <p>The <strong>date</strong> is in <code>yyyymmdd</code> format and represents the date of the data collection start. The <strong>project string</strong> is assigned by the project manager and the initials are from the person collecting data.</p>
 <p><strong>Tools</strong> are short strings and represent the machine taking the data, see <a href="https://github.com/thomasgredig/MSthesis-Guidelines" class="external-link">Tool List</a>.</p>
-<p>Each <strong>sample</strong> should have a unique name, generally starting witht he initials of the person, and following the date of sample creation. If more than 1 data collection is made in one day, then <strong>RunInfo</strong> is added to discriminate or to add more description to the RAW data file.</p>
+<p>Each <strong>sample</strong> should have a unique name, generally starting with the initials of the person, and following the date of sample creation. If more than 1 data collection is made in one day, then <strong>RunInfo</strong> is added to distinguish or to add more description to the RAW data file.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
@@ -125,22 +139,10 @@
 <p>This is a basic example which shows you how to check your RAW folder</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://thomasgredig.github.io/RAWdataR/">RAWdataR</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># folder path</span></span>
-<span><span class="va">p</span> <span class="op">=</span> <span class="st">'Research-User/RAW'</span></span>
-<span></span>
-<span><span class="co"># does it have the proper structure?</span></span>
-<span><span class="fu"><a href="reference/raw.checkNoSubfolders.html">raw.checkNoSubfolders</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># find all the project names</span></span>
-<span><span class="fu">raw.getNamesProjects</span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># make a data frame with all fields</span></span>
-<span><span class="va">d</span> <span class="op">=</span> <span class="fu">raw.getTable</span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="loading-raw-data">Loading RAW Data<a class="anchor" aria-label="anchor" href="#loading-raw-data"></a>
-</h2>
+<span><span class="fu"><a href="reference/raw.updateID.html">raw.updateID</a></span><span class="op">(</span><span class="va">path.RAW</span><span class="op">)</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="loading-raw-data">Loading RAW Data<a class="anchor" aria-label="anchor" href="#loading-raw-data"></a>
+</h3>
 <p>For graphing and data analysis the correct files need to be loaded. A common approach would be searching data files by <code>project</code>, <code>date</code>, <code>user</code>, or by <code>instrument</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for instance, find all VSM files from 2018</span></span>
@@ -151,16 +153,16 @@
 <span><span class="va">file.list</span> <span class="op">=</span> <span class="fu"><a href="reference/raw.findFiles.html">raw.findFiles</a></span><span class="op">(</span><span class="va">path.RAW</span>, date<span class="op">=</span><span class="st">'2018'</span>, instrument<span class="op">=</span><span class="st">'vsm'</span>,</span>
 <span>    md5 <span class="op">=</span> <span class="st">'a25f3a,66c5d1,4a0333,1b94b5'</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="invalid-files">Invalid Files<a class="anchor" aria-label="anchor" href="#invalid-files"></a>
-</h2>
+<div class="section level3">
+<h3 id="invalid-files">Invalid Files<a class="anchor" aria-label="anchor" href="#invalid-files"></a>
+</h3>
 <p>You can also find files with invalid naming convention using the following function, where date is optional</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/raw.getInvalidFiles.html">raw.getInvalidFiles</a></span><span class="op">(</span><span class="va">path.RAW</span>, date<span class="op">=</span><span class="st">'2020'</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="file-checking">File Checking<a class="anchor" aria-label="anchor" href="#file-checking"></a>
-</h2>
+<div class="section level3">
+<h3 id="file-checking">File Checking<a class="anchor" aria-label="anchor" href="#file-checking"></a>
+</h3>
 <p>Instead of using direct filenames, you can use checksums from the files. For a project that has data added all the time, you could have the following code:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://thomasgredig.github.io/RAWdataR/">RAWdataR</a></span><span class="op">)</span></span>
@@ -170,6 +172,7 @@
 <span><span class="co"># this will return 'README.md'</span></span>
 <span><span class="va">filename</span> <span class="op">=</span> <span class="fu"><a href="reference/raw.getFilename.html">raw.getFilename</a></span><span class="op">(</span><span class="va">file.list</span>,<span class="va">s</span><span class="op">)</span></span></code></pre></div>
 </div>
+</div>
 <div class="section level2">
 <h2 id="data-project">Data Project<a class="anchor" aria-label="anchor" href="#data-project"></a>
 </h2>
@@ -177,6 +180,13 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">RAWdataR</span><span class="fu">::</span><span class="fu"><a href="reference/raw.dataProject.html">raw.dataProject</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>You can use <code><a href="reference/raw.dataMaker.html">raw.dataMaker()</a></code> to generate a make.data..R file that creates a dataset.</p>
+</div>
+<div class="section level2">
+<h2 id="data-standards">Data Standards<a class="anchor" aria-label="anchor" href="#data-standards"></a>
+</h2>
+<p>We distinguish between digital data from experimental instruments (AFM, XRD, spectrometer, etc.) and analog data (observations, sample names, etc.). All raw instrument data is stored in standardized, open-accessible formats and/or CSV tables, if possible.</p>
+<p>A quality control procedure should be in place.</p>
+<p>Data analysis will be organized, reproducible and open access. Raw and m’’;’lkjhgfd eta data is saved in R packages. The primary analysis of scientific data is either in R packages or jupyter notebooks. Naming conventions are to be followed.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
@@ -199,7 +209,7 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://home.csulb.edu//~tgredig/" class="external-link">Thomas Gredig</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5824-7626" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<a href="https://home.csulb.edu/~tgredig/" class="external-link">Thomas Gredig</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5824-7626" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
@@ -216,7 +226,7 @@
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by <a href="https://home.csulb.edu//~tgredig/" class="external-link">Thomas Gredig</a>.</p>
+<p>Developed by <a href="https://home.csulb.edu/~tgredig/" class="external-link">Thomas Gredig</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

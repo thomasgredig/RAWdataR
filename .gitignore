@@ -3,9 +3,9 @@
 .RData
 .Ruserdata
 .DS_Store
-inst/doc
-RAW-ID.csv
 .RDataTmp
 _*.R
+RAW-ID.csv
 
+inst/doc
 docs/
