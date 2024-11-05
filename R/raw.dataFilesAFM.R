@@ -31,6 +31,18 @@ raw.dataFilesAFM <- function(fIDfile = 'data-raw/RAW-ID.csv',
     if (verbose) cat("Already",nrow(result),"AFM images in dataFilesAFM\n")
   }
 
+  # expand to include date if needed
+  if (nrow(result)>0) {
+    if(ncol(result != 25)) {
+      # add column date at location 17
+      result$date <- ""
+      result <- result[,c("ID","sample","filename","partial","note","quality","scanRate","cantilever",
+                          "setPoint","scanAngle","driveFrequency","objectect","description","resolution",
+                          "size","channel","date","z.min","z.max","z.units","dataType","res.px",
+                          "size.nm","imgNo","direction")]
+    }
+  }
+
   ###########
   for(j in 1:nrow(rFile)) {
     # check if AFM file needs to be loaded and added

@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Codecov test coverage](https://codecov.io/gh/thomasgredig/RAWdataR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/thomasgredig/RAWdataR?branch=master)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 `RAWdataR` provides a framework in R language to uniquely track and analyse raw data from scientific instruments. It assigns unique file IDs based on MD5 sums. This means that even after renaming the files or moving them to different folders, the analysis package can refer to its ID to retrieve the data.  Aligned with the National Science Foundation, the [Open Data at NSF](https://www.nsf.gov/data/) describes the underlying goals; it also fosters maintaining metadata. 
@@ -86,12 +87,13 @@ If more than 1 data collection is made in one day, then **RunInfo** is added to 
 
 ## Example
 
-This is a basic example which shows you how to check your RAW folder
+After you create a new data package, load the `RAWdataR` package to initialize the package. 
 
 ``` r
 library(RAWdataR)
-raw.updateID(path.RAW)
+raw.init()
 ```
+
 
 ### Loading RAW Data
 

@@ -7,6 +7,8 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/thomasgredig/RAWdataR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/thomasgredig/RAWdataR?branch=master)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 `RAWdataR` provides a framework in R language to uniquely track and
@@ -115,11 +117,12 @@ added to distinguish or to add more description to the RAW data file.
 
 ## Example
 
-This is a basic example which shows you how to check your RAW folder
+After you create a new data package, load the `RAWdataR` package to
+initialize the package.
 
 ``` r
 library(RAWdataR)
-raw.updateID(path.RAW)
+raw.init()
 ```
 
 ### Loading RAW Data

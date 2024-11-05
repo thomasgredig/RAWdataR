@@ -1,6 +1,7 @@
 # RAWdataR 1.2.6
 
 * update documentation
+* AFM accepts either 24 or 25 columns (new column is date)
 
 # RAWdataR 1.2.5
 
