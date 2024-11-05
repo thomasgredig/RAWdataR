@@ -2,6 +2,7 @@
 
 * update documentation
 * AFM accepts either 24 or 25 columns (new column is date)
+* add "date" to FilesAFM due to upgrade to nanoAFMr summary
 
 # RAWdataR 1.2.5
 

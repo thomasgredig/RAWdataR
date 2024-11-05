@@ -26,21 +26,9 @@ raw.dataFilesAFM <- function(fIDfile = 'data-raw/RAW-ID.csv',
   } else {
     result = dataFilesAFM
     # update rows / match to current version
-    colN = "ID,sample,filename,partial,note,quality,scanRate,cantilever,setPoint,scanAngle,driveFrequency,objectect,description,resolution,size,channel,z.min,z.max,z.units,dataType,res.px,size.nm,imgNo,direction"
+    colN = "ID,sample,filename,partial,note,quality,scanRate,cantilever,setPoint,scanAngle,driveFrequency,objectect,description,resolution,size,channel,date,z.min,z.max,z.units,dataType,res.px,size.nm,imgNo,direction"
     result <- matchColNames(result, colN)
-    if (verbose) cat("Already",nrow(result),"AFM images in dataFilesAFM\n")
-  }
-
-  # expand to include date if needed
-  if (nrow(result)>0) {
-    if(ncol(result != 25)) {
-      # add column date at location 17
-      result$date <- ""
-      result <- result[,c("ID","sample","filename","partial","note","quality","scanRate","cantilever",
-                          "setPoint","scanAngle","driveFrequency","objectect","description","resolution",
-                          "size","channel","date","z.min","z.max","z.units","dataType","res.px",
-                          "size.nm","imgNo","direction")]
-    }
+    if (verbose) cat("Using",nrow(result),"AFM images in dataFilesAFM\n")
   }
 
   ###########
@@ -76,17 +64,21 @@ raw.dataFilesAFM <- function(fIDfile = 'data-raw/RAW-ID.csv',
       setPoint = setPoint,
       scanAngle = scanAngle,
       driveFrequency = driveFrequency,
-      summary(df)[1,],
+      objectect = summary(df)[1,c('objectect')],
+      description = summary(df)[1,c('description')],
+      resolution = summary(df)[1,c('resolution')],
+      size = summary(df)[1,c('size')],
+      channel = paste(summary(df)$channel, collapse=","),
+      date = summary(df)[1,c('date')],
+      z.min = paste(summary(df)$z.min, collapse=","),
+      z.max = paste(summary(df)$z.max, collapse=","),
+      z.units = paste(summary(df)$z.units, collapse=","),
+      dataType = summary(df)[1,c('dataType')],
       res.px = res.px[1],
-      size.nm = size.nm[1]
+      size.nm = size.nm[1],
+      imgNo = 0,
+      direction = ""
     )
-    r$channel = paste(summary(df)$channel, collapse=",")
-    r$z.min = paste(summary(df)$z.min, collapse=",")
-    r$z.max = paste(summary(df)$z.max, collapse=",")
-    r$z.units = paste(summary(df)$z.units, collapse=",")
-    r$imgNo = 0
-    r$direction = ""
-    r$history <- NULL
 
     result = rbind(result, r)
   }
@@ -126,10 +118,14 @@ matchColNames <- function(r, colN) {
   }
   if (length(rno.keep) != length(names(r))) warning(length(names(r))-length(rno.keep)," columns of r not used.")
 
-  r0 = rbind(r0, rep("",length(rno.add)))
-  colnames(r0) = colNames.new[rno.add]
+  if(length(rno.add)>0) {
+    r0 = rbind(r0, rep("",length(rno.add)))
+    colnames(r0) = colNames.new[rno.add]
+    r2 = cbind(r[,rno.keep], r0)
+  } else {
+    r2 <- r[,rno.keep]
+  }
 
-  r2 = cbind(r[,rno.keep], r0)
   r2 <- as.data.frame(setcolorder(data.table(r2), colNames.new))
   r2
 }
